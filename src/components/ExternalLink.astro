@@ -1,0 +1,33 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  href: string;
+  /** Read by screen readers after the visible label, e.g. "(opens in a new tab)". */
+  srLabel: string;
+  class?: string;
+}
+
+const { href, srLabel, class: className } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    "group inline-flex min-h-11 items-center text-sm font-semibold text-ink transition-colors hover:text-orange",
+    className,
+  ]}
+>
+  <span
+    class="inline-flex items-center gap-1.5 border-b-2 border-orange pb-0.5"
+  >
+    <slot />
+    <Icon
+      name="arrowUpRight"
+      class="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+    />
+  </span>
+  <span class="sr-only">&nbsp;{srLabel}</span>
+</a>

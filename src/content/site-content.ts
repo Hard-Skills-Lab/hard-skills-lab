@@ -70,6 +70,25 @@ export interface SiteContent {
       intro: string;
     };
   };
+  projects: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    seeMore: { label: string; href: string };
+    viewProject: string;
+    newTab: string;
+    illustrativeLabel: string;
+    previous: string;
+    next: string;
+    items: Array<{
+      category: string;
+      title: string;
+      text: string;
+      href: string;
+      illustrative?: boolean;
+      image: { label: string; tone: "light" | "dark" };
+    }>;
+  };
   about: {
     title: string;
     mission: string;
@@ -220,6 +239,48 @@ export const content: Record<Language, SiteContent> = {
         intro:
           "Data helps you understand. AI helps you build. Together, they help you solve real problems.",
       },
+    },
+    projects: {
+      eyebrow: "Real work",
+      title: "Sample projects",
+      intro:
+        "Here's a look at the kind of work you'll do. These are examples from our curriculum — real analysis and a simple machine learning project.",
+      // PLACEHOLDER URLs: replace with the real destinations
+      seeMore: {
+        label: "See more projects",
+        href: "https://example.com/projects",
+      },
+      viewProject: "View project",
+      newTab: "(opens in a new tab)",
+      illustrativeLabel: "Illustrative example",
+      previous: "Previous projects",
+      next: "Next projects",
+      items: [
+        {
+          category: "Data analysis project",
+          title: "Togo population and employment",
+          text: "Clean, explore and visualise public data to find insights about youth employment in Togo.",
+          href: "https://example.com/projects/togo-population-employment",
+          illustrative: true,
+          image: { label: "Data visualisation", tone: "light" },
+        },
+        {
+          category: "AI / ML project",
+          title: "Student dropout prediction",
+          text: "Build and evaluate a simple model to predict which students are at risk of dropping out (uses real-world style data).",
+          href: "https://example.com/projects/student-dropout-prediction",
+          illustrative: true,
+          image: { label: "Code screenshot", tone: "dark" },
+        },
+        {
+          category: "Data analysis project",
+          title: "Togo population and employment",
+          text: "Clean, explore and visualise public data to find insights about youth employment in Togo.",
+          href: "https://example.com/projects/togo-population-employment",
+          illustrative: true,
+          image: { label: "Data visualisation", tone: "light" },
+        },
+      ],
     },
     about: {
       title: "About Hard Skills Lab",
@@ -400,6 +461,48 @@ export const content: Record<Language, SiteContent> = {
         intro:
           "Les données vous aident à comprendre. L'IA vous aide à construire. Ensemble, elles vous permettent de résoudre de vrais problèmes.",
       },
+    },
+    projects: {
+      eyebrow: "Travaux concrets",
+      title: "Exemples de projets",
+      intro:
+        "Voici un aperçu du type de travail que vous réaliserez. Ce sont des exemples issus de notre curriculum — une vraie analyse de données et un projet simple de machine learning.",
+      // URL PLACEHOLDER : à remplacer par les vraies destinations
+      seeMore: {
+        label: "Voir plus de projets",
+        href: "https://example.com/projects",
+      },
+      viewProject: "Voir le projet",
+      newTab: "(s'ouvre dans un nouvel onglet)",
+      illustrativeLabel: "Exemple illustratif",
+      previous: "Projets précédents",
+      next: "Projets suivants",
+      items: [
+        {
+          category: "Projet d'analyse de données",
+          title: "Population et emploi au Togo",
+          text: "Nettoyez, explorez et visualisez des données publiques pour dégager des enseignements sur l'emploi des jeunes au Togo.",
+          href: "https://example.com/projects/togo-population-employment",
+          illustrative: true,
+          image: { label: "Data visualisation", tone: "light" },
+        },
+        {
+          category: "Projet IA / ML",
+          title: "Prédiction du décrochage scolaire",
+          text: "Construisez et évaluez un modèle simple pour prédire quels élèves risquent d'abandonner leurs études (avec des données proches du réel).",
+          href: "https://example.com/projects/student-dropout-prediction",
+          illustrative: true,
+          image: { label: "Code screenshot", tone: "dark" },
+        },
+        {
+          category: "Projet d'analyse de données",
+          title: "Population et emploi au Togo",
+          text: "Nettoyez, explorez et visualisez des données publiques pour dégager des enseignements sur l'emploi des jeunes au Togo.",
+          href: "https://example.com/projects/togo-population-employment",
+          illustrative: true,
+          image: { label: "Data visualisation", tone: "light" },
+        },
+      ],
     },
     about: {
       title: "À Propos de Hard Skills Lab",

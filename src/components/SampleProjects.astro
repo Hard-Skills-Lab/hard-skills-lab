@@ -1,0 +1,165 @@
+---
+import type { Language } from "../content/site-config";
+import { getContent } from "../content/site-content";
+import ImagePlaceholder from "./ImagePlaceholder.astro";
+import ExternalLink from "./ExternalLink.astro";
+import Icon from "./Icon.astro";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const { projects } = getContent(lang);
+
+// 2 projects or fewer: plain grid. More than 2: carousel showing 2 at a time.
+const isCarousel = projects.items.length > 2;
+const carouselAttrs = isCarousel
+  ? ({
+      "data-carousel": "",
+      role: "region",
+      "aria-roledescription": "carousel",
+      "aria-label": projects.title,
+    } as const)
+  : {};
+---
+
+<section id="projects" class="section-y bg-paper lg:bg-paper-soft">
+  <div class="container-page">
+    <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
+      <!-- Intro -->
+      <div class="flex flex-col lg:col-span-4">
+        <p class="eyebrow">{projects.eyebrow}</p>
+        <h2 class="heading-section mt-4">{projects.title}</h2>
+        <p class="mt-5 max-w-md text-base text-muted sm:text-lg">
+          {projects.intro}
+        </p>
+        <div class="mt-2 lg:pt-2">
+          <ExternalLink href={projects.seeMore.href} srLabel={projects.newTab}>
+            {projects.seeMore.label}
+          </ExternalLink>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="min-w-0 lg:col-span-8" {...carouselAttrs}>
+        <ul
+          data-carousel-track
+          class:list={[
+            isCarousel
+              ? "flex snap-x snap-mandatory scroll-smooth gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              : "grid gap-10 md:grid-cols-2 md:gap-6",
+          ]}
+        >
+          {
+            projects.items.map((item) => (
+              <li
+                class:list={[
+                  isCarousel &&
+                    "shrink-0 basis-full snap-start md:basis-[calc((100%_-_1.5rem)_/_2)]",
+                ]}
+              >
+                <article class="flex h-full flex-col">
+                  <div class="relative aspect-[16/10]">
+                    <ImagePlaceholder
+                      label={item.image.label}
+                      tone={item.image.tone}
+                      class="absolute inset-0"
+                    />
+                  </div>
+
+                  <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <p class="eyebrow">{item.category}</p>
+                    {item.illustrative && (
+                      <span class="border border-rule px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted">
+                        {projects.illustrativeLabel}
+                      </span>
+                    )}
+                  </div>
+                  <h3 class="mt-3 font-heading text-xl font-semibold leading-tight">
+                    {item.title}
+                  </h3>
+                  <p class="mt-2 max-w-sm text-sm text-muted">{item.text}</p>
+                  <div class="mt-auto pt-3">
+                    <ExternalLink
+                      href={item.href}
+                      srLabel={`${item.title} ${projects.newTab}`}
+                    >
+                      {projects.viewProject}
+                    </ExternalLink>
+                  </div>
+                </article>
+              </li>
+            ))
+          }
+        </ul>
+
+        {
+          isCarousel && (
+            <div class="mt-6 flex items-center justify-end gap-2">
+              <button
+                type="button"
+                data-carousel-prev
+                disabled
+                aria-label={projects.previous}
+                class="inline-flex size-11 items-center justify-center border border-rule text-ink transition-colors hover:border-ink disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-rule"
+              >
+                <Icon name="chevronLeft" class="size-5" />
+              </button>
+              <button
+                type="button"
+                data-carousel-next
+                aria-label={projects.next}
+                class="inline-flex size-11 items-center justify-center border border-rule text-ink transition-colors hover:border-ink disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-rule"
+              >
+                <Icon name="chevronRight" class="size-5" />
+              </button>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const initCarousel = (root: HTMLElement) => {
+    const track = root.querySelector<HTMLElement>("[data-carousel-track]");
+    const prev = root.querySelector<HTMLButtonElement>("[data-carousel-prev]");
+    const next = root.querySelector<HTMLButtonElement>("[data-carousel-next]");
+    if (!track || !prev || !next) return;
+
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      prev.disabled = track.scrollLeft <= 1;
+      next.disabled = track.scrollLeft >= max - 1;
+    };
+
+    // Moves by one "page": as many cards as are currently visible (1 or 2)
+    const scrollPage = (direction: 1 | -1) => {
+      const first = track.firstElementChild as HTMLElement | null;
+      if (!first) return;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      const itemWidth = first.getBoundingClientRect().width + gap;
+      const perPage = Math.max(1, Math.round(track.clientWidth / itemWidth));
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      track.scrollBy({
+        left: direction * itemWidth * perPage,
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+    };
+
+    prev.addEventListener("click", () => scrollPage(-1));
+    next.addEventListener("click", () => scrollPage(1));
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  };
+
+  document
+    .querySelectorAll<HTMLElement>("[data-carousel]")
+    .forEach(initCarousel);
+</script>

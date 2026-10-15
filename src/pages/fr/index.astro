@@ -8,6 +8,7 @@ import ImagePlaceholder from "../../components/ImagePlaceholder.astro";
 import { getContent } from "../../content/site-content";
 import { siteConfig } from "../../content/site-config";
 import Icon from "@/components/Icon.astro";
+import SampleProjects from "@/components/SampleProjects.astro";
 
 const lang = "fr" as const;
 const t = getContent(lang);
@@ -289,6 +290,9 @@ const t = getContent(lang);
         />
       </div>
     </section>
+
+    <!-- Sample Projects Section -->
+    <SampleProjects lang={lang} />
 
     <!-- About Section -->
     <section

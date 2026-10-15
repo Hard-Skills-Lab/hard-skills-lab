@@ -10,6 +10,9 @@ export const iconPaths = {
   // Approximate outline of Africa: replace with a proper icon later
   africa:
     '<path d="M8 3.5h5l3 2 1.5 3.5 3.5 1.2-.8 3.8-3 1.5-1.2 4-2.5 2.5-2-1.5-.5-5-3-2.5-4.5-1-.5-3.5L6 6z"/>',
+  arrowUpRight: '<path d="M7 17 17 7"/><path d="M8 7h9v9"/>',
+  chevronLeft: '<path d="m15 5-7 7 7 7"/>',
+  chevronRight: '<path d="m9 5 7 7-7 7"/>',
 } as const;
 
 export type IconName = keyof typeof iconPaths;
