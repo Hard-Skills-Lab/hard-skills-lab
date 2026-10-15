@@ -1,0 +1,21 @@
+---
+import { siteConfig } from "../content/site-config";
+
+interface Props {
+  currentLang: "en" | "fr";
+}
+
+const { currentLang } = Astro.props;
+const alternateLang = currentLang === "en" ? "fr" : "en";
+const alternateUrl = `/${alternateLang}/`;
+---
+
+<a
+  href={alternateUrl}
+  class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-ink hover:text-orange transition-colors"
+  aria-label={alternateLang === "fr"
+    ? "Switch to French"
+    : "Passer à l'anglais"}
+>
+  <span class="font-mono">{alternateLang.toUpperCase()}</span>
+</a>

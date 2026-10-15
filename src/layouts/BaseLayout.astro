@@ -1,14 +1,19 @@
 ---
+import { siteConfig } from "../content/site-config";
+
 interface Props {
   title: string;
   description: string;
-  lang: 'en' | 'fr';
+  lang: "en" | "fr";
 }
 
 const { title, description, lang } = Astro.props;
+const alternateLang = lang === "en" ? "fr" : "en";
+const canonicalUrl = new URL(Astro.url.pathname, siteConfig.siteUrl);
+const alternateUrl = new URL(`/${alternateLang}/`, siteConfig.siteUrl);
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
@@ -16,14 +21,36 @@ const { title, description, lang } = Astro.props;
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Canonical and hreflang -->
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang={alternateLang} href={alternateUrl} />
+    <link rel="alternate" hreflang={lang} href={canonicalUrl} />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL("/en/", siteConfig.siteUrl)}
+    />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang === "en" ? "en_US" : "fr_FR"} />
+    <meta
+      property="og:locale:alternate"
+      content={lang === "en" ? "fr_FR" : "en_US"}
+    />
+
     <title>{title}</title>
-    
+
     <!-- Font preloads -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" 
-      rel="stylesheet" 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
     />
   </head>
   <body>

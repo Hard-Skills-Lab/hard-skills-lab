@@ -1,19 +1,4 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+// Redirect root to English as default language
+return Astro.redirect("/en/");
 ---
-
-<BaseLayout
-  title="Hard Skills Lab"
-  description="Training young Africans in data and AI through free, online, practical, project-first learning."
-  lang="en"
->
-  <main class="min-h-screen flex items-center justify-center px-4">
-    <div class="text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">Hard Skills Lab</h1>
-      <p class="text-lg text-muted max-w-md mx-auto">
-        Foundation setup complete. Phase 1.2 will add bilingual content and
-        routing.
-      </p>
-    </div>
-  </main>
-</BaseLayout>
