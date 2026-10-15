@@ -90,14 +90,19 @@ export interface SiteContent {
     }>;
   };
   about: {
+    eyebrow: string;
     title: string;
-    mission: string;
-    vision: string;
-    founders: Array<{
+    intro: string;
+    team: Array<{
       name: string;
       role: string;
       bio: string;
+      photoLabel: string;
     }>;
+    together: {
+      title: string;
+      text: string;
+    };
   };
   faq: {
     title: string;
@@ -283,18 +288,29 @@ export const content: Record<Language, SiteContent> = {
       ],
     },
     about: {
-      title: "About Hard Skills Lab",
-      mission:
-        "Our mission is to make data and AI skills accessible to young Africans, regardless of background or location.",
-      vision:
-        "We envision a generation of African builders who use data and AI to solve local and global challenges.",
-      founders: [
+      eyebrow: "About us",
+      title: "A small team, a big mission.",
+      intro:
+        "We're two co-founders, united by the belief that African talent deserves access to practical, high-quality training in data and AI. We teach, we build, and we grow together with our learners.",
+      // DEV: names and bios come from the mockup. Confirm with the founders.
+      team: [
         {
-          name: "Founder Name",
-          role: "Co-founder & Program Lead",
-          bio: "Bio placeholder — to be updated with real founder information.",
+          name: "Hugues",
+          role: "Co-founder · Data Analysis Track",
+          bio: "Data scientist and educator. I design and teach the Python track and handle the data side of the capstone.",
+          photoLabel: "Portrait",
+        },
+        {
+          name: "Name TBC",
+          role: "Co-founder · AI & Machine Learning Track",
+          bio: "Machine learning engineer and educator. I design and teach the AI track and draft the curriculum content.",
+          photoLabel: "Portrait",
         },
       ],
+      together: {
+        title: "Together",
+        text: "We also run our LinkedIn and Instagram, recruit learners, run the sessions, issue certificates and build the community.",
+      },
     },
     faq: {
       title: "Frequently Asked Questions",
@@ -505,18 +521,29 @@ export const content: Record<Language, SiteContent> = {
       ],
     },
     about: {
-      title: "À Propos de Hard Skills Lab",
-      mission:
-        "Notre mission est de rendre les compétences en données et en IA accessibles aux jeunes Africains, quel que soit leur parcours ou leur lieu de résidence.",
-      vision:
-        "Nous envisageons une génération de bâtisseurs africains qui utilisent les données et l'IA pour résoudre des défis locaux et mondiaux.",
-      founders: [
+      eyebrow: "À propos",
+      title: "Une petite équipe, une grande mission.",
+      intro:
+        "Nous sommes deux cofondateurs, unis par la conviction que les talents africains méritent un accès à une formation pratique et de qualité en données et en IA. Nous enseignons, nous construisons, et nous progressons avec nos apprenants.",
+      // DEV : noms et bios issus de la maquette. À confirmer avec les fondateurs.
+      team: [
         {
-          name: "Nom du Fondateur",
-          role: "Co-fondateur & Responsable du Programme",
-          bio: "Biographie à compléter — sera remplacée par les informations réelles des fondateurs.",
+          name: "Hugues",
+          role: "Cofondateur · Parcours Analyse de données",
+          bio: "Data scientist et formateur. Je conçois et j'enseigne le parcours Python et je m'occupe du volet données du projet final.",
+          photoLabel: "Portrait",
+        },
+        {
+          name: "Nom à confirmer",
+          role: "Cofondateur · Parcours IA & Machine Learning",
+          bio: "Ingénieur en machine learning et formateur. Je conçois et j'enseigne le parcours IA et je rédige le contenu du curriculum.",
+          photoLabel: "Portrait",
         },
       ],
+      together: {
+        title: "Ensemble",
+        text: "Nous gérons aussi notre LinkedIn et notre Instagram, recrutons les apprenants, animons les sessions, délivrons les certificats et faisons vivre la communauté.",
+      },
     },
     faq: {
       title: "Questions Fréquentes",
