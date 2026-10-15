@@ -9,6 +9,12 @@
   --color-muted: #66645f;
   --color-white: #ffffff;
 
+  /*
+   * Not in SPEC.md: slightly lighter paper used by alternating section bands
+   * in the mockup. Value is an ESTIMATE read from the mockup, tweak freely.
+   */
+  --color-paper-soft: #fbfaf6;
+
   /* Typography */
   --font-heading:
     "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -39,7 +45,68 @@
   --breakpoint-lg: 1024px;
 }
 
-/* Base styles */
+/* ------------------------------------------------------------------ */
+/* Layout & typography utilities (shared by header and all sections)   */
+/* ------------------------------------------------------------------ */
+
+/* Single page container: same left/right edges for header and sections */
+@utility container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Small uppercase orange label above headings ("THE PROGRAM", ...) */
+@utility eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-orange);
+}
+
+/* Hero headline */
+@utility heading-display {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 1.5rem + 4vw, 4.25rem);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Section headlines ("An 8-week cohort, two tracks, one goal.") */
+@utility heading-section {
+  font-family: var(--font-heading);
+  font-size: clamp(1.875rem, 1.2rem + 2.2vw, 2.75rem);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Vertical rhythm for a section (replaces the global `section` rule later) */
+@utility section-y {
+  padding-block: 4rem;
+
+  @media (min-width: 768px) {
+    padding-block: 6rem;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Base styles                                                         */
+/* ------------------------------------------------------------------ */
+
 html {
   scroll-behavior: smooth;
 }
@@ -62,6 +129,7 @@ h6 {
   font-family: var(--font-heading);
   line-height: 1.2;
   font-weight: 700;
+  text-wrap: balance;
 }
 
 /* Focus visible styles for accessibility */
@@ -93,7 +161,11 @@ section[id] {
   scroll-margin-top: 5rem;
 }
 
-/* Section padding */
+/*
+ * TEMPORARY: global section padding.
+ * Will be removed in the last 1.4 sub-phase, once every section uses
+ * the `section-y` utility instead.
+ */
 section {
   padding-top: 4rem;
   padding-bottom: 4rem;

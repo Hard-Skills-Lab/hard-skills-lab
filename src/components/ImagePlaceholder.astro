@@ -1,0 +1,33 @@
+---
+interface Props {
+  /** What the real image will show. Visible to the team only while in dev. */
+  label: string;
+  tone?: "light" | "dark";
+  class?: string;
+}
+
+const { label, tone = "light", class: className } = Astro.props;
+
+const tones = {
+  light: "bg-rule/70 text-muted",
+  dark: "bg-ink text-white/70",
+};
+
+// Subtle diagonal hatching, drawn with the current text color
+const pattern =
+  "background-image: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, currentColor 14%, transparent) 14px 15px);";
+---
+
+<!-- DEV PLACEHOLDER: replace with a real <img>/<Image> and a proper alt -->
+<div class:list={["overflow-hidden", className]} aria-hidden="true">
+  <div
+    class:list={["flex h-full w-full items-end p-3", tones[tone]]}
+    style={pattern}
+  >
+    <span
+      class="bg-paper/90 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-ink"
+    >
+      Placeholder · {label}
+    </span>
+  </div>
+</div>

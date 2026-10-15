@@ -2,19 +2,50 @@
 interface Props {
   href: string;
   variant?: "primary" | "secondary";
+  size?: "sm" | "md";
+  /** Adds a trailing arrow that nudges right on hover/focus */
+  arrow?: boolean;
   class?: string;
 }
 
-const { href, variant = "primary", class: className = "" } = Astro.props;
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  arrow = false,
+  class: className,
+} = Astro.props;
 
-const baseStyles =
-  "inline-flex items-center justify-center px-6 py-3 font-medium transition-colors";
+const base =
+  "group inline-flex items-center justify-center gap-2 font-semibold transition-colors";
+
+const sizes = {
+  sm: "min-h-11 px-4 text-sm",
+  md: "min-h-12 px-6 text-base",
+};
+
 const variants = {
   primary: "bg-orange text-white hover:bg-orange/90",
   secondary: "border border-ink text-ink hover:bg-ink hover:text-white",
 };
 ---
 
-<a href={href} class={`${baseStyles} ${variants[variant]} ${className}`}>
+<a href={href} class:list={[base, sizes[size], variants[variant], className]}>
   <slot />
+  {
+    arrow && (
+      <svg
+        class="size-4 transition-transform group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </svg>
+    )
+  }
 </a>

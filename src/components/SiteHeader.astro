@@ -1,227 +1,319 @@
 ---
 import type { Language } from "../content/site-config";
 import { siteConfig } from "../content/site-config";
+import { getContent } from "../content/site-content";
+import type { SiteContent } from "../content/site-content";
+import SiteLogo from "./SiteLogo.astro";
+import LanguageSwitch from "./LanguageSwitch.astro";
 
 interface Props {
   lang: Language;
-  navigation: {
-    program: string;
-    curriculum: string;
-    about: string;
-    faq: string;
-    apply: string;
-  };
+  navigation: SiteContent["navigation"];
 }
 
 const { lang, navigation } = Astro.props;
-const alternateLang = lang === "en" ? "fr" : "en";
-const alternateUrl = `/${alternateLang}/`;
+const { header } = getContent(lang);
+const applyUrl = siteConfig.applicationUrls[lang];
 
+// Order follows the order of the sections on the page.
+// "#top" scrolls to the top of the page (Home).
 const navItems = [
+  { label: navigation.home, href: "#top" },
   { label: navigation.program, href: "#program" },
   { label: navigation.curriculum, href: "#curriculum" },
+  { label: navigation.projects, href: "#projects" },
   { label: navigation.about, href: "#about" },
-  { label: navigation.faq, href: "#faq" },
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-paper border-b border-rule">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <!-- Wordmark -->
+<header class="sticky top-0 z-50 border-b border-rule/70 bg-paper">
+  <div
+    class="container-page flex h-14 items-center justify-between gap-3 sm:h-16 lg:gap-6"
+  >
+    <SiteLogo lang={lang} />
+
+    <!-- Desktop navigation -->
+    <nav
+      class="hidden items-center gap-6 lg:flex xl:gap-8"
+      aria-label={header.mainNavLabel}
+    >
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            data-nav-link
+            class="border-b-2 border-transparent py-2 text-sm font-medium text-ink transition-colors hover:border-rule aria-[current=location]:border-orange"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-1 lg:gap-4">
+      <LanguageSwitch lang={lang} switchLabel={header.switchLanguage} />
+
+      <!-- TEMP: will be replaced by <PrimaryButton> once I have seen it (1.4.c) -->
       <a
-        href={`/${lang}/`}
-        class="flex items-center gap-2 text-ink hover:text-orange transition-colors"
+        href={applyUrl}
+        class="group hidden min-h-11 items-center gap-2 bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange/90 lg:inline-flex"
       >
+        {header.applyCta}
         <svg
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <rect width="32" height="32" fill="#F7F5EF"></rect>
-          <rect x="6" y="6" width="20" height="4" fill="#20211F"></rect>
-          <rect x="6" y="14" width="14" height="4" fill="#D94F2B"></rect>
-          <rect x="6" y="22" width="20" height="4" fill="#20211F"></rect>
-        </svg>
-        <span class="font-heading font-bold text-lg">Hard Skills Lab</span>
-      </a>
-
-      <!-- Desktop Navigation -->
-      <nav
-        class="hidden md:flex items-center gap-8"
-        aria-label="Main navigation"
-      >
-        {
-          navItems.map((item) => (
-            <a
-              href={item.href}
-              class="text-sm font-medium text-ink hover:text-orange transition-colors"
-            >
-              {item.label}
-            </a>
-          ))
-        }
-      </nav>
-
-      <!-- Desktop Actions -->
-      <div class="hidden md:flex items-center gap-4">
-        <a
-          href={alternateUrl}
-          class="text-sm font-mono font-medium text-muted hover:text-ink transition-colors"
-          aria-label={alternateLang === "fr"
-            ? "Switch to French"
-            : "Passer à l'anglais"}
-        >
-          {alternateLang.toUpperCase()}
-        </a>
-        <a
-          href={siteConfig.applicationUrls[lang]}
-          class="inline-flex items-center px-4 py-2 bg-orange text-white text-sm font-medium hover:bg-orange/90 transition-colors"
-        >
-          {navigation.apply}
-        </a>
-      </div>
-
-      <!-- Mobile Menu Button -->
-      <button
-        type="button"
-        class="md:hidden inline-flex items-center justify-center p-2 text-ink hover:text-orange transition-colors"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        aria-label="Open menu"
-        id="menu-button"
-      >
-        <svg
-          class="w-6 h-6"
+          class="size-4 transition-transform group-hover:translate-x-0.5"
+          viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
           aria-hidden="true"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
+          <path d="M5 12h14M13 6l6 6-6 6"></path>
+        </svg>
+      </a>
+
+      <!-- Mobile menu button -->
+      <button
+        type="button"
+        id="menu-open"
+        class="-mr-2 inline-flex size-11 items-center justify-center text-ink lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={header.openMenu}
+      >
+        <svg
+          class="size-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
         </svg>
       </button>
     </div>
   </div>
 
-  <!-- Mobile Menu -->
+  <!-- Mobile menu (full screen) -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden border-t border-rule bg-paper"
+    class="fixed inset-0 z-50 hidden flex-col overflow-y-auto bg-ink text-white lg:hidden"
     role="dialog"
     aria-modal="true"
-    aria-label="Mobile navigation"
+    aria-label={header.menuLabel}
   >
-    <div class="px-4 py-6 space-y-4">
-      <nav class="flex flex-col gap-4" aria-label="Mobile navigation">
-        {
-          navItems.map((item) => (
-            <a
-              href={item.href}
-              class="text-base font-medium text-ink hover:text-orange transition-colors mobile-nav-link"
-            >
-              {item.label}
-            </a>
-          ))
-        }
+    <div
+      class="container-page flex h-14 shrink-0 items-center justify-between sm:h-16"
+    >
+      <SiteLogo lang={lang} inverted />
+      <button
+        type="button"
+        id="menu-close"
+        class="-mr-2 inline-flex size-11 items-center justify-center text-white"
+        aria-label={header.closeMenu}
+      >
+        <svg
+          class="size-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="container-page flex flex-1 flex-col pb-8 pt-10">
+      <nav aria-label={header.mainNavLabel}>
+        <ul class="flex flex-col items-start gap-3">
+          {
+            navItems.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  data-nav-link
+                  class="inline-block border-b-2 border-transparent py-1 font-heading text-2xl font-medium text-white aria-[current=location]:border-orange"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </nav>
-      <div class="pt-4 border-t border-rule flex flex-col gap-4">
-        <a
-          href={alternateUrl}
-          class="text-sm font-mono font-medium text-muted hover:text-ink transition-colors"
+
+      <LanguageSwitch
+        lang={lang}
+        switchLabel={header.switchLanguage}
+        tone="dark"
+        class="-ml-1.5 mt-8"
+      />
+
+      <a
+        href={applyUrl}
+        class="group mt-6 flex min-h-12 items-center justify-center gap-2 bg-orange px-4 py-3 text-base font-semibold text-white transition-colors hover:bg-orange/90"
+      >
+        {header.applyCta}
+        <svg
+          class="size-4 transition-transform group-hover:translate-x-0.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
         >
-          {alternateLang === "fr" ? "Français" : "English"}
-        </a>
-        <a
-          href={siteConfig.applicationUrls[lang]}
-          class="inline-flex items-center justify-center px-4 py-3 bg-orange text-white font-medium hover:bg-orange/90 transition-colors"
-        >
-          {navigation.apply}
-        </a>
-      </div>
+          <path d="M5 12h14M13 6l6 6-6 6"></path>
+        </svg>
+      </a>
+
+      <p class="mt-auto border-t border-white/15 pt-6 text-sm text-white/70">
+        {header.tagline}
+      </p>
     </div>
   </div>
 </header>
 
 <script>
-  function initMobileMenu() {
-    const button = document.getElementById("menu-button");
+  // Must match Tailwind's `lg` breakpoint (1024px)
+  const DESKTOP_QUERY = "(min-width: 1024px)";
+
+  const initMobileMenu = () => {
+    const openButton = document.getElementById(
+      "menu-open",
+    ) as HTMLButtonElement | null;
+    const closeButton = document.getElementById(
+      "menu-close",
+    ) as HTMLButtonElement | null;
     const menu = document.getElementById("mobile-menu");
 
-    if (!button || !menu) return;
+    if (!openButton || !closeButton || !menu) return;
 
     let isOpen = false;
+    let previousOverflow = "";
 
-    function openMenu() {
+    const getFocusable = () =>
+      Array.from(
+        menu.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"),
+      );
+
+    const openMenu = () => {
+      if (isOpen) return;
       isOpen = true;
-      menu.classList.remove("hidden");
-      button.setAttribute("aria-expanded", "true");
-      button.setAttribute("aria-label", "Close menu");
+      previousOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
+      menu.classList.remove("hidden");
+      menu.classList.add("flex");
+      openButton.setAttribute("aria-expanded", "true");
+      closeButton.focus();
+    };
 
-      // Change icon to X
-      const svg = button.querySelector("svg");
-      if (svg) {
-        svg.innerHTML =
-          '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
-      }
-    }
-
-    function closeMenu() {
+    const closeMenu = (restoreFocus = true) => {
+      if (!isOpen) return;
       isOpen = false;
+      document.body.style.overflow = previousOverflow;
       menu.classList.add("hidden");
-      button.setAttribute("aria-expanded", "false");
-      button.setAttribute("aria-label", "Open menu");
-      document.body.style.overflow = "";
+      menu.classList.remove("flex");
+      openButton.setAttribute("aria-expanded", "false");
+      if (restoreFocus) openButton.focus();
+    };
 
-      // Change icon back to hamburger
-      const svg = button.querySelector("svg");
-      if (svg) {
-        svg.innerHTML =
-          '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
-      }
-    }
+    openButton.addEventListener("click", openMenu);
+    closeButton.addEventListener("click", () => closeMenu());
 
-    function toggleMenu() {
-      if (isOpen) {
+    // Close after choosing a section
+    menu.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", () => closeMenu(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!isOpen) return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
         closeMenu();
-      } else {
-        openMenu();
+        return;
       }
-    }
 
-    // Toggle on button click
-    button.addEventListener("click", toggleMenu);
+      // Keep keyboard focus inside the open menu
+      if (event.key === "Tab") {
+        const focusable = getFocusable();
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (!first || !last) return;
 
-    // Close on Escape key
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && isOpen) {
-        closeMenu();
-        button.focus();
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     });
 
-    // Close when clicking nav links
-    const navLinks = menu.querySelectorAll(".mobile-nav-link");
-    navLinks.forEach((link) => {
-      link.addEventListener("click", closeMenu);
+    // Close if the viewport becomes desktop-sized while the menu is open
+    window.matchMedia(DESKTOP_QUERY).addEventListener("change", (event) => {
+      if (event.matches) closeMenu(false);
     });
+  };
 
-    // Close on resize to desktop
-    window.addEventListener("resize", () => {
-      if (window.innerWidth >= 768 && isOpen) {
-        closeMenu();
+  // Marks the nav link of the section currently under the header
+  const initScrollSpy = () => {
+    const links = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"),
+    );
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("main section[id]"),
+    );
+    if (links.length === 0) return;
+
+    const OFFSET = 120; // a bit more than the sticky header height
+
+    const update = () => {
+      let activeId = "top";
+      let closest = -Infinity;
+
+      for (const section of sections) {
+        const top = section.getBoundingClientRect().top;
+        if (top <= OFFSET && top > closest) {
+          closest = top;
+          activeId = section.id;
+        }
       }
-    });
-  }
 
-  // Initialize on page load
+      for (const link of links) {
+        if (link.getAttribute("href") === `#${activeId}`) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      }
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  };
+
   initMobileMenu();
+  initScrollSpy();
 </script>

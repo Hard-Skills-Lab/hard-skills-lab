@@ -1,21 +1,62 @@
 ---
-import { siteConfig } from "../content/site-config";
+import type { Language } from "../content/site-config";
 
 interface Props {
-  currentLang: "en" | "fr";
+  lang: Language;
+  /** Accessible name of the link that goes to the other language. */
+  switchLabel: string;
+  tone?: "light" | "dark";
+  class?: string;
 }
 
-const { currentLang } = Astro.props;
-const alternateLang = currentLang === "en" ? "fr" : "en";
-const alternateUrl = `/${alternateLang}/`;
+const { lang, switchLabel, tone = "light", class: className } = Astro.props;
+const dark = tone === "dark";
+
+const items: Array<{ code: Language; label: string }> = [
+  { code: "fr", label: "FR" },
+  { code: "en", label: "EN" },
+];
 ---
 
-<a
-  href={alternateUrl}
-  class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-ink hover:text-orange transition-colors"
-  aria-label={alternateLang === "fr"
-    ? "Switch to French"
-    : "Passer à l'anglais"}
->
-  <span class="font-mono">{alternateLang.toUpperCase()}</span>
-</a>
+<div class:list={["flex items-center text-sm", className]}>
+  {
+    items.map((item, index) => (
+      <>
+        {index > 0 && (
+          <span
+            class:list={["select-none", dark ? "text-white/40" : "text-rule"]}
+            aria-hidden="true"
+          >
+            /
+          </span>
+        )}
+        {item.code === lang ? (
+          <span
+            class:list={[
+              "inline-flex min-h-11 items-center px-1.5 font-bold",
+              dark ? "text-white" : "text-ink",
+            ]}
+            aria-current="true"
+          >
+            {item.label}
+          </span>
+        ) : (
+          <a
+            href={`/${item.code}/`}
+            hreflang={item.code}
+            lang={item.code}
+            aria-label={switchLabel}
+            class:list={[
+              "inline-flex min-h-11 items-center px-1.5 font-medium transition-colors",
+              dark
+                ? "text-white/70 hover:text-white"
+                : "text-muted hover:text-ink",
+            ]}
+          >
+            {item.label}
+          </a>
+        )}
+      </>
+    ))
+  }
+</div>

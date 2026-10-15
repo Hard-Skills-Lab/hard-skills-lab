@@ -11,18 +11,30 @@ export interface SiteContent {
     description: string;
   };
   navigation: {
+    home: string;
     program: string;
     curriculum: string;
+    projects: string;
     about: string;
     faq: string;
     apply: string;
   };
+  header: {
+    openMenu: string;
+    closeMenu: string;
+    menuLabel: string;
+    mainNavLabel: string;
+    switchLanguage: string;
+    applyCta: string;
+    tagline: string;
+  };
   hero: {
-    badge: string;
-    title: string;
+    eyebrow: string;
+    titleLines: string[];
     subtitle: string;
-    primaryCta: string;
-    secondaryCta: string;
+    cta: string;
+    pillars: string[];
+    scroll: string;
   };
   program: {
     title: string;
@@ -80,19 +92,35 @@ export const content: Record<Language, SiteContent> = {
         "Free, online, practical, project-first learning in data and AI for young people in Togo and West Africa.",
     },
     navigation: {
+      home: "Home",
       program: "Program",
       curriculum: "Curriculum",
+      projects: "Sample projects",
       about: "About",
       faq: "FAQ",
       apply: "Apply",
     },
+    header: {
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
+      menuLabel: "Menu",
+      mainNavLabel: "Main navigation",
+      switchLanguage: "Switch to French",
+      applyCta: "Apply for cohort",
+      tagline: "Free. Practical. Bilingual. Beginner friendly.",
+    },
     hero: {
-      badge: "Applications open for Cohort 1",
-      title: "Learn data & AI by building real projects",
+      eyebrow: "Data & AI training for Africa",
+      titleLines: [
+        "Real skills.",
+        "Practical projects.",
+        "A stronger tomorrow.",
+      ],
       subtitle:
-        "Hard Skills Lab trains young Africans in data and AI through free, online, practical, project-first learning. No prior experience required — just curiosity and commitment.",
-      primaryCta: "Apply for Cohort 1",
-      secondaryCta: "Explore the program",
+        "Hard Skills Lab trains young Africans in data and artificial intelligence, free and online, in French and English. We teach by doing — so you leave with a real project, not just theory.",
+      cta: "Apply for cohort",
+      pillars: ["Learn", "Build", "Grow"],
+      scroll: "Scroll",
     },
     program: {
       title: "The Program",
@@ -198,19 +226,35 @@ export const content: Record<Language, SiteContent> = {
         "Apprentissage gratuit, en ligne, pratique et axé sur les projets en données et IA pour les jeunes du Togo et d'Afrique de l'Ouest.",
     },
     navigation: {
+      home: "Accueil",
       program: "Programme",
-      curriculum: "Programme de cours",
+      curriculum: "Curriculum",
+      projects: "Projets",
       about: "À propos",
       faq: "FAQ",
       apply: "Postuler",
     },
+    header: {
+      openMenu: "Ouvrir le menu",
+      closeMenu: "Fermer le menu",
+      menuLabel: "Menu",
+      mainNavLabel: "Navigation principale",
+      switchLanguage: "Passer à l'anglais",
+      applyCta: "Postuler à la cohorte",
+      tagline: "Gratuit. Pratique. Bilingue. Accessible aux débutants.",
+    },
     hero: {
-      badge: "Candidatures ouvertes pour la Cohorte 1",
-      title: "Apprenez les données et l'IA en réalisant de vrais projets",
+      eyebrow: "Formation en données et IA pour l'Afrique",
+      titleLines: [
+        "De vraies compétences.",
+        "Des projets concrets.",
+        "Un avenir plus solide.",
+      ],
       subtitle:
-        "Hard Skills Lab forme les jeunes Africains aux données et à l'IA grâce à un apprentissage gratuit, en ligne, pratique et axé sur les projets. Aucune expérience préalable requise — juste de la curiosité et de l'engagement.",
-      primaryCta: "Postuler pour la Cohorte 1",
-      secondaryCta: "Découvrir le programme",
+        "Hard Skills Lab forme les jeunes Africains aux données et à l'intelligence artificielle, gratuitement et en ligne, en français et en anglais. Nous enseignons en pratiquant — pour que vous repartiez avec un vrai projet, pas seulement de la théorie.",
+      cta: "Postuler à la cohorte",
+      pillars: ["Apprendre", "Créer", "Grandir"],
+      scroll: "Défiler",
     },
     program: {
       title: "Le Programme",
