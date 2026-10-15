@@ -87,3 +87,21 @@ h6 {
   background-color: var(--color-orange);
   color: var(--color-white);
 }
+
+/* Scroll margin for sticky header */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Section padding */
+section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}

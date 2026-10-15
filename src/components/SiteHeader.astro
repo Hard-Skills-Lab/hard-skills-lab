@@ -1,0 +1,227 @@
+---
+import type { Language } from "../content/site-config";
+import { siteConfig } from "../content/site-config";
+
+interface Props {
+  lang: Language;
+  navigation: {
+    program: string;
+    curriculum: string;
+    about: string;
+    faq: string;
+    apply: string;
+  };
+}
+
+const { lang, navigation } = Astro.props;
+const alternateLang = lang === "en" ? "fr" : "en";
+const alternateUrl = `/${alternateLang}/`;
+
+const navItems = [
+  { label: navigation.program, href: "#program" },
+  { label: navigation.curriculum, href: "#curriculum" },
+  { label: navigation.about, href: "#about" },
+  { label: navigation.faq, href: "#faq" },
+];
+---
+
+<header class="sticky top-0 z-50 bg-paper border-b border-rule">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Wordmark -->
+      <a
+        href={`/${lang}/`}
+        class="flex items-center gap-2 text-ink hover:text-orange transition-colors"
+      >
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <rect width="32" height="32" fill="#F7F5EF"></rect>
+          <rect x="6" y="6" width="20" height="4" fill="#20211F"></rect>
+          <rect x="6" y="14" width="14" height="4" fill="#D94F2B"></rect>
+          <rect x="6" y="22" width="20" height="4" fill="#20211F"></rect>
+        </svg>
+        <span class="font-heading font-bold text-lg">Hard Skills Lab</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav
+        class="hidden md:flex items-center gap-8"
+        aria-label="Main navigation"
+      >
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="text-sm font-medium text-ink hover:text-orange transition-colors"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- Desktop Actions -->
+      <div class="hidden md:flex items-center gap-4">
+        <a
+          href={alternateUrl}
+          class="text-sm font-mono font-medium text-muted hover:text-ink transition-colors"
+          aria-label={alternateLang === "fr"
+            ? "Switch to French"
+            : "Passer à l'anglais"}
+        >
+          {alternateLang.toUpperCase()}
+        </a>
+        <a
+          href={siteConfig.applicationUrls[lang]}
+          class="inline-flex items-center px-4 py-2 bg-orange text-white text-sm font-medium hover:bg-orange/90 transition-colors"
+        >
+          {navigation.apply}
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        type="button"
+        class="md:hidden inline-flex items-center justify-center p-2 text-ink hover:text-orange transition-colors"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+        id="menu-button"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden border-t border-rule bg-paper"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+  >
+    <div class="px-4 py-6 space-y-4">
+      <nav class="flex flex-col gap-4" aria-label="Mobile navigation">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="text-base font-medium text-ink hover:text-orange transition-colors mobile-nav-link"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+      <div class="pt-4 border-t border-rule flex flex-col gap-4">
+        <a
+          href={alternateUrl}
+          class="text-sm font-mono font-medium text-muted hover:text-ink transition-colors"
+        >
+          {alternateLang === "fr" ? "Français" : "English"}
+        </a>
+        <a
+          href={siteConfig.applicationUrls[lang]}
+          class="inline-flex items-center justify-center px-4 py-3 bg-orange text-white font-medium hover:bg-orange/90 transition-colors"
+        >
+          {navigation.apply}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  function initMobileMenu() {
+    const button = document.getElementById("menu-button");
+    const menu = document.getElementById("mobile-menu");
+
+    if (!button || !menu) return;
+
+    let isOpen = false;
+
+    function openMenu() {
+      isOpen = true;
+      menu.classList.remove("hidden");
+      button.setAttribute("aria-expanded", "true");
+      button.setAttribute("aria-label", "Close menu");
+      document.body.style.overflow = "hidden";
+
+      // Change icon to X
+      const svg = button.querySelector("svg");
+      if (svg) {
+        svg.innerHTML =
+          '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+      }
+    }
+
+    function closeMenu() {
+      isOpen = false;
+      menu.classList.add("hidden");
+      button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-label", "Open menu");
+      document.body.style.overflow = "";
+
+      // Change icon back to hamburger
+      const svg = button.querySelector("svg");
+      if (svg) {
+        svg.innerHTML =
+          '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+      }
+    }
+
+    function toggleMenu() {
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    // Toggle on button click
+    button.addEventListener("click", toggleMenu);
+
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen) {
+        closeMenu();
+        button.focus();
+      }
+    });
+
+    // Close when clicking nav links
+    const navLinks = menu.querySelectorAll(".mobile-nav-link");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    // Close on resize to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768 && isOpen) {
+        closeMenu();
+      }
+    });
+  }
+
+  // Initialize on page load
+  initMobileMenu();
+</script>

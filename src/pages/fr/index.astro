@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import LanguageSwitch from "../../components/LanguageSwitch.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import PrimaryButton from "../../components/PrimaryButton.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
 import { getContent } from "../../content/site-content";
 import { siteConfig } from "../../content/site-config";
 
@@ -9,33 +12,170 @@ const t = getContent(lang);
 ---
 
 <BaseLayout title={t.meta.title} description={t.meta.description} lang={lang}>
-  <main class="min-h-screen px-4 py-16 relative">
-    <div class="absolute top-4 right-4">
-      <LanguageSwitch currentLang={lang} />
-    </div>
-    <div class="max-w-4xl mx-auto text-center">
-      <!-- rest of content stays the same -->
-      <p class="text-sm font-mono text-orange mb-4">{t.hero.badge}</p>
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">
-        {t.hero.title}
-      </h1>
-      <p class="text-lg text-muted mb-8 max-w-2xl mx-auto">
-        {t.hero.subtitle}
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href={siteConfig.applicationUrls.fr}
-          class="inline-flex items-center justify-center px-6 py-3 bg-orange text-white font-medium hover:bg-orange/90 transition-colors"
-        >
-          {t.hero.primaryCta}
-        </a>
-        <a
-          href="#program"
-          class="inline-flex items-center justify-center px-6 py-3 border border-ink text-ink font-medium hover:bg-ink hover:text-white transition-colors"
-        >
-          {t.hero.secondaryCta}
-        </a>
+  <SiteHeader lang={lang} navigation={t.navigation} />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-sm font-mono text-orange mb-4">{t.hero.badge}</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          {t.hero.title}
+        </h1>
+        <p class="text-lg text-muted mb-8 max-w-2xl mx-auto">
+          {t.hero.subtitle}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <PrimaryButton href={siteConfig.applicationUrls.fr}>
+            {t.hero.primaryCta}
+          </PrimaryButton>
+          <PrimaryButton href="#program" variant="secondary">
+            {t.hero.secondaryCta}
+          </PrimaryButton>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Program Section -->
+    <section
+      id="program"
+      class="px-4 sm:px-6 lg:px-8 bg-white border-y border-rule"
+    >
+      <div class="max-w-7xl mx-auto">
+        <SectionHeading title={t.program.title} subtitle={t.program.intro} />
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {
+            t.program.facts.map((fact) => (
+              <div class="border border-rule p-6">
+                <p class="text-sm font-mono text-muted mb-2">{fact.label}</p>
+                <p class="text-xl font-heading font-semibold">{fact.value}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section id="curriculum" class="px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <SectionHeading
+          title={t.curriculum.title}
+          subtitle={t.curriculum.intro}
+        />
+        <div class="grid md:grid-cols-3 gap-6">
+          {
+            t.curriculum.tracks.map((track) => (
+              <article class="border border-rule p-6 bg-white">
+                <h3 class="text-xl font-heading font-semibold mb-3">
+                  {track.title}
+                </h3>
+                <p class="text-muted mb-4">{track.description}</p>
+                <ul class="flex flex-wrap gap-2">
+                  {track.skills.map((skill) => (
+                    <li class="text-xs font-mono px-2 py-1 bg-paper border border-rule">
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section
+      id="about"
+      class="px-4 sm:px-6 lg:px-8 bg-white border-y border-rule"
+    >
+      <div class="max-w-7xl mx-auto">
+        <SectionHeading title={t.about.title} />
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div>
+            <h3 class="text-lg font-heading font-semibold mb-3">Mission</h3>
+            <p class="text-muted">{t.about.mission}</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-heading font-semibold mb-3">Vision</h3>
+            <p class="text-muted">{t.about.vision}</p>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {
+            t.about.founders.map((founder) => (
+              <article class="border border-rule p-6">
+                <div class="w-16 h-16 bg-rule mb-4" aria-hidden="true" />
+                <h3 class="font-heading font-semibold">{founder.name}</h3>
+                <p class="text-sm text-orange mb-2">{founder.role}</p>
+                <p class="text-sm text-muted">{founder.bio}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <SectionHeading title={t.faq.title} />
+        <div class="space-y-6">
+          {
+            t.faq.questions.map((item) => (
+              <details class="border border-rule bg-white group">
+                <summary class="p-6 cursor-pointer font-medium hover:text-orange transition-colors list-none flex justify-between items-center">
+                  {item.question}
+                  <svg
+                    class="w-5 h-5 text-muted group-open:rotate-180 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div class="px-6 pb-6 text-muted">{item.answer}</div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Apply Section -->
+    <section id="apply" class="px-4 sm:px-6 lg:px-8 bg-ink text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          {t.apply.title}
+        </h2>
+        <p class="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
+          {t.apply.description}
+        </p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8 text-left">
+          {
+            t.apply.requirements.map((req) => (
+              <div class="border border-white/20 p-4 text-sm text-white/80">
+                {req}
+              </div>
+            ))
+          }
+        </div>
+        <PrimaryButton
+          href={siteConfig.applicationUrls.fr}
+          class="text-lg px-8 py-4"
+        >
+          {t.apply.cta}
+        </PrimaryButton>
+      </div>
+    </section>
   </main>
+
+  <SiteFooter lang={lang} footer={t.footer} navigation={t.navigation} />
 </BaseLayout>
