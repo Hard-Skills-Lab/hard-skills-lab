@@ -132,108 +132,183 @@ The language switch should take users to the equivalent page in the other langua
 - Language switch must remain visible on desktop and mobile.
 - Keep section IDs stable and language-neutral (e.g. `#program`, `#curriculum`, `#about`, `#apply`) so anchor behavior is consistent.
 
-## 5. Recommended technical approach
+## 5. Project Status (Sprint 1 in progress)
 
-### Stack
+### Tech Stack
 
-- **Astro** for static-first pages and file-based routes.
-- **Tailwind CSS** for styling and responsive utilities.
-- **TypeScript** for content and component props.
-- Small vanilla JavaScript only where interaction requires it (mobile navigation and reveal animations).
-- Use Astro’s built-in image tooling or a consistent image optimization workflow for local images.
-- Do not add a UI component framework or animation library unless a real need emerges.
+- **Astro** (static-first, file-based routes)
+- **Tailwind CSS v4** (via `@tailwindcss/vite` plugin, no `tailwind.config.js`)
+- **TypeScript** (strict mode)
+- Minimal vanilla JS for mobile menu only
 
-Why this stack:
+### Current File Structure
 
-- The website is content-led, mostly static, and does not require a logged-in application.
-- Astro supports fast pages and reusable components without shipping a large JavaScript bundle.
-- A shared template and localized content make the two language versions maintainable.
-- Sprint 2 can introduce a Git-based CMS without rebuilding the visual components.
+```
+hard-skills-lab/
+├── public/
+│   ├── favicon.svg          # Simple typographic mark (3 bars: ink/orange/ink)
+│   └── robots.txt
+├── src/
+│   ├── components/
+│   │   ├── SiteHeader.astro      # Sticky header, desktop nav, mobile menu with ARIA
+│   │   ├── SiteFooter.astro      # Dark footer, dynamic year, nav links, contact
+│   │   ├── PrimaryButton.astro   # Primary/secondary button variants
+│   │   └── SectionHeading.astro  # Consistent section headers
+│   ├── content/
+│   │   ├── site-config.ts        # Centralized URLs (application forms, social, site URL)
+│   │   └── site-content.ts       # Typed bilingual content object (en/fr)
+│   ├── layouts/
+│   │   └── BaseLayout.astro      # HTML shell, hreflang, fonts, meta tags
+│   ├── pages/
+│   │   ├── index.astro           # Redirects to /en/
+│   │   ├── en/
+│   │   │   └── index.astro       # English homepage (full sections)
+│   │   └── fr/
+│   │       └── index.astro       # French homepage (full sections)
+│   └── styles/
+│       └── global.css            # Tailwind v4 import, @theme tokens, base styles
+├── astro.config.mjs              # Site URL + Tailwind Vite plugin
+├── package.json
+├── tsconfig.json                 # Strict TS, path aliases @/*
+└── README.md                     # Setup, commands, structure, design tokens
+```
 
-**Note:** Tailwind’s setup differs between major versions. Use the current Astro integration instructions for the selected Tailwind version and record the version in the project. Do not blindly copy a configuration from an older tutorial.
+### Design Tokens (Tailwind v4 `@theme` in global.css)
 
-### Component principles (atomic)
+| Token            | Value     | Usage                      |
+| ---------------- | --------- | -------------------------- |
+| `--color-paper`  | `#F7F5EF` | Main background            |
+| `--color-ink`    | `#20211F` | Primary text/dark surfaces |
+| `--color-orange` | `#D94F2B` | CTAs, accents              |
+| `--color-rule`   | `#DCD9D0` | Borders/dividers           |
+| `--color-muted`  | `#66645F` | Secondary text             |
 
-- Components should represent reusable UI patterns, not every individual `div`.
-- Keep content separate from layout wherever practical.
-- Pass translated labels and content through props or localized data.
-- Avoid duplicating the whole homepage for French and English.
-- Avoid a single giant component with all content and interactions mixed together.
-- Use semantic HTML: `header`, `nav`, `main`, `section`, `footer`, `ul`, `button`, and `a` appropriately.
-- Prefer real anchors for navigation and real buttons for actions.
-- Use `aria-expanded`, `aria-controls`, and accessible names for the mobile menu.
-- Ensure all images have meaningful `alt` text; decorative images should use empty alt text (`alt=""`).
+**Typography:** Space Grotesk (headings), Source Sans 3 (body), IBM Plex Mono (technical labels) — loaded via Google Fonts with system fallbacks.
 
----
+### What's Been Implemented (Phase 1 Complete)
 
-# Sprint 1 — Basic bilingual website
+**Phase 1.1 — Foundation:**
 
-**Sprint goal:** Ship a complete, responsive, accessible, static-first website with reusable components and French/English content. Content can initially be maintained in code. The application CTA links to Google Forms.
+- Astro + Tailwind v4 + TypeScript scaffolded
+- Design tokens in `@theme` (Tailwind v4 syntax)
+- BaseLayout with hreflang alternate links, localized meta
+- Favicon, robots.txt, README
 
-## Phase 1.1 — Project setup and foundation
+**Phase 1.2 — Bilingual Content & Routing:**
 
-### Tasks
+- Typed content model: `site-content.ts` with full `en`/`fr` objects
+- Centralized config: `site-config.ts` (application URLs, social, site URL)
+- Routes: `/en/`, `/fr/`, root `/` redirects to `/en/`
+- Language switcher in header (desktop: text link, mobile: in menu)
+- All UI strings translated (nav, CTAs, sections, footer)
 
-- [ ] Create the repository and agree on a simple branch/PR workflow.
-- [ ] Scaffold an Astro project with TypeScript.
-- [ ] Add Tailwind CSS using the current recommended Astro integration.
-- [ ] Add a basic lint/format workflow if the team is comfortable maintaining it; keep tooling minimal.
-- [ ] Configure the production site URL in Astro configuration once the domain is known.
-- [ ] Establish the initial directory structure.
-- [ ] Add the design tokens to global styles or Tailwind theme configuration.
-- [ ] Add font loading and sensible fallback fonts.
-- [ ] Create a basic `BaseLayout.astro` with metadata slots, global CSS, and document language.
-- [ ] Create a simple favicon and typographic wordmark.
-- [ ] Add a README with setup, local development, build, and deployment commands.
+**Phase 1.3 — Layout & Navigation:**
+
+- Sticky header with smooth-scroll anchor nav
+- Mobile menu: hamburger toggle, Escape to close, close-on-nav, body scroll lock, `aria-expanded`/`aria-controls`
+- Footer with dynamic year, nav, contact email placeholder
+- Homepage sections: Hero, Program (facts grid), Curriculum (track cards), About (mission/vision + founder placeholder), FAQ (details/summary), Apply (requirements + CTA)
+- `scroll-margin-top` on sections for sticky header offset
+- Focus-visible styles, reduced-motion respect
+
+### Known Issues / Debug Notes
+
+None.
+
+## TODOs / Next Steps
+
+### Phase 1.4 — Build homepage sections
+
+Implement each section using shared components and localized content.
+
+#### Tasks
+
+- [ ] Hero: eyebrow, main headline, concise value proposition, primary CTA, and image/work visual.
+- [ ] Program overview: cohort format and confirmed program facts.
+- [ ] Mission section: why Hard Skills Lab exists and what makes its approach practical.
+- [ ] Curriculum section: high-level weekly progression, with content approved by track leads.
+- [ ] Track cards: Data Analysis with Python and Artificial Intelligence & Machine Learning.
+- [ ] Example project cards: clearly label as proposed/illustrative until real projects are available.
+- [ ] About/team section: founder names, roles, bios, and approved photos or explicit placeholders.
+- [ ] Eligibility/application section: eligibility, language, internet, time commitment, and application steps.
+- [ ] FAQ section: only confirmed answers.
+- [ ] Final application CTA.
+- [ ] Footer.
+- [ ] Add meaningful anchor IDs for all navigable sections.
 
 **Acceptance criteria**
 
-- The project starts locally with the documented command.
-- The production build succeeds.
-- Global design tokens and typography are available to every page.
-- No secrets or private keys are committed.
+- Every required section appears in a coherent order.
+- Section content is complete in English and French.
+- All placeholder content is visibly identified for the team and not misleading to visitors.
+- All application CTAs use the centralized application URL.
+- The page is understandable if images fail to load.
 
-## Phase 1.2 — Bilingual content model and routing
+### Phase 1.5 — Responsive styling and visual refinement
 
-### Tasks
+#### Tasks
 
-- [ ] Define a typed content object for `en` and `fr`.
-- [ ] Store all visible strings and homepage content in the localized content source.
-- [ ] Create the English route at `/en/`.
-- [ ] Create the French route at `/fr/`.
-- [ ] Decide and implement root `/` behavior (default-language redirect or language chooser).
-- [ ] Add localized page titles and descriptions.
-- [ ] Add the correct `lang` attribute to each page.
-- [ ] Add `hreflang` alternate links when the production domain is configured.
-- [ ] Centralize application URLs and social URLs.
-- [ ] Add a simple validation/checklist so missing translations are caught before release.
-
-**Acceptance criteria**
-
-- Both routes build and render.
-- Switching language leads to the corresponding language homepage.
-- Neither language contains untranslated navigation or UI strings.
-- Each page has correct language metadata and unique title/description.
-- The application CTA points to the intended form for that language.
-
-## Phase 1.3 — Shared layout and navigation
-
-### Tasks
-
-- [ ] Build `SiteHeader.astro` with wordmark, anchor navigation, language switch, and application CTA.
-- [ ] Build the responsive mobile menu.
-- [ ] Add accessible open/close behavior, Escape handling, and close-on-navigation behavior.
-- [ ] Build `SiteFooter.astro` with social links, navigation, contact/privacy placeholders, and dynamic year.
-- [ ] Build shared button/link styles for primary, secondary, and text-link actions.
-- [ ] Define focus-visible, hover, active, and disabled styles where applicable.
-- [ ] Verify header and anchor behavior with keyboard navigation and touch input.
+- [ ] Match the approved desktop and mobile design direction.
+- [ ] Verify mobile layouts at narrow widths, including 320px.
+- [ ] Check tablet layouts and wide desktop layouts.
+- [ ] Ensure cards stack properly and no text, menu, or buttons overflow.
+- [ ] Tune line lengths, font sizes, spacing, and image crops at each breakpoint.
+- [ ] Check color contrast and visible focus states.
+- [ ] Ensure touch targets are large enough.
+- [ ] Use responsive image sizes and modern image formats where practical.
+- [ ] Avoid layout shifts by setting image dimensions or aspect ratios.
 
 **Acceptance criteria**
 
-- Header works with mouse, keyboard, and touch.
-- Mobile navigation can be opened and closed accessibly.
-- Navigation anchors do not hide section headings under a sticky header.
-- Links have descriptive labels and visible focus indicators.
+- No horizontal page overflow at 320px or common mobile/tablet/desktop widths.
+- The mobile menu is usable and does not obscure essential controls.
+- Text is readable without zooming.
+- Layout remains coherent with long French labels and translated copy.
+
+### Phase 1.6 — Reveal animation and interaction polish
+
+#### Tasks
+
+- [ ] Create a reusable reveal pattern for selected content and image blocks.
+- [ ] Use opacity and a small vertical translation; keep duration around 450–650ms.
+- [ ] Trigger reveals with Intersection Observer or an equally lightweight solution.
+- [ ] Reveal each element at most once unless a clear reason requires otherwise.
+- [ ] Ensure content remains visible if JavaScript fails or reduced motion is enabled.
+- [ ] Add subtle CTA arrow/underline transitions only where useful.
+- [ ] Avoid animating every list row or creating distracting motion.
+
+**Acceptance criteria**
+
+- Animations feel subtle and do not delay reading.
+- `prefers-reduced-motion: reduce` disables or greatly reduces movement.
+- The page remains usable without JavaScript.
+- No large animation dependency is introduced without a justified need.
+
+### Phase 1.7 — Accessibility, SEO, performance, and pre-launch QA
+
+#### Tasks
+
+- [ ] Use semantic headings in logical order.
+- [ ] Check keyboard-only navigation and focus order.
+- [ ] Confirm mobile menu labels and ARIA state are correct.
+- [ ] Add image alt text and mark decorative imagery appropriately.
+- [ ] Add title, description, canonical URL, Open Graph metadata, and favicon.
+- [ ] Add `hreflang` alternates and verify URLs after the production domain is known.
+- [ ] Add a `robots.txt`; generate a sitemap if appropriate for the chosen route setup.
+- [ ] Optimize images and avoid loading below-the-fold images eagerly.
+- [ ] Test production build locally.
+- [ ] Check external links, form links, social links, and contact information.
+- [ ] Run Lighthouse or equivalent checks for performance, accessibility, SEO, and best practices.
+- [ ] Test on at least one real phone if possible.
+- [ ] Ask both founders to approve copy, dates, track details, photos, and form destinations.
+
+**Acceptance criteria**
+
+- Production build completes without errors.
+- No broken internal links or incorrect form destinations.
+- No unapproved factual claims or placeholder deadlines are published.
+- Major accessibility and mobile issues are fixed before launch.
+- Founders approve all public-facing content.
 
 ---
 
