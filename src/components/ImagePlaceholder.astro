@@ -3,14 +3,26 @@ interface Props {
   /** What the real image will show. Visible to the team only while in dev. */
   label: string;
   tone?: "light" | "dark";
+  /** Where the dev label sits, so it can avoid text overlaid on the image. */
+  labelPosition?: "bottom-left" | "top-right";
   class?: string;
 }
 
-const { label, tone = "light", class: className } = Astro.props;
+const {
+  label,
+  tone = "light",
+  labelPosition = "bottom-left",
+  class: className,
+} = Astro.props;
 
 const tones = {
   light: "bg-rule/70 text-muted",
   dark: "bg-ink text-white/70",
+};
+
+const positions = {
+  "bottom-left": "items-end justify-start",
+  "top-right": "items-start justify-end",
 };
 
 // Subtle diagonal hatching, drawn with the current text color
@@ -21,7 +33,11 @@ const pattern =
 <!-- DEV PLACEHOLDER: replace with a real <img>/<Image> and a proper alt -->
 <div class:list={["overflow-hidden", className]} aria-hidden="true">
   <div
-    class:list={["flex h-full w-full items-end p-3", tones[tone]]}
+    class:list={[
+      "flex h-full w-full p-3",
+      positions[labelPosition],
+      tones[tone],
+    ]}
     style={pattern}
   >
     <span
