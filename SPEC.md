@@ -217,9 +217,7 @@ None.
 
 ## TODOs / Next Steps
 
-### Phase 1.4 — Build homepage sections
-
-Implement each section using shared components and localized content.
+### Phase 1.4 — Build/update homepage sections
 
 #### Tasks
 
