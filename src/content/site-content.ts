@@ -208,7 +208,7 @@ export const content: Record<Language, SiteContent> = {
     },
     curriculum: {
       eyebrow: "The curriculum",
-      title: ["8 weeks. 2 tracks.", " 1 capstone project."],
+      title: ["8 weeks.", "2 tracks.", " 1 project."],
       intro:
         "Each week, you'll have one data session and one AI session. The two tracks reinforce each other, and everything builds towards a final project you'll present.",
       weekLabel: "Week",
@@ -463,7 +463,7 @@ export const content: Record<Language, SiteContent> = {
     },
     curriculum: {
       eyebrow: "Le curriculum",
-      title: ["8 semaines. 2 parcours.", "1 projet final."],
+      title: ["8 semaines.", "2 parcours.", "1 projet."],
       intro:
         "Chaque semaine, vous suivez une session données et une session IA. Les deux parcours se renforcent mutuellement, et tout converge vers un projet final que vous présenterez.",
       weekLabel: "Semaine",
