@@ -1,0 +1,95 @@
+---
+import type { Language } from "../content/site-config";
+import { siteConfig } from "../content/site-config";
+import { getContent } from "../content/site-content";
+import PrimaryButton from "./PrimaryButton.astro";
+import ImagePlaceholder from "./ImagePlaceholder.astro";
+import ExternalLink from "./ExternalLink.astro";
+import Icon from "./Icon.astro";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const { apply, hero } = getContent(lang);
+const applyUrl = siteConfig.applicationUrls[lang];
+const contactUrl = `mailto:${siteConfig.social.email}`;
+---
+
+<section id="apply" class="bg-paper lg:flex lg:bg-paper-soft">
+  <!-- Desktop image: touches the left edge of the screen -->
+  <div class="relative hidden lg:block lg:w-1/3 lg:shrink-0">
+    <ImagePlaceholder label="Notebook and pen" class="absolute inset-0" />
+  </div>
+
+  <div class="section-y px-4 sm:px-6 lg:flex-1 lg:px-12 xl:px-16">
+    <div class="max-w-4xl">
+      <!-- Heading + desktop button -->
+      <div class="lg:flex lg:items-center lg:justify-between lg:gap-10">
+        <div class="max-w-xl">
+          <p class="eyebrow">{apply.eyebrow}</p>
+          <h2 class="heading-section mt-4">{apply.title}</h2>
+          <p class="mt-5 text-base text-muted sm:text-lg">{apply.intro}</p>
+        </div>
+        <div class="hidden shrink-0 lg:block">
+          <PrimaryButton href={applyUrl} arrow>{apply.cta}</PrimaryButton>
+        </div>
+      </div>
+
+      <!-- Practical details -->
+      <ul
+        class="mt-10 border-t border-rule lg:grid lg:grid-cols-4 lg:gap-8 lg:border-t-0"
+      >
+        {
+          apply.details.map((detail) => (
+            <li class="flex gap-4 border-b border-rule py-4 lg:block lg:border-b-0 lg:py-0">
+              <Icon name={detail.icon} class="size-7 text-orange lg:size-8" />
+              <div class="lg:mt-4">
+                <p class="font-heading text-sm font-semibold">{detail.title}</p>
+                <p class="mt-1 text-sm text-muted">{detail.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Mobile button -->
+      <div class="mt-8 lg:hidden">
+        <PrimaryButton href={applyUrl} arrow class="w-full">
+          {apply.cta}
+        </PrimaryButton>
+      </div>
+
+      <!-- Questions -->
+      <div class="mt-8 flex gap-4 bg-rule/40 p-5 lg:mt-10">
+        <Icon name="helpCircle" class="size-6 text-muted" />
+        <div>
+          <p class="text-sm font-semibold">{apply.questions.title}</p>
+          <p class="mt-1 text-xs text-muted sm:text-sm">
+            {apply.questions.text}
+          </p>
+          <ExternalLink href={contactUrl} external={false} class="-mb-2">
+            {apply.questions.cta}
+          </ExternalLink>
+        </div>
+      </div>
+
+      <!-- Mobile / tablet image -->
+      <div class="relative mt-8 aspect-[16/10] sm:aspect-[2/1] lg:hidden">
+        <ImagePlaceholder
+          label="Landscape"
+          tone="dark"
+          labelPosition="top-right"
+          class="absolute inset-0"
+        />
+        <p
+          class="absolute bottom-3 left-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white"
+          aria-hidden="true"
+        >
+          {hero.pillars.join("  ›  ")}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

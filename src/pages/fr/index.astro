@@ -10,6 +10,7 @@ import { siteConfig } from "../../content/site-config";
 import Icon from "@/components/Icon.astro";
 import SampleProjects from "@/components/SampleProjects.astro";
 import AboutSection from "@/components/AboutSection.astro";
+import ApplySection from "@/components/ApplySection.astro";
 
 const lang = "fr" as const;
 const t = getContent(lang);
@@ -299,7 +300,7 @@ const t = getContent(lang);
     <AboutSection lang={lang} />
 
     <!-- FAQ Section -->
-    <section id="faq" class="px-4 sm:px-6 lg:px-8">
+    <!-- <section id="faq" class="px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
         <SectionHeading title={t.faq.title} />
         <div class="space-y-6">
@@ -328,34 +329,10 @@ const t = getContent(lang);
           }
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <!-- Apply Section -->
-    <section id="apply" class="px-4 sm:px-6 lg:px-8 bg-ink text-white">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">
-          {t.apply.title}
-        </h2>
-        <p class="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-          {t.apply.description}
-        </p>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8 text-left">
-          {
-            t.apply.requirements.map((req) => (
-              <div class="border border-white/20 p-4 text-sm text-white/80">
-                {req}
-              </div>
-            ))
-          }
-        </div>
-        <PrimaryButton
-          href={siteConfig.applicationUrls.en}
-          class="text-lg px-8 py-4"
-        >
-          {t.apply.cta}
-        </PrimaryButton>
-      </div>
-    </section>
+    <!-- Apply / Join us -->
+    <ApplySection lang={lang} />
   </main>
 
   <SiteFooter lang={lang} footer={t.footer} navigation={t.navigation} />

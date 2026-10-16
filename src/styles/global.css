@@ -160,20 +160,3 @@ h6 {
 section[id] {
   scroll-margin-top: 5rem;
 }
-
-/*
- * TEMPORARY: global section padding.
- * Will be removed in the last 1.4 sub-phase, once every section uses
- * the `section-y` utility instead.
- */
-section {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-@media (min-width: 768px) {
-  section {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-}

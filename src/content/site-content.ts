@@ -112,10 +112,20 @@ export interface SiteContent {
     }>;
   };
   apply: {
+    eyebrow: string;
     title: string;
-    description: string;
+    intro: string;
     cta: string;
-    requirements: string[];
+    details: Array<{
+      icon: IconName;
+      title: string;
+      text: string;
+    }>;
+    questions: {
+      title: string;
+      text: string;
+      cta: string;
+    };
   };
   footer: {
     tagline: string;
@@ -338,17 +348,39 @@ export const content: Record<Language, SiteContent> = {
       ],
     },
     apply: {
-      title: "Ready to Start?",
-      description:
-        "Applications for Cohort 1 are now open. Join us and build the skills that will shape your future.",
-      cta: "Apply for Cohort 1",
-      requirements: [
-        "Aged 18-30",
-        "Based in Togo or West Africa",
-        "Basic computer literacy",
-        "Reliable internet access",
-        "Commitment to 16 weeks of learning",
+      eyebrow: "Join us",
+      title: "Ready to build your future?",
+      intro:
+        "Apply for the first cohort and take the first step into data and AI.",
+      cta: "Apply for cohort",
+      details: [
+        {
+          icon: "checkCircle",
+          title: "Eligibility",
+          text: "Young people in Togo and West Africa.",
+        },
+        {
+          icon: "clock",
+          title: "Time commitment",
+          text: "Around 10-12 hours per week.",
+        },
+        {
+          icon: "wifi",
+          title: "Internet",
+          text: "A stable internet connection is required.",
+        },
+        {
+          icon: "calendar",
+          title: "Application deadline",
+          // DEV: the mockup says "May 31, 2025 (example)". Set the real date.
+          text: "Date to be confirmed.",
+        },
       ],
+      questions: {
+        title: "Have questions?",
+        text: "Get in touch with the team.",
+        cta: "Contact us",
+      },
     },
     footer: {
       tagline:
@@ -571,17 +603,39 @@ export const content: Record<Language, SiteContent> = {
       ],
     },
     apply: {
-      title: "Prêt à Commencer ?",
-      description:
-        "Les candidatures pour la Cohorte 1 sont maintenant ouvertes. Rejoignez-nous et développez les compétences qui façonneront votre avenir.",
-      cta: "Postuler pour la Cohorte 1",
-      requirements: [
-        "Âgé de 18 à 30 ans",
-        "Basé au Togo ou en Afrique de l'Ouest",
-        "Compétences informatiques de base",
-        "Accès internet fiable",
-        "Engagement pour 16 semaines d'apprentissage",
+      eyebrow: "Rejoignez-nous",
+      title: "Prêt à construire votre avenir ?",
+      intro:
+        "Postulez à la première cohorte et faites le premier pas vers les données et l'IA.",
+      cta: "Postuler à la cohorte",
+      details: [
+        {
+          icon: "checkCircle",
+          title: "Éligibilité",
+          text: "Jeunes du Togo et d'Afrique de l'Ouest.",
+        },
+        {
+          icon: "clock",
+          title: "Engagement",
+          text: "Environ 10 à 12 heures par semaine.",
+        },
+        {
+          icon: "wifi",
+          title: "Internet",
+          text: "Une connexion internet stable est nécessaire.",
+        },
+        {
+          icon: "calendar",
+          title: "Date limite de candidature",
+          // DEV : la maquette indique « 31 mai 2025 (exemple) ». Mettre la vraie date.
+          text: "Date à confirmer.",
+        },
       ],
+      questions: {
+        title: "Des questions ?",
+        text: "Contactez l'équipe.",
+        cta: "Nous contacter",
+      },
     },
     footer: {
       tagline:

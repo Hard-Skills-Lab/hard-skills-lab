@@ -1,76 +1,53 @@
 ---
 import type { Language } from "../content/site-config";
 import { siteConfig } from "../content/site-config";
+import type { SiteContent } from "../content/site-content";
+import { socialLinks } from "../content/social-links";
+import SiteLogo from "./SiteLogo.astro";
+import Icon from "./Icon.astro";
 
 interface Props {
   lang: Language;
-  footer: {
-    tagline: string;
-    navigation: string;
-    contact: string;
-    rights: string;
-  };
-  navigation: {
-    program: string;
-    curriculum: string;
-    about: string;
-    faq: string;
-    apply: string;
-  };
+  footer: SiteContent["footer"];
+  navigation: SiteContent["navigation"];
 }
 
 const { lang, footer, navigation } = Astro.props;
 const year = new Date().getFullYear();
 
+// Same links and order as the header
 const navItems = [
+  { label: navigation.home, href: "#top" },
   { label: navigation.program, href: "#program" },
   { label: navigation.curriculum, href: "#curriculum" },
+  { label: navigation.projects, href: "#projects" },
   { label: navigation.about, href: "#about" },
-  { label: navigation.faq, href: "#faq" },
-  { label: navigation.apply, href: siteConfig.applicationUrls[lang] },
 ];
 ---
 
 <footer class="bg-ink text-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+  <div class="container-page py-12 md:py-16">
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
       <!-- Brand -->
       <div>
-        <div class="flex items-center gap-2 mb-4">
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <rect width="32" height="32" fill="#20211F"></rect>
-            <rect x="6" y="6" width="20" height="4" fill="#F7F5EF"></rect>
-            <rect x="6" y="14" width="14" height="4" fill="#D94F2B"></rect>
-            <rect x="6" y="22" width="20" height="4" fill="#F7F5EF"></rect>
-          </svg>
-          <span class="font-heading font-bold text-lg">Hard Skills Lab</span>
-        </div>
-        <p class="text-sm text-white/70 max-w-xs">
-          {footer.tagline}
-        </p>
+        <SiteLogo lang={lang} inverted class="mb-4" />
+        <p class="max-w-xs text-sm text-white/70">{footer.tagline}</p>
       </div>
 
       <!-- Navigation -->
-      <div>
+      <nav aria-label={footer.navigation}>
         <h3
-          class="font-heading font-semibold text-sm uppercase tracking-wider mb-4 text-white/50"
+          class="mb-3 font-heading text-sm font-semibold uppercase tracking-wider text-white/50"
         >
           {footer.navigation}
         </h3>
-        <ul class="space-y-3">
+        <ul>
           {
             navItems.map((item) => (
               <li>
                 <a
                   href={item.href}
-                  class="text-sm text-white/80 hover:text-orange transition-colors"
+                  class="inline-flex min-h-11 items-center text-sm text-white/80 transition-colors hover:text-white"
                 >
                   {item.label}
                 </a>
@@ -78,33 +55,46 @@ const navItems = [
             ))
           }
         </ul>
-      </div>
+      </nav>
 
       <!-- Contact -->
       <div>
         <h3
-          class="font-heading font-semibold text-sm uppercase tracking-wider mb-4 text-white/50"
+          class="mb-3 font-heading text-sm font-semibold uppercase tracking-wider text-white/50"
         >
           {footer.contact}
         </h3>
         <a
           href={`mailto:${siteConfig.social.email}`}
-          class="text-sm text-white/80 hover:text-orange transition-colors"
+          class="inline-flex min-h-11 items-center text-sm text-white/80 transition-colors hover:text-white"
         >
           {siteConfig.social.email}
         </a>
+
+        {
+          socialLinks.length > 0 && (
+            <ul class="mt-2 flex gap-2">
+              {socialLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    aria-label={link.name}
+                    class="inline-flex size-11 items-center justify-center border border-white/20 text-white/80 transition-colors hover:border-white hover:text-white"
+                  >
+                    <Icon name={link.icon} class="size-5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
       </div>
     </div>
 
-    <div
-      class="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4"
-    >
+    <div class="mt-12 border-t border-white/10 pt-8">
       <p class="text-sm text-white/50">
         © {year} Hard Skills Lab. {footer.rights}
       </p>
-      <div class="flex items-center gap-4">
-        <!-- TODO: Add social links when available -->
-      </div>
     </div>
   </div>
 </footer>

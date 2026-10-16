@@ -10,7 +10,7 @@ export const siteConfig = {
     // TODO: Add real social URLs when available
     email: "contact@hardskillslab.org",
     linkedin: "",
-    twitter: "",
+    instagram: "",
   },
 } as const;
 

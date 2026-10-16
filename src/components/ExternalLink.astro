@@ -3,18 +3,20 @@ import Icon from "./Icon.astro";
 
 interface Props {
   href: string;
-  /** Read by screen readers after the visible label, e.g. "(opens in a new tab)". */
-  srLabel: string;
+  /** Read by screen readers after the label, e.g. "(opens in a new tab)". Only used when external. */
+  srLabel?: string;
+  /** External links open in a new tab. Set to false for mailto: or same-site links. */
+  external?: boolean;
   class?: string;
 }
 
-const { href, srLabel, class: className } = Astro.props;
+const { href, srLabel, external = true, class: className } = Astro.props;
 ---
 
 <a
   href={href}
-  target="_blank"
-  rel="noopener noreferrer"
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
   class:list={[
     "group inline-flex min-h-11 items-center text-sm font-semibold text-ink transition-colors hover:text-orange",
     className,
@@ -25,9 +27,11 @@ const { href, srLabel, class: className } = Astro.props;
   >
     <slot />
     <Icon
-      name="arrowUpRight"
-      class="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+      name={external ? "arrowUpRight" : "arrowRight"}
+      class={external
+        ? "size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+        : "size-4 transition-transform group-hover:translate-x-0.5"}
     />
   </span>
-  <span class="sr-only">&nbsp;{srLabel}</span>
+  {external && srLabel && <span class="sr-only">&nbsp;{srLabel}</span>}
 </a>

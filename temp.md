@@ -1,44 +1,137 @@
-## src/components/SectionHeading.astro:
+## src/components/SiteFooter.astro
 
 ```
 ---
+import type { Language } from "../content/site-config";
+import { siteConfig } from "../content/site-config";
+
 interface Props {
-  title: string;
-  subtitle?: string;
+  lang: Language;
+  footer: {
+    tagline: string;
+    navigation: string;
+    contact: string;
+    rights: string;
+  };
+  navigation: {
+    program: string;
+    curriculum: string;
+    about: string;
+    faq: string;
+    apply: string;
+  };
 }
 
-const { title, subtitle } = Astro.props;
+const { lang, footer, navigation } = Astro.props;
+const year = new Date().getFullYear();
+
+const navItems = [
+  { label: navigation.program, href: "#program" },
+  { label: navigation.curriculum, href: "#curriculum" },
+  { label: navigation.about, href: "#about" },
+  { label: navigation.faq, href: "#faq" },
+  { label: navigation.apply, href: siteConfig.applicationUrls[lang] },
+];
 ---
 
-<div class="max-w-3xl mb-12">
-  <h2 class="text-3xl md:text-4xl font-bold mb-4">
-    {title}
-  </h2>
-  {subtitle && <p class="text-lg text-muted">{subtitle}</p>}
-</div>
+<footer class="bg-ink text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <rect width="32" height="32" fill="#20211F"></rect>
+            <rect x="6" y="6" width="20" height="4" fill="#F7F5EF"></rect>
+            <rect x="6" y="14" width="14" height="4" fill="#D94F2B"></rect>
+            <rect x="6" y="22" width="20" height="4" fill="#F7F5EF"></rect>
+          </svg>
+          <span class="font-heading font-bold text-lg">Hard Skills Lab</span>
+        </div>
+        <p class="text-sm text-white/70 max-w-xs">
+          {footer.tagline}
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h3
+          class="font-heading font-semibold text-sm uppercase tracking-wider mb-4 text-white/50"
+        >
+          {footer.navigation}
+        </h3>
+        <ul class="space-y-3">
+          {
+            navItems.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="text-sm text-white/80 hover:text-orange transition-colors"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3
+          class="font-heading font-semibold text-sm uppercase tracking-wider mb-4 text-white/50"
+        >
+          {footer.contact}
+        </h3>
+        <a
+          href={`mailto:${siteConfig.social.email}`}
+          class="text-sm text-white/80 hover:text-orange transition-colors"
+        >
+          {siteConfig.social.email}
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4"
+    >
+      <p class="text-sm text-white/50">
+        © {year} Hard Skills Lab. {footer.rights}
+      </p>
+      <div class="flex items-center gap-4">
+        <!-- TODO: Add social links when available -->
+      </div>
+    </div>
+  </div>
+</footer>
 ```
 
-## src/components/PrimaryButton.astro:
+## src/content/site-config.ts
 
 ```
----
-interface Props {
-  href: string;
-  variant?: "primary" | "secondary";
-  class?: string;
-}
+export const siteConfig = {
+  // TODO: Update with production domain once confirmed
+  siteUrl: "https://hardskillslab.org",
+  // TODO: Replace with actual Google Form URLs when available
+  applicationUrls: {
+    en: "https://forms.gle/placeholder-en",
+    fr: "https://forms.gle/placeholder-fr",
+  },
+  social: {
+    // TODO: Add real social URLs when available
+    email: "contact@hardskillslab.org",
+    linkedin: "",
+    twitter: "",
+  },
+} as const;
 
-const { href, variant = "primary", class: className = "" } = Astro.props;
-
-const baseStyles =
-  "inline-flex items-center justify-center px-6 py-3 font-medium transition-colors";
-const variants = {
-  primary: "bg-orange text-white hover:bg-orange/90",
-  secondary: "border border-ink text-ink hover:bg-ink hover:text-white",
-};
----
-
-<a href={href} class={`${baseStyles} ${variants[variant]} ${className}`}>
-  <slot />
-</a>
+export type Language = "en" | "fr";
+export type ApplicationUrl = keyof typeof siteConfig.applicationUrls;
 ```
