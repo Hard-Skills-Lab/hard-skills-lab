@@ -47,7 +47,7 @@ const carouselAttrs = isCarousel
           data-carousel-track
           class:list={[
             isCarousel
-              ? "relative flex snap-x snap-mandatory scroll-smooth gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              ? "relative flex snap-x snap-mandatory scroll-smooth gap-6 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden"
               : "grid gap-10 md:grid-cols-2 md:gap-6",
           ]}
         >
@@ -56,11 +56,11 @@ const carouselAttrs = isCarousel
               <li
                 class:list={[
                   isCarousel &&
-                    "shrink-0 basis-full snap-start md:basis-[calc((100%_-_1.5rem)_/_2)]",
+                    "shrink-0 basis-full snap-start md:basis-[calc((100%-1.5rem)/2)]",
                 ]}
               >
                 <article class="flex h-full flex-col">
-                  <div class="relative aspect-[16/10]">
+                  <div class="relative aspect-16/10">
                     <ImagePlaceholder
                       label={item.image.label}
                       tone={item.image.tone}
