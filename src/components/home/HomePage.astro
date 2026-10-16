@@ -1,0 +1,35 @@
+---
+import AboutSection from "@/components/home/AboutSection.astro";
+import ApplySection from "@/components/home/ApplySection.astro";
+import CurriculumSection from "@/components/home/CurriculumSection.astro";
+import HeroSection from "@/components/home/HeroSection.astro";
+import ProgramSection from "@/components/home/ProgramSection.astro";
+import SampleProjects from "@/components/SampleProjects.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import { getContent } from "@/content/site-content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+  lang: Parameters<typeof getContent>[0];
+}
+
+const { lang } = Astro.props;
+const t = getContent(lang);
+---
+
+<BaseLayout title={t.meta.title} description={t.meta.description} lang={lang}>
+  <SiteHeader lang={lang} navigation={t.navigation} />
+
+  <main>
+    <HeroSection lang={lang} />
+    <ProgramSection lang={lang} />
+    <CurriculumSection lang={lang} />
+    <SampleProjects lang={lang} />
+    <AboutSection lang={lang} />
+    <!-- FAQ section: re-add here when ready (the old markup is in git history) -->
+    <ApplySection lang={lang} />
+  </main>
+
+  <SiteFooter lang={lang} footer={t.footer} navigation={t.navigation} />
+</BaseLayout>

@@ -1,11 +1,11 @@
 ---
-import type { Language } from "../content/site-config";
-import { siteConfig } from "../content/site-config";
-import { getContent } from "../content/site-content";
-import PrimaryButton from "./PrimaryButton.astro";
-import ImagePlaceholder from "./ImagePlaceholder.astro";
-import ExternalLink from "./ExternalLink.astro";
-import Icon from "./Icon.astro";
+import ExternalLink from "@/components/ExternalLink.astro";
+import Icon from "@/components/Icon.astro";
+import ImagePlaceholder from "@/components/ImagePlaceholder.astro";
+import PrimaryButton from "@/components/PrimaryButton.astro";
+import type { Language } from "@/content/site-config";
+import { siteConfig } from "@/content/site-config";
+import { getContent } from "@/content/site-content";
 
 interface Props {
   lang: Language;

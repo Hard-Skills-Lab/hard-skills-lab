@@ -1,0 +1,95 @@
+---
+import ImagePlaceholder from "@/components/ImagePlaceholder.astro";
+import PrimaryButton from "@/components/PrimaryButton.astro";
+import { siteConfig } from "@/content/site-config";
+import { getContent } from "@/content/site-content";
+
+interface Props {
+  lang: Parameters<typeof getContent>[0];
+}
+
+const { lang } = Astro.props;
+const t = getContent(lang);
+---
+
+<!--
+  Hero. A <div> on purpose (not a <section>): the temporary global
+  `section { padding }` rule would override its spacing. Revisit in 1.4.h.
+-->
+<div id="top" class="relative scroll-mt-20 overflow-hidden">
+  <!-- Text -->
+  <div class="container-page">
+    <div
+      class="relative z-10 flex flex-col justify-center pb-10 pt-10 sm:pt-14 lg:min-h-136 lg:w-[55%] lg:py-20"
+    >
+      <p class="eyebrow">{t.hero.eyebrow}</p>
+      <h1
+        class="mt-5 font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl"
+      >
+        {t.hero.titleLines.map((line) => <span class="block">{line}</span>)}
+      </h1>
+      <p class="mt-6 max-w-md text-base text-ink/80 sm:text-lg">
+        {t.hero.subtitle}
+      </p>
+      <div class="mt-8">
+        <PrimaryButton href={siteConfig.applicationUrls[lang]} arrow>
+          {t.hero.cta}
+        </PrimaryButton>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual: below the text on mobile, anchored to the right on desktop -->
+  <div
+    class="px-4 pb-8 sm:px-6 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[50%] lg:p-0 2xl:w-[45%]"
+  >
+    <div class="relative aspect-4/5 sm:aspect-16/10 lg:aspect-auto lg:h-full">
+      <ImagePlaceholder
+        label="Hero portrait"
+        class="absolute inset-0 lg:right-[9%]"
+      />
+
+      <!-- Orange block (desktop only) -->
+      <div
+        class="absolute right-0 top-[37%] hidden h-[15.5%] w-[9%] bg-orange lg:block"
+        aria-hidden="true"
+      >
+      </div>
+
+      <!-- Landscape thumbnail (desktop only) -->
+      <div class="absolute bottom-0 right-0 hidden h-[47%] w-[14.5%] lg:block">
+        <ImagePlaceholder label="Landscape" tone="dark" class="h-full" />
+      </div>
+
+      <!-- Learn / Build / Grow (desktop only, decorative) -->
+      <ul
+        class="absolute right-[calc(9%+2rem)] top-[17%] hidden border-l-2 border-orange pl-3 text-xs font-medium uppercase leading-5 tracking-[0.18em] text-ink lg:block"
+        aria-hidden="true"
+      >
+        {t.hero.pillars.map((pillar) => <li>{pillar}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Scroll cue (mobile / tablet) -->
+  <div class="container-page pb-6 lg:hidden">
+    <a
+      href="#program"
+      class="inline-flex min-h-11 flex-col items-start justify-center gap-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted"
+    >
+      {t.hero.scroll}
+      <svg
+        class="size-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 5v14M6 13l6 6 6-6"></path>
+      </svg>
+    </a>
+  </div>
+</div>

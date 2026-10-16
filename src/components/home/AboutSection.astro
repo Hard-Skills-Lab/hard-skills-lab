@@ -1,8 +1,7 @@
 ---
-import type { Language } from "../content/site-config";
-import { getContent } from "../content/site-content";
-import ImagePlaceholder from "./ImagePlaceholder.astro";
-import Icon from "./Icon.astro";
+import ImagePlaceholder from "@/components/ImagePlaceholder.astro";
+import type { Language } from "@/content/site-config";
+import { getContent } from "@/content/site-content";
 
 interface Props {
   lang: Language;
@@ -30,7 +29,7 @@ const { about } = getContent(lang);
           {
             about.team.map((member) => (
               <li class="flex gap-5 sm:gap-6">
-                <div class="relative aspect-[4/5] w-28 shrink-0 sm:w-36">
+                <div class="relative aspect-4/5 w-28 shrink-0 sm:w-36">
                   <ImagePlaceholder
                     label={member.photoLabel}
                     class="absolute inset-0"
