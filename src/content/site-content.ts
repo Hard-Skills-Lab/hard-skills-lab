@@ -1,6 +1,6 @@
-import { siteConfig } from "./site-config";
-import type { Language } from "./site-config";
-import type { IconName } from "../components/icons";
+import { siteConfig } from './site-config';
+import type { Language } from './site-config';
+import type { IconName } from '../components/icons';
 
 export interface NavigationItem {
   label: string;
@@ -128,7 +128,7 @@ export interface SiteContent {
       // Leave empty to hide the "View project" link
       href: string;
       illustrative?: boolean;
-      image: { label: string; tone: "light" | "dark" };
+      image: { label: string; tone: 'light' | 'dark' };
     }>;
   };
   about: {
@@ -182,618 +182,618 @@ export interface SiteContent {
 export const content: Record<Language, SiteContent> = {
   en: {
     meta: {
-      title: "Hard Skills Lab | Free data and AI training for young Africans",
+      title: 'Hard Skills Lab | Free data and AI training for young Africans',
       description:
-        "Free, online and project-first training in data and AI for young people across Africa, in French and English.",
+        'Free, online and project-first training in data and AI for young people across Africa, in French and English.',
       ogImageAlt:
-        "Hard Skills Lab: free data and AI training, online, in French and English.",
+        'Hard Skills Lab: free data and AI training, online, in French and English.',
     },
     navigation: {
-      home: "Home",
-      program: "Program",
-      curriculum: "Curriculum",
-      projects: "Sample projects",
-      about: "About",
-      faq: "FAQ",
-      apply: "Apply",
+      home: 'Home',
+      program: 'Program',
+      curriculum: 'Curriculum',
+      projects: 'Sample projects',
+      about: 'About',
+      faq: 'FAQ',
+      apply: 'Apply',
     },
     header: {
-      skipLink: "Skip to content",
-      openMenu: "Open menu",
-      closeMenu: "Close menu",
-      menuLabel: "Menu",
-      mainNavLabel: "Main navigation",
-      switchLanguage: "Switch to French",
-      tagline: "Free. Practical. Bilingual. Beginner friendly.",
+      skipLink: 'Skip to content',
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
+      menuLabel: 'Menu',
+      mainNavLabel: 'Main navigation',
+      switchLanguage: 'Switch to French',
+      tagline: 'Free. Practical. Bilingual. Beginner friendly.',
     },
     cta: {
-      apply: "Apply for cohort 1",
-      waitlist: "Get notified",
-      curriculum: "See the curriculum",
+      apply: 'Apply for cohort 1',
+      waitlist: 'Get notified',
+      curriculum: 'See the curriculum',
     },
     announcement: {
-      open: "Cohort 1 applications are open.",
-      waitlist: "Cohort 1 applications open soon.",
+      open: 'Cohort 1 applications are open.',
+      waitlist: 'Cohort 1 applications open soon.',
     },
     hero: {
-      eyebrow: "Data & AI training for Africa",
+      eyebrow: 'Data & AI training for Africa',
       titleLines: [
-        "Real skills.",
-        "Practical projects.",
-        "A stronger tomorrow.",
+        'Real skills.',
+        'Practical projects.',
+        'A stronger tomorrow.',
       ],
       subtitle:
-        "Hard Skills Lab trains young Africans in data and artificial intelligence, free and online, in French and English. We teach by doing, so you leave with a real project, not just theory.",
-      facts: ["Free", "8 weeks", "100% online", "French & English"],
-      pillars: ["Learn", "Build", "Grow"],
-      scroll: "Scroll",
-      photoAlt: "A young woman working on a laptop at a desk",
+        'Hard Skills Lab trains young Africans in data and artificial intelligence, free and online, in French and English. We teach by doing, so you leave with a real project, not just theory.',
+      facts: ['Free', '8 weeks', '100% online', 'French & English'],
+      pillars: ['Learn', 'Build', 'Grow'],
+      scroll: 'Scroll',
+      photoAlt: 'A young woman working on a laptop at a desk',
     },
     program: {
-      eyebrow: "The program",
-      title: "An 8-week cohort, two tracks, one goal.",
+      eyebrow: 'The program',
+      title: 'An 8-week cohort, two tracks, one goal.',
       intro:
-        "You follow two tracks in parallel: Data Analysis with Python, and Artificial Intelligence & Machine Learning. Live sessions, hands-on exercises and a final capstone project.",
+        'You follow two tracks in parallel: Data Analysis with Python, and Artificial Intelligence & Machine Learning. Live sessions, hands-on exercises and a final capstone project.',
       facts: [
         {
-          icon: "laptop",
-          title: "100% online",
-          text: "Live sessions + self-paced work",
+          icon: 'laptop',
+          title: '100% online',
+          text: 'Live sessions + self-paced work',
         },
         {
-          icon: "globe",
-          title: "Bilingual",
-          text: "French & English",
+          icon: 'globe',
+          title: 'Bilingual',
+          text: 'French & English',
         },
         {
-          icon: "users",
-          title: "Beginner friendly",
-          text: "No experience needed",
+          icon: 'users',
+          title: 'Beginner friendly',
+          text: 'No experience needed',
         },
         {
-          icon: "africa",
-          title: "Across Africa",
-          text: "Open to young people across the continent",
+          icon: 'africa',
+          title: 'Across Africa',
+          text: 'Open to young people across the continent',
         },
       ],
       mission: {
-        eyebrow: "Our mission",
-        title: "More African talent in data and AI.",
-        text: "We close the gap in practical, free training, and build a community of learners who create real solutions for Africa.",
+        eyebrow: 'Our mission',
+        title: 'More African talent in data and AI.',
+        text: 'We close the gap in practical, free training, and build a community of learners who create real solutions for Africa.',
       },
       photoAlt:
-        "A coding class in a computer lab, with the teacher at the front",
+        'A coding class in a computer lab, with the teacher at the front',
     },
     howItWorks: {
-      eyebrow: "How it works",
-      title: "From application to final project.",
+      eyebrow: 'How it works',
+      title: 'From application to final project.',
       // DEV: add a selection step, session days and times (GMT) and
       // recordings here once they are decided.
       steps: [
         {
-          title: "Apply",
-          text: "Fill in the online form, in French or English. There is no fee.",
+          title: 'Apply',
+          text: 'Fill in the online form, in French or English. There is no fee.',
         },
         {
-          title: "Learn live",
-          text: "Each week, join one live data session and one live AI session.",
+          title: 'Learn live',
+          text: 'Each week, join one live data session and one live AI session.',
         },
         {
-          title: "Practise",
-          text: "Do the hands-on exercises at your own pace. Plan for about 10 to 12 hours a week in total.",
+          title: 'Practise',
+          text: 'Do the hands-on exercises at your own pace. Plan for about 10 to 12 hours a week in total.',
         },
         {
-          title: "Present your project",
-          text: "In week 8, bring both tracks together in one capstone project and present it.",
+          title: 'Present your project',
+          text: 'In week 8, bring both tracks together in one capstone project and present it.',
         },
       ],
     },
     curriculum: {
-      eyebrow: "The curriculum",
-      title: ["8 weeks.", "2 tracks.", "1 project."],
+      eyebrow: 'The curriculum',
+      title: ['8 weeks.', '2 tracks.', '1 project.'],
       intro:
-        "Everyone follows both tracks. Each week you have one data session and one AI session. The two tracks support each other, and everything builds towards a final project you present.",
-      weekLabel: "Week",
-      leadLabel: "Led by",
-      leadLink: "(LinkedIn profile, opens in a new tab)",
-      outcomesTitle: "By the end, you can",
-      toolsTitle: "Tools you will use",
+        'Everyone follows both tracks. Each week you have one data session and one AI session. The two tracks support each other, and everything builds towards a final project you present.',
+      weekLabel: 'Week',
+      leadLabel: 'Led by',
+      leadLink: '(LinkedIn profile, opens in a new tab)',
+      outcomesTitle: 'By the end, you can',
+      toolsTitle: 'Tools you will use',
       // DEV: list to confirm with the track leads
-      tools: ["Python", "Jupyter", "pandas", "Matplotlib", "scikit-learn"],
+      tools: ['Python', 'Jupyter', 'pandas', 'Matplotlib', 'scikit-learn'],
       tracks: [
         {
-          title: "Data Analysis with Python",
-          shortTitle: "Data Analysis with Python",
+          title: 'Data Analysis with Python',
+          shortTitle: 'Data Analysis with Python',
           lead: {
-            name: "Kokou Hugues Minasseh",
-            role: "Data scientist and educator",
+            name: 'Kokou Hugues Minasseh',
+            role: 'Data scientist and educator',
             linkedin:
-              "https://www.linkedin.com/in/kokou-hugues-minasseh-b426591b8",
+              'https://www.linkedin.com/in/kokou-hugues-minasseh-b426591b8',
           },
           summary:
-            "Clean, explore and visualise data to find insights about your market, your users or your community.",
+            'Clean, explore and visualise data to find insights about your market, your users or your community.',
           weeks: [
-            "Python basics & environment setup",
-            "Data structures, functions, files",
-            "Pandas: load, filter, group, summarise",
-            "Cleaning messy data",
-            "Visualisation",
-            "Basic statistics that matter",
-            "End-to-end data analysis",
-            "Capstone data work & presentation",
+            'Python basics & environment setup',
+            'Data structures, functions, files',
+            'Pandas: load, filter, group, summarise',
+            'Cleaning messy data',
+            'Visualisation',
+            'Basic statistics that matter',
+            'End-to-end data analysis',
+            'Capstone data work & presentation',
           ],
           outcomes: [
-            "Write Python to load, clean and reshape data",
-            "Explore and summarise a dataset with pandas",
-            "Build clear charts and use basic statistics",
-            "Run a full analysis and present what you found",
+            'Write Python to load, clean and reshape data',
+            'Explore and summarise a dataset with pandas',
+            'Build clear charts and use basic statistics',
+            'Run a full analysis and present what you found',
           ],
         },
         {
-          title: "Artificial Intelligence & Machine Learning",
-          shortTitle: "Artificial Intelligence & ML",
+          title: 'Artificial Intelligence & Machine Learning',
+          shortTitle: 'Artificial Intelligence & ML',
           // DEV: confirm the name format, role line and LinkedIn URL
           lead: {
-            name: "Yao Gervais Amoah",
-            role: "Machine learning engineer and educator",
-            linkedin: "",
+            name: 'Yao Gervais Amoah',
+            role: 'Machine learning engineer and educator',
+            linkedin: 'https://www.linkedin.com/in/gervais-amoah/',
           },
           summary:
-            "Build and evaluate simple models to predict, classify or generate useful results from data.",
+            'Build and evaluate simple models to predict, classify or generate useful results from data.',
           weeks: [
-            "What is AI and ML, setup",
-            "How machines learn from data",
-            "First model: classifier or regressor",
-            "Training, testing, evaluation",
-            "Improving models, second algorithm",
-            "LLMs and responsible AI",
-            "Applied AI mini-project",
-            "Capstone model work & presentation",
+            'What is AI and ML, setup',
+            'How machines learn from data',
+            'First model: classifier or regressor',
+            'Training, testing, evaluation',
+            'Improving models, second algorithm',
+            'LLMs and responsible AI',
+            'Applied AI mini-project',
+            'Capstone model work & presentation',
           ],
           outcomes: [
-            "Explain how machines learn from data",
-            "Train, test and evaluate a first model",
-            "Improve a model and compare two algorithms",
-            "Use LLMs responsibly and build a small AI project",
+            'Explain how machines learn from data',
+            'Train, test and evaluate a first model',
+            'Improve a model and compare two algorithms',
+            'Use LLMs responsibly and build a small AI project',
           ],
         },
       ],
       tracksSection: {
-        eyebrow: "The tracks",
-        title: "Two skills, working together.",
+        eyebrow: 'The tracks',
+        title: 'Two skills, working together.',
         intro:
-          "Data helps you understand. AI helps you build. Together, they help you solve real problems.",
-        photoAlt: "A developer with headphones writing code on a large screen",
+          'Data helps you understand. AI helps you build. Together, they help you solve real problems.',
+        photoAlt: 'A developer with headphones writing code on a large screen',
       },
     },
     projects: {
-      eyebrow: "Real work",
-      title: "Sample projects",
+      eyebrow: 'Real work',
+      title: 'Sample projects',
       intro:
-        "Here is the kind of work you will do. Both examples follow the curriculum: a data analysis and a simple machine learning project.",
+        'Here is the kind of work you will do. Both examples follow the curriculum: a data analysis and a simple machine learning project.',
       // TODO: add the real links (a projects page or GitHub) when they exist
       seeMore: {
-        label: "See more projects",
-        href: "",
+        label: 'See more projects',
+        href: '',
       },
-      viewProject: "View project",
-      newTab: "(opens in a new tab)",
-      illustrativeLabel: "Illustrative example",
-      previous: "Previous projects",
-      next: "Next projects",
+      viewProject: 'View project',
+      newTab: '(opens in a new tab)',
+      illustrativeLabel: 'Illustrative example',
+      previous: 'Previous projects',
+      next: 'Next projects',
       items: [
         {
-          category: "Data analysis project",
-          title: "Youth employment in Africa",
-          text: "Clean, explore and visualise public data to find insights about youth employment across African countries.",
-          href: "",
+          category: 'Data analysis project',
+          title: 'Youth employment in Africa',
+          text: 'Clean, explore and visualise public data to find insights about youth employment across African countries.',
+          href: '',
           illustrative: true,
-          image: { label: "Data visualisation", tone: "light" },
+          image: { label: 'Data visualisation', tone: 'light' },
         },
         {
-          category: "AI / ML project",
-          title: "Student dropout prediction",
-          text: "Build and evaluate a simple model to predict which students are at risk of dropping out (uses real-world style data).",
-          href: "",
+          category: 'AI / ML project',
+          title: 'Student dropout prediction',
+          text: 'Build and evaluate a simple model to predict which students are at risk of dropping out (uses real-world style data).',
+          href: '',
           illustrative: true,
-          image: { label: "Code screenshot", tone: "dark" },
+          image: { label: 'Code screenshot', tone: 'dark' },
         },
       ],
     },
     about: {
-      eyebrow: "About us",
-      title: "Practical skills, open to the whole continent.",
+      eyebrow: 'About us',
+      title: 'Practical skills, open to the whole continent.',
       intro:
-        "We believe African talent deserves practical, high-quality training in data and AI. Hard Skills Lab makes it free, online and project-first, so more young people can take part.",
+        'We believe African talent deserves practical, high-quality training in data and AI. Hard Skills Lab makes it free, online and project-first, so more young people can take part.',
       points: [
         {
-          icon: "checkCircle",
-          title: "Free, so cost is not a barrier",
-          text: "There are no fees. If you have the time and a stable connection, you can apply.",
+          icon: 'checkCircle',
+          title: 'Free, so cost is not a barrier',
+          text: 'There are no fees. If you have the time and a stable connection, you can apply.',
         },
         {
-          icon: "globe",
-          title: "Bilingual, to reach most of the continent",
-          text: "French or English is a working language in most African countries. Teaching in both opens the program to learners from francophone and anglophone countries.",
+          icon: 'globe',
+          title: 'Bilingual, to reach most of the continent',
+          text: 'French or English is a working language in most African countries. Teaching in both opens the program to learners from francophone and anglophone countries.',
         },
         {
-          icon: "laptop",
-          title: "Project-first, so you can show your skills",
-          text: "You practise every topic and finish with a real project to add to your portfolio.",
+          icon: 'laptop',
+          title: 'Project-first, so you can show your skills',
+          text: 'You practise every topic and finish with a real project to add to your portfolio.',
         },
       ],
     },
     faq: {
-      eyebrow: "Good to know",
-      title: "Frequently asked questions",
-      more: "Something else? Write to us at",
+      eyebrow: 'Good to know',
+      title: 'Frequently asked questions',
+      more: 'Something else? Write to us at',
       // Only confirmed answers here (see SPEC.md)
       questions: [
         {
-          question: "Is it really free?",
-          answer: "Yes. There are no fees to apply or to take part.",
+          question: 'Is it really free?',
+          answer: 'Yes. There are no fees to apply or to take part.',
         },
         {
-          question: "Do I need to know how to code?",
+          question: 'Do I need to know how to code?',
           answer:
-            "No. The program is beginner friendly. Week 1 starts with Python basics and setting up your tools.",
+            'No. The program is beginner friendly. Week 1 starts with Python basics and setting up your tools.',
         },
         {
-          question: "Who can join?",
+          question: 'Who can join?',
           answer:
-            "Young people from anywhere in Africa who want to learn data and AI. No experience is needed.",
+            'Young people from anywhere in Africa who want to learn data and AI. No experience is needed.',
         },
         {
-          question: "Which language are classes in?",
+          question: 'Which language are classes in?',
           answer:
-            "French and English. The program runs in both languages, so learners from francophone and anglophone countries can join.",
+            'French and English. The program runs in both languages, so learners from francophone and anglophone countries can join.',
         },
         {
-          question: "How much time does it take?",
+          question: 'How much time does it take?',
           answer:
-            "About 10 to 12 hours a week for 8 weeks. That covers one live data session, one live AI session and practice at your own pace.",
+            'About 10 to 12 hours a week for 8 weeks. That covers one live data session, one live AI session and practice at your own pace.',
         },
         {
-          question: "When does the next cohort start?",
+          question: 'When does the next cohort start?',
           // DEV: update this answer when applications open
           answer:
-            "The dates are not set yet. Click “Get notified” and we will email you as soon as applications open.",
+            'The dates are not set yet. Click “Get notified” and we will email you as soon as applications open.',
         },
         {
-          question: "What do I get at the end?",
+          question: 'What do I get at the end?',
           answer:
-            "A real project that you built and presented, using what you learned in both tracks.",
+            'A real project that you built and presented, using what you learned in both tracks.',
         },
       ],
     },
     apply: {
-      eyebrow: "Join us",
-      title: "Ready to build your future?",
+      eyebrow: 'Join us',
+      title: 'Ready to build your future?',
       intro:
-        "Apply for the first cohort and take your first step into data and AI.",
+        'Apply for the first cohort and take your first step into data and AI.',
       waitlistIntro:
-        "Applications for the first cohort open soon. Leave your email and we will let you know as soon as they open.",
+        'Applications for the first cohort open soon. Leave your email and we will let you know as soon as they open.',
       photoAlt:
-        "A young woman smiling at her laptop, with a notebook beside her",
+        'A young woman smiling at her laptop, with a notebook beside her',
       details: [
         {
-          icon: "checkCircle",
-          title: "Eligibility",
-          text: "Young people from anywhere in Africa.",
+          icon: 'checkCircle',
+          title: 'Eligibility',
+          text: 'Young people from anywhere in Africa.',
         },
         {
-          icon: "clock",
-          title: "Time commitment",
-          text: "About 10 to 12 hours a week.",
+          icon: 'clock',
+          title: 'Time commitment',
+          text: 'About 10 to 12 hours a week.',
         },
         {
-          icon: "wifi",
-          title: "Internet",
-          text: "A stable internet connection is required.",
+          icon: 'wifi',
+          title: 'Internet',
+          text: 'A stable internet connection is required.',
         },
         {
-          icon: "calendar",
-          title: "Application deadline",
+          icon: 'calendar',
+          title: 'Application deadline',
           // DEV: the mockup says "May 31, 2025 (example)". Set the real date.
-          text: "Date to be confirmed.",
+          text: 'Date to be confirmed.',
         },
       ],
       questions: {
-        title: "Have questions?",
-        text: "Get in touch with the team.",
-        cta: "Contact us",
+        title: 'Have questions?',
+        text: 'Get in touch with the team.',
+        cta: 'Contact us',
       },
     },
     footer: {
       tagline:
-        "Training young Africans in data and AI through free, practical, project-first learning.",
-      navigation: "Navigation",
-      contact: "Contact",
-      rights: "All rights reserved.",
+        'Training young Africans in data and AI through free, practical, project-first learning.',
+      navigation: 'Navigation',
+      contact: 'Contact',
+      rights: 'All rights reserved.',
       // DEV: draft, to approve before going live
       privacy:
-        "Privacy: we use the details you give in our forms only to run the program and keep you informed. Email us if you want them deleted.",
+        'Privacy: we use the details you give in our forms only to run the program and keep you informed. Email us if you want them deleted.',
     },
   },
   fr: {
     meta: {
       title:
-        "Hard Skills Lab | Formation gratuite en données et IA pour les jeunes Africains",
+        'Hard Skills Lab | Formation gratuite en données et IA pour les jeunes Africains',
       description:
         "Formation gratuite, en ligne et axée sur les projets, en données et en IA, pour les jeunes de toute l'Afrique, en français et en anglais.",
       ogImageAlt:
-        "Hard Skills Lab : formation gratuite en données et IA, en ligne, en français et en anglais.",
+        'Hard Skills Lab : formation gratuite en données et IA, en ligne, en français et en anglais.',
     },
     navigation: {
-      home: "Accueil",
-      program: "Programme",
-      curriculum: "Curriculum",
-      projects: "Projets",
-      about: "À propos",
-      faq: "FAQ",
-      apply: "Postuler",
+      home: 'Accueil',
+      program: 'Programme',
+      curriculum: 'Curriculum',
+      projects: 'Projets',
+      about: 'À propos',
+      faq: 'FAQ',
+      apply: 'Postuler',
     },
     header: {
-      skipLink: "Aller au contenu",
-      openMenu: "Ouvrir le menu",
-      closeMenu: "Fermer le menu",
-      menuLabel: "Menu",
-      mainNavLabel: "Navigation principale",
+      skipLink: 'Aller au contenu',
+      openMenu: 'Ouvrir le menu',
+      closeMenu: 'Fermer le menu',
+      menuLabel: 'Menu',
+      mainNavLabel: 'Navigation principale',
       switchLanguage: "Passer à l'anglais",
-      tagline: "Gratuit. Pratique. Bilingue. Accessible aux débutants.",
+      tagline: 'Gratuit. Pratique. Bilingue. Accessible aux débutants.',
     },
     cta: {
-      apply: "Postuler à la cohorte 1",
-      waitlist: "Me prévenir",
-      curriculum: "Voir le curriculum",
+      apply: 'Postuler à la cohorte 1',
+      waitlist: 'Me prévenir',
+      curriculum: 'Voir le curriculum',
     },
     announcement: {
-      open: "Cohorte 1 : les candidatures sont ouvertes.",
-      waitlist: "Cohorte 1 : candidatures bientôt ouvertes.",
+      open: 'Cohorte 1 : les candidatures sont ouvertes.',
+      waitlist: 'Cohorte 1 : candidatures bientôt ouvertes.',
     },
     hero: {
       eyebrow: "Formation en données et IA pour l'Afrique",
       titleLines: [
-        "De vraies compétences.",
-        "Des projets concrets.",
-        "Un avenir plus solide.",
+        'De vraies compétences.',
+        'Des projets concrets.',
+        'Un avenir plus solide.',
       ],
       subtitle:
         "Hard Skills Lab forme les jeunes Africains aux données et à l'intelligence artificielle, gratuitement et en ligne, en français et en anglais. Nous enseignons par la pratique : vous repartez avec un vrai projet, pas seulement de la théorie.",
-      facts: ["Gratuit", "8 semaines", "100 % en ligne", "Français et anglais"],
-      pillars: ["Apprendre", "Créer", "Grandir"],
-      scroll: "Défiler",
+      facts: ['Gratuit', '8 semaines', '100 % en ligne', 'Français et anglais'],
+      pillars: ['Apprendre', 'Créer', 'Grandir'],
+      scroll: 'Défiler',
       photoAlt:
-        "Une jeune femme travaille sur un ordinateur portable à son bureau",
+        'Une jeune femme travaille sur un ordinateur portable à son bureau',
     },
     program: {
-      eyebrow: "Le programme",
-      title: "Une cohorte de 8 semaines, deux parcours, un seul objectif.",
+      eyebrow: 'Le programme',
+      title: 'Une cohorte de 8 semaines, deux parcours, un seul objectif.',
       intro:
         "Vous suivez deux parcours en parallèle : l'analyse de données avec Python, et l'intelligence artificielle et le machine learning. Sessions en direct, exercices pratiques et un projet final.",
       facts: [
         {
-          icon: "laptop",
-          title: "100 % en ligne",
-          text: "Sessions en direct + travail à votre rythme",
+          icon: 'laptop',
+          title: '100 % en ligne',
+          text: 'Sessions en direct + travail à votre rythme',
         },
         {
-          icon: "globe",
-          title: "Bilingue",
-          text: "Français et anglais",
+          icon: 'globe',
+          title: 'Bilingue',
+          text: 'Français et anglais',
         },
         {
-          icon: "users",
-          title: "Accessible aux débutants",
-          text: "Aucune expérience requise",
+          icon: 'users',
+          title: 'Accessible aux débutants',
+          text: 'Aucune expérience requise',
         },
         {
-          icon: "africa",
-          title: "Partout en Afrique",
-          text: "Ouvert aux jeunes de tout le continent",
+          icon: 'africa',
+          title: 'Partout en Afrique',
+          text: 'Ouvert aux jeunes de tout le continent',
         },
       ],
       mission: {
-        eyebrow: "Notre mission",
-        title: "Plus de talents africains en données et en IA.",
+        eyebrow: 'Notre mission',
+        title: 'Plus de talents africains en données et en IA.',
         text: "Nous comblons le manque de formations pratiques et gratuites, et nous construisons une communauté d'apprenants qui créent de vraies solutions pour l'Afrique.",
       },
       photoAlt:
-        "Un cours de programmation dans une salle informatique, avec le formateur devant la classe",
+        'Un cours de programmation dans une salle informatique, avec le formateur devant la classe',
     },
     howItWorks: {
-      eyebrow: "Comment ça marche",
-      title: "De la candidature au projet final.",
+      eyebrow: 'Comment ça marche',
+      title: 'De la candidature au projet final.',
       // DEV : ajouter une étape de sélection, les jours et heures des sessions
       // (GMT) et les enregistrements quand ils seront décidés.
       steps: [
         {
-          title: "Postulez",
+          title: 'Postulez',
           text: "Remplissez le formulaire en ligne, en français ou en anglais. C'est gratuit.",
         },
         {
-          title: "Apprenez en direct",
-          text: "Chaque semaine, suivez une session données et une session IA en direct.",
+          title: 'Apprenez en direct',
+          text: 'Chaque semaine, suivez une session données et une session IA en direct.',
         },
         {
-          title: "Pratiquez",
-          text: "Faites les exercices pratiques à votre rythme. Comptez environ 10 à 12 heures par semaine au total.",
+          title: 'Pratiquez',
+          text: 'Faites les exercices pratiques à votre rythme. Comptez environ 10 à 12 heures par semaine au total.',
         },
         {
-          title: "Présentez votre projet",
-          text: "En semaine 8, réunissez les deux parcours dans un projet final et présentez-le.",
+          title: 'Présentez votre projet',
+          text: 'En semaine 8, réunissez les deux parcours dans un projet final et présentez-le.',
         },
       ],
     },
     curriculum: {
-      eyebrow: "Le curriculum",
-      title: ["8 semaines.", "2 parcours.", "1 projet."],
+      eyebrow: 'Le curriculum',
+      title: ['8 semaines.', '2 parcours.', '1 projet.'],
       intro:
-        "Tout le monde suit les deux parcours. Chaque semaine, vous avez une session données et une session IA. Les deux parcours se renforcent, et tout converge vers un projet final que vous présentez.",
-      weekLabel: "Semaine",
-      leadLabel: "Animé par",
+        'Tout le monde suit les deux parcours. Chaque semaine, vous avez une session données et une session IA. Les deux parcours se renforcent, et tout converge vers un projet final que vous présentez.',
+      weekLabel: 'Semaine',
+      leadLabel: 'Animé par',
       leadLink: "(profil LinkedIn, s'ouvre dans un nouvel onglet)",
-      outcomesTitle: "À la fin, vous saurez",
-      toolsTitle: "Les outils utilisés",
+      outcomesTitle: 'À la fin, vous saurez',
+      toolsTitle: 'Les outils utilisés',
       // DEV : liste à confirmer avec les responsables des parcours
-      tools: ["Python", "Jupyter", "pandas", "Matplotlib", "scikit-learn"],
+      tools: ['Python', 'Jupyter', 'pandas', 'Matplotlib', 'scikit-learn'],
       tracks: [
         {
-          title: "Analyse de données avec Python",
-          shortTitle: "Analyse de données avec Python",
+          title: 'Analyse de données avec Python',
+          shortTitle: 'Analyse de données avec Python',
           lead: {
-            name: "Kokou Hugues Minasseh",
-            role: "Data scientist et formateur",
+            name: 'Kokou Hugues Minasseh',
+            role: 'Data scientist et formateur',
             linkedin:
-              "https://www.linkedin.com/in/kokou-hugues-minasseh-b426591b8",
+              'https://www.linkedin.com/in/kokou-hugues-minasseh-b426591b8',
           },
           summary:
-            "Nettoyez, explorez et visualisez des données pour dégager des enseignements sur votre marché, vos utilisateurs ou votre communauté.",
+            'Nettoyez, explorez et visualisez des données pour dégager des enseignements sur votre marché, vos utilisateurs ou votre communauté.',
           weeks: [
             "Bases de Python et installation de l'environnement",
-            "Structures de données, fonctions, fichiers",
-            "Pandas : charger, filtrer, regrouper, résumer",
-            "Nettoyage de données désordonnées",
-            "Visualisation",
-            "Les statistiques de base qui comptent",
-            "Analyse de données de bout en bout",
-            "Projet final en données et présentation",
+            'Structures de données, fonctions, fichiers',
+            'Pandas : charger, filtrer, regrouper, résumer',
+            'Nettoyage de données désordonnées',
+            'Visualisation',
+            'Les statistiques de base qui comptent',
+            'Analyse de données de bout en bout',
+            'Projet final en données et présentation',
           ],
           outcomes: [
-            "Écrire du Python pour charger, nettoyer et transformer des données",
-            "Explorer et résumer un jeu de données avec pandas",
-            "Créer des graphiques clairs et utiliser les statistiques de base",
-            "Mener une analyse complète et présenter vos résultats",
+            'Écrire du Python pour charger, nettoyer et transformer des données',
+            'Explorer et résumer un jeu de données avec pandas',
+            'Créer des graphiques clairs et utiliser les statistiques de base',
+            'Mener une analyse complète et présenter vos résultats',
           ],
         },
         {
-          title: "Intelligence artificielle & Machine Learning",
-          shortTitle: "Intelligence artificielle & ML",
+          title: 'Intelligence artificielle & Machine Learning',
+          shortTitle: 'Intelligence artificielle & ML',
           // DEV : confirmer le format du nom, le rôle et l'URL LinkedIn
           lead: {
-            name: "Yao Gervais Amoah",
-            role: "Ingénieur en machine learning et formateur",
-            linkedin: "",
+            name: 'Yao Gervais Amoah',
+            role: 'Ingénieur en machine learning et formateur',
+            linkedin: '',
           },
           summary:
-            "Construisez et évaluez des modèles simples pour prédire, classer ou générer des résultats utiles à partir de données.",
+            'Construisez et évaluez des modèles simples pour prédire, classer ou générer des résultats utiles à partir de données.',
           weeks: [
             "Qu'est-ce que l'IA et le ML ? Installation",
-            "Comment les machines apprennent des données",
-            "Premier modèle : classification ou régression",
-            "Entraînement, test et évaluation",
-            "Améliorer les modèles, second algorithme",
-            "LLM et IA responsable",
+            'Comment les machines apprennent des données',
+            'Premier modèle : classification ou régression',
+            'Entraînement, test et évaluation',
+            'Améliorer les modèles, second algorithme',
+            'LLM et IA responsable',
             "Mini-projet d'IA appliquée",
-            "Projet final en modèle et présentation",
+            'Projet final en modèle et présentation',
           ],
           outcomes: [
-            "Expliquer comment les machines apprennent des données",
-            "Entraîner, tester et évaluer un premier modèle",
-            "Améliorer un modèle et comparer deux algorithmes",
+            'Expliquer comment les machines apprennent des données',
+            'Entraîner, tester et évaluer un premier modèle',
+            'Améliorer un modèle et comparer deux algorithmes',
             "Utiliser les LLM de façon responsable et créer un petit projet d'IA",
           ],
         },
       ],
       tracksSection: {
-        eyebrow: "Les parcours",
-        title: "Deux compétences qui se complètent.",
+        eyebrow: 'Les parcours',
+        title: 'Deux compétences qui se complètent.',
         intro:
           "Les données vous aident à comprendre. L'IA vous aide à construire. Ensemble, elles vous permettent de résoudre de vrais problèmes.",
         photoAlt:
-          "Un développeur avec un casque écrit du code sur un grand écran",
+          'Un développeur avec un casque écrit du code sur un grand écran',
       },
     },
     projects: {
-      eyebrow: "Travaux concrets",
-      title: "Exemples de projets",
+      eyebrow: 'Travaux concrets',
+      title: 'Exemples de projets',
       intro:
-        "Voici le type de travail que vous réaliserez. Les deux exemples suivent le curriculum : une analyse de données et un projet simple de machine learning.",
+        'Voici le type de travail que vous réaliserez. Les deux exemples suivent le curriculum : une analyse de données et un projet simple de machine learning.',
       // TODO : ajouter les vrais liens (page projets ou GitHub) quand ils existeront
       seeMore: {
-        label: "Voir plus de projets",
-        href: "",
+        label: 'Voir plus de projets',
+        href: '',
       },
-      viewProject: "Voir le projet",
+      viewProject: 'Voir le projet',
       newTab: "(s'ouvre dans un nouvel onglet)",
-      illustrativeLabel: "Exemple illustratif",
-      previous: "Projets précédents",
-      next: "Projets suivants",
+      illustrativeLabel: 'Exemple illustratif',
+      previous: 'Projets précédents',
+      next: 'Projets suivants',
       items: [
         {
           category: "Projet d'analyse de données",
           title: "L'emploi des jeunes en Afrique",
           text: "Nettoyez, explorez et visualisez des données publiques pour mieux comprendre l'emploi des jeunes dans les pays africains.",
-          href: "",
+          href: '',
           illustrative: true,
-          image: { label: "Data visualisation", tone: "light" },
+          image: { label: 'Data visualisation', tone: 'light' },
         },
         {
-          category: "Projet IA / ML",
-          title: "Prédiction du décrochage scolaire",
+          category: 'Projet IA / ML',
+          title: 'Prédiction du décrochage scolaire',
           text: "Construisez et évaluez un modèle simple pour prédire quels élèves risquent d'abandonner leurs études (avec des données proches du réel).",
-          href: "",
+          href: '',
           illustrative: true,
-          image: { label: "Code screenshot", tone: "dark" },
+          image: { label: 'Code screenshot', tone: 'dark' },
         },
       ],
     },
     about: {
-      eyebrow: "À propos",
-      title: "Des compétences concrètes, ouvertes à tout le continent.",
+      eyebrow: 'À propos',
+      title: 'Des compétences concrètes, ouvertes à tout le continent.',
       intro:
-        "Nous pensons que les talents africains méritent une formation pratique et de qualité en données et en IA. Hard Skills Lab la rend gratuite, en ligne et axée sur les projets, pour que plus de jeunes puissent y participer.",
+        'Nous pensons que les talents africains méritent une formation pratique et de qualité en données et en IA. Hard Skills Lab la rend gratuite, en ligne et axée sur les projets, pour que plus de jeunes puissent y participer.',
       points: [
         {
-          icon: "checkCircle",
-          title: "Gratuit, pour que le coût ne soit pas un frein",
-          text: "Aucun frais. Si vous avez le temps et une connexion stable, vous pouvez postuler.",
+          icon: 'checkCircle',
+          title: 'Gratuit, pour que le coût ne soit pas un frein',
+          text: 'Aucun frais. Si vous avez le temps et une connexion stable, vous pouvez postuler.',
         },
         {
-          icon: "globe",
-          title: "Bilingue, pour toucher la majeure partie du continent",
+          icon: 'globe',
+          title: 'Bilingue, pour toucher la majeure partie du continent',
           text: "Le français ou l'anglais est une langue de travail dans la plupart des pays africains. Enseigner dans les deux ouvre le programme aux apprenants des pays francophones comme anglophones.",
         },
         {
-          icon: "laptop",
-          title: "Axé sur les projets, pour montrer ce que vous savez faire",
-          text: "Vous pratiquez chaque notion et terminez avec un vrai projet à ajouter à votre portfolio.",
+          icon: 'laptop',
+          title: 'Axé sur les projets, pour montrer ce que vous savez faire',
+          text: 'Vous pratiquez chaque notion et terminez avec un vrai projet à ajouter à votre portfolio.',
         },
       ],
     },
     faq: {
-      eyebrow: "Bon à savoir",
-      title: "Questions fréquentes",
-      more: "Une autre question ? Écrivez-nous à",
+      eyebrow: 'Bon à savoir',
+      title: 'Questions fréquentes',
+      more: 'Une autre question ? Écrivez-nous à',
       // Uniquement des réponses confirmées (voir SPEC.md)
       questions: [
         {
-          question: "Le programme est-il vraiment gratuit ?",
+          question: 'Le programme est-il vraiment gratuit ?',
           answer:
             "Oui. Il n'y a aucun frais, ni pour postuler ni pour participer.",
         },
         {
-          question: "Faut-il savoir coder ?",
+          question: 'Faut-il savoir coder ?',
           answer:
             "Non. Le programme est accessible aux débutants. La semaine 1 commence par les bases de Python et l'installation des outils.",
         },
         {
-          question: "Qui peut participer ?",
+          question: 'Qui peut participer ?',
           answer:
             "Les jeunes de toute l'Afrique qui veulent apprendre les données et l'IA. Aucune expérience n'est requise.",
         },
         {
-          question: "Dans quelle langue sont les cours ?",
+          question: 'Dans quelle langue sont les cours ?',
           answer:
-            "En français et en anglais. Le programme est proposé dans les deux langues, pour accueillir les apprenants des pays francophones comme anglophones.",
+            'En français et en anglais. Le programme est proposé dans les deux langues, pour accueillir les apprenants des pays francophones comme anglophones.',
         },
         {
-          question: "Combien de temps faut-il prévoir ?",
+          question: 'Combien de temps faut-il prévoir ?',
           answer:
-            "Environ 10 à 12 heures par semaine pendant 8 semaines. Cela comprend une session données et une session IA en direct, et du travail à votre rythme.",
+            'Environ 10 à 12 heures par semaine pendant 8 semaines. Cela comprend une session données et une session IA en direct, et du travail à votre rythme.',
         },
         {
-          question: "Quand commence la prochaine cohorte ?",
+          question: 'Quand commence la prochaine cohorte ?',
           // DEV : mettre à jour cette réponse à l'ouverture des candidatures
           answer:
             "Les dates ne sont pas encore fixées. Cliquez sur « Me prévenir » et nous vous écrirons dès l'ouverture des candidatures.",
@@ -801,57 +801,57 @@ export const content: Record<Language, SiteContent> = {
         {
           question: "Qu'est-ce que j'obtiens à la fin ?",
           answer:
-            "Un vrai projet que vous avez construit et présenté, avec ce que vous avez appris dans les deux parcours.",
+            'Un vrai projet que vous avez construit et présenté, avec ce que vous avez appris dans les deux parcours.',
         },
       ],
     },
     apply: {
-      eyebrow: "Rejoignez-nous",
-      title: "Prêt à construire votre avenir ?",
+      eyebrow: 'Rejoignez-nous',
+      title: 'Prêt à construire votre avenir ?',
       intro:
         "Postulez à la première cohorte et faites vos premiers pas dans les données et l'IA.",
       waitlistIntro:
-        "Les candidatures pour la première cohorte ouvrent bientôt. Laissez votre e-mail et nous vous préviendrons dès leur ouverture.",
+        'Les candidatures pour la première cohorte ouvrent bientôt. Laissez votre e-mail et nous vous préviendrons dès leur ouverture.',
       photoAlt:
         "Une jeune femme sourit devant son ordinateur portable, un cahier à côté d'elle",
       details: [
         {
-          icon: "checkCircle",
-          title: "Éligibilité",
+          icon: 'checkCircle',
+          title: 'Éligibilité',
           text: "Jeunes de toute l'Afrique.",
         },
         {
-          icon: "clock",
-          title: "Engagement",
-          text: "Environ 10 à 12 heures par semaine.",
+          icon: 'clock',
+          title: 'Engagement',
+          text: 'Environ 10 à 12 heures par semaine.',
         },
         {
-          icon: "wifi",
-          title: "Internet",
-          text: "Une connexion internet stable est nécessaire.",
+          icon: 'wifi',
+          title: 'Internet',
+          text: 'Une connexion internet stable est nécessaire.',
         },
         {
-          icon: "calendar",
-          title: "Date limite de candidature",
+          icon: 'calendar',
+          title: 'Date limite de candidature',
           // DEV : la maquette indique « 31 mai 2025 (exemple) ». Mettre la vraie date.
-          text: "Date à confirmer.",
+          text: 'Date à confirmer.',
         },
       ],
       questions: {
-        title: "Des questions ?",
+        title: 'Des questions ?',
         text: "Contactez l'équipe.",
-        cta: "Nous contacter",
+        cta: 'Nous contacter',
       },
     },
     footer: {
       tagline:
         "Former les jeunes Africains aux données et à l'IA grâce à un apprentissage gratuit, pratique et axé sur les projets.",
-      navigation: "Navigation",
-      contact: "Contact",
-      rights: "Tous droits réservés.",
+      navigation: 'Navigation',
+      contact: 'Contact',
+      rights: 'Tous droits réservés.',
       // DEV : brouillon, à valider avant la mise en ligne
       privacy:
-        "Confidentialité : nous utilisons les informations de nos formulaires uniquement pour organiser le programme et vous tenir informé. Écrivez-nous pour les faire supprimer.",
+        'Confidentialité : nous utilisons les informations de nos formulaires uniquement pour organiser le programme et vous tenir informé. Écrivez-nous pour les faire supprimer.',
     },
   },
 };
