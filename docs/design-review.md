@@ -28,7 +28,7 @@ The branch `design-improvements` builds the ten proposals below. What changed, w
 
 - The site speaks to young people across Africa, not only Togo and West Africa. Teaching in French and English is the reason it can reach learners from francophone and anglophone countries.
 - No team section and no "two co-founders" line. The About section is about the mission and why it matters. The names go on the tracks: Kokou Hugues Minasseh leads Data Analysis, Yao Gervais Amoah leads AI and ML.
-- Three free stock photos are now on the page (hero, program, curriculum). The other image slots keep their placeholders. Stock photos of people must not be presented as our learners or team.
+- Four free stock photos are now on the page (hero, program, curriculum, apply). Only the two sample project cards keep their placeholders. Stock photos of people must not be presented as our learners or team.
 
 ## What the branch changes
 
@@ -43,7 +43,7 @@ The branch `design-improvements` builds the ten proposals below. What changed, w
 | 7 | Sticky "Get notified" button on phones and tablets. It hides while the hero buttons, the apply section or the footer are on screen. Hero image 16:9 on phones instead of 4:5. Fonts self-hosted with Fontsource: 3 files, about 66 KB for a page, and no request to Google. | `MobileCta.astro`, `BaseLayout.astro`, `package.json` |
 | 8 | New colour `orange-deep` (#b93d1c) for eyebrows, buttons, number badges and link hovers. #c2431f was not enough on the light grey cards (4.24:1). #b93d1c gives 5.14:1 on paper, 4.66:1 on the cards and 5.6:1 with white text. #d94f2b stays for large shapes, icons and underlines. Skip link added. | `global.css`, `PrimaryButton.astro` |
 | 9 | Sharing images `public/og/og-en.png` and `og-fr.png` (1200x630, brand colours and fonts) with the og:image and Twitter card tags. The root page now redirects at once: French when the browser prefers French, English otherwise, and English without JavaScript. | `BaseLayout.astro`, `pages/index.astro` |
-| Photos | Three free stock photos: hero (Daniel Thomas), program mission card and phone banner (Kenneth Chiamaka Ejiofor), curriculum on phones and the thin strip in the desktop hero (Olumuyiwa Sobowale). Web-sized copies in `src/assets/photos`, credits in `CREDITS.md`, alt text in both languages. Astro serves them as WebP at several widths; only the hero loads straight away. | `home/HeroSection.astro`, `home/ProgramSection.astro`, `home/CurriculumSection.astro` |
+| Photos | Four free stock photos: hero (Daniel Thomas), program mission card and phone banner (Kenneth Chiamaka Ejiofor), curriculum on phones and the thin strip in the desktop hero (Olumuyiwa Sobowale), apply section column on desktop and banner on phones (FOTOGRAFÍA EDITORIAL). Web-sized copies in `src/assets/photos`, credits in `CREDITS.md`, alt text in both languages. Astro serves them as WebP at several widths; only the hero loads straight away. | `home/HeroSection.astro`, `home/ProgramSection.astro`, `home/CurriculumSection.astro`, `home/ApplySection.astro` |
 | 10 | Footer: language switch, FAQ link and a short privacy note (draft). LinkedIn and Instagram appear by themselves once their URLs are in `site-config.ts`. All em dashes removed from the copy. Tagline unchanged, ideas below. | `SiteFooter.astro`, `site-content.ts` |
 
 Also in the branch:
@@ -59,7 +59,7 @@ Also in the branch:
 - Mobile bar: hidden at the top, shown mid-page, hidden over the apply section.
 - Root redirect: fr-FR and fr-TG go to /fr/, en-GB and de-DE go to /en/.
 - The first Tab stop is the skip link.
-- Photos: no broken image. A phone (390 px, 2x screen) loads about 27 KB for the hero photo and about 145 KB of photos for the whole page.
+- Photos: no broken image. A phone (390 px, 2x screen) loads about 27 KB for the hero photo and about 200 KB of photos for the whole page.
 - No em or en dash and no Togo or West Africa mention left in `src`.
 - The mobile page is now about 9,700 px long in English (it was about 7,300). The new sections add length; the shorter hero image takes some back.
 
@@ -76,7 +76,7 @@ Also in the branch:
 
 ## Images
 
-The three marked "In the site" are on the page. The others are options for the slots that still have placeholders (apply section) or for a later swap.
+The four marked "In the site" are on the page. The others are options for a later swap.
 
 All free under the Unsplash License or the Pexels License: free for commercial use, no credit required (a credit is still nice). Neither licence allows implying that the people shown endorse us, so these are scene photos, not "our learners". Real photos from cohort 1 should replace them when possible. New photos go in `src/assets/photos` and use Astro's `<Image>`, like the three already there.
 
@@ -88,7 +88,7 @@ All free under the Unsplash License or the Pexels License: free for commercial u
 | Program landscape, other option | Student with a laptop on a campus bench | Iwaria Inc. (Unsplash) | https://unsplash.com/photos/a-person-sitting-on-a-bench-with-a-laptop-SESt1VL2D-w |
 | Curriculum on phones, strip in the desktop hero. **In the site** | Man with headphones in front of code | Olumuyiwa Sobowale (Unsplash) | https://unsplash.com/photos/a-man-sitting-in-front-of-a-computer-wearing-headphones-kQIdjLbCghA |
 | Curriculum, other option | Developer with headphones, code on the monitor | Nubelson Fernandes (Unsplash) | https://unsplash.com/photos/man-in-black-long-sleeve-shirt-wearing-black-headphones-sitting-on-chair-gTs2w7bu3Qo |
-| Apply section (tall on desktop) | Woman studying with a laptop and books | FOTOGRAFÍA EDITORIAL (Unsplash) | https://unsplash.com/photos/woman-typing-on-laptop-at-workspace-RMK8Lt3Ac2s |
+| Apply section (tall on desktop, banner on phones). **In the site** | Woman studying with a laptop, notebook and pen | FOTOGRAFÍA EDITORIAL (Unsplash) | https://unsplash.com/photos/woman-typing-on-laptop-at-workspace-RMK8Lt3Ac2s |
 | Apply, other options | Woman at a laptop, blue blazer | Akinyemi Gbadamosi (Unsplash) | https://unsplash.com/photos/a-woman-sitting-in-front-of-a-laptop-computer-T_CkxezKRTA |
 | | Young man focused on his laptop | Kojo Kwarteng (Unsplash) | https://unsplash.com/photos/man-in-gray-crew-neck-t-shirt-using-laptop-computer-KUzlAah2dog |
 

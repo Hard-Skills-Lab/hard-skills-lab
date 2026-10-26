@@ -157,6 +157,8 @@ export interface SiteContent {
     intro: string;
     // Shown instead of the intro while applications are closed
     waitlistIntro: string;
+    // Alt text of the study photo (left column on desktop, banner on phones)
+    photoAlt: string;
     details: Array<{
       icon: IconName;
       title: string;
@@ -471,6 +473,8 @@ export const content: Record<Language, SiteContent> = {
         "Apply for the first cohort and take your first step into data and AI.",
       waitlistIntro:
         "Applications for the first cohort open soon. Leave your email and we will let you know as soon as they open.",
+      photoAlt:
+        "A young woman smiling at her laptop, with a notebook beside her",
       details: [
         {
           icon: "checkCircle",
@@ -808,6 +812,8 @@ export const content: Record<Language, SiteContent> = {
         "Postulez à la première cohorte et faites vos premiers pas dans les données et l'IA.",
       waitlistIntro:
         "Les candidatures pour la première cohorte ouvrent bientôt. Laissez votre e-mail et nous vous préviendrons dès leur ouverture.",
+      photoAlt:
+        "Une jeune femme sourit devant son ordinateur portable, un cahier à côté d'elle",
       details: [
         {
           icon: "checkCircle",
