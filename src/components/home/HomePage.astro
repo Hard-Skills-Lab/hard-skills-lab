@@ -1,8 +1,12 @@
 ---
+import AnnouncementBar from "@/components/AnnouncementBar.astro";
+import MobileCta from "@/components/MobileCta.astro";
 import AboutSection from "@/components/home/AboutSection.astro";
 import ApplySection from "@/components/home/ApplySection.astro";
 import CurriculumSection from "@/components/home/CurriculumSection.astro";
+import FaqSection from "@/components/home/FaqSection.astro";
 import HeroSection from "@/components/home/HeroSection.astro";
+import HowItWorksSection from "@/components/home/HowItWorksSection.astro";
 import ProgramSection from "@/components/home/ProgramSection.astro";
 import SampleProjects from "@/components/SampleProjects.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
@@ -19,17 +23,21 @@ const t = getContent(lang);
 ---
 
 <BaseLayout title={t.meta.title} description={t.meta.description} lang={lang}>
+  <AnnouncementBar lang={lang} />
   <SiteHeader lang={lang} navigation={t.navigation} />
 
-  <main>
+  <!-- id="main" is the target of the skip link in BaseLayout -->
+  <main id="main">
     <HeroSection lang={lang} />
     <ProgramSection lang={lang} />
+    <HowItWorksSection lang={lang} />
     <CurriculumSection lang={lang} />
     <SampleProjects lang={lang} />
     <AboutSection lang={lang} />
-    <!-- FAQ section: re-add here when ready (the old markup is in git history) -->
+    <FaqSection lang={lang} />
     <ApplySection lang={lang} />
   </main>
 
   <SiteFooter lang={lang} footer={t.footer} navigation={t.navigation} />
+  <MobileCta lang={lang} />
 </BaseLayout>

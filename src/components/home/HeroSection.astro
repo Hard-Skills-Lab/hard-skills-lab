@@ -1,8 +1,10 @@
 ---
-import ImagePlaceholder from "@/components/ImagePlaceholder.astro";
+import { Image } from "astro:assets";
 import PrimaryButton from "@/components/PrimaryButton.astro";
-import { siteConfig } from "@/content/site-config";
-import { getContent } from "@/content/site-content";
+import { getContent, getMainCta } from "@/content/site-content";
+// Stock photos for now, credits in src/assets/photos/CREDITS.md
+import abstractPhoto from "@/assets/photos/abstractPhoto.jpg";
+import heroPhoto from "@/assets/photos/hero-laptop.jpg";
 
 interface Props {
   lang: Parameters<typeof getContent>[0];
@@ -10,6 +12,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getContent(lang);
+const cta = getMainCta(lang);
 ---
 
 <!--
@@ -31,9 +34,28 @@ const t = getContent(lang);
       <p class="mt-6 max-w-md text-base text-ink/80 sm:text-lg">
         {t.hero.subtitle}
       </p>
-      <div class="mt-8">
-        <PrimaryButton href={siteConfig.applicationUrls[lang]} arrow>
-          {t.hero.cta}
+
+      <!-- Key facts, so visitors get the essentials at a glance -->
+      <ul
+        class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-ink sm:text-base"
+      >
+        {
+          t.hero.facts.map((fact) => (
+            <li class="flex items-center gap-2">
+              <span class="size-1.5 shrink-0 bg-orange" aria-hidden="true" />
+              {fact}
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- data-hero-actions: the mobile sticky button stays hidden while these are on screen -->
+      <div class="mt-8 flex flex-wrap gap-3" data-hero-actions>
+        <PrimaryButton href={cta.href} arrow>
+          {cta.label}
+        </PrimaryButton>
+        <PrimaryButton href="#curriculum" variant="secondary">
+          {t.cta.curriculum}
         </PrimaryButton>
       </div>
     </div>
@@ -43,11 +65,24 @@ const t = getContent(lang);
   <div
     class="px-4 pb-8 sm:px-6 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[50%] lg:p-0 2xl:w-[45%]"
   >
-    <div class="relative aspect-4/5 sm:aspect-16/10 lg:aspect-auto lg:h-full">
-      <ImagePlaceholder
-        label="Hero portrait"
-        class="absolute inset-0 lg:right-[9%]"
-      />
+    <!-- 16:9 on phones (was 4:5) so the page gets to the program faster -->
+    <div class="relative aspect-video sm:aspect-16/10 lg:aspect-auto lg:h-full">
+      <div class="absolute inset-0 overflow-hidden bg-rule lg:right-[9%]">
+        <!--
+          Above the fold, so it loads first. On desktop the box is almost square,
+          so the photo is cropped on the sides: about 70vw of image for a 50vw box.
+          object-position keeps her in frame.
+        -->
+        <Image
+          src={heroPhoto}
+          alt={t.hero.photoAlt}
+          widths={[640, 960, 1280, 1600, 2000]}
+          sizes="(min-width: 1024px) 70vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="h-full w-full object-cover object-[65%_50%]"
+        />
+      </div>
 
       <!-- Orange block (desktop only) -->
       <div
@@ -56,9 +91,17 @@ const t = getContent(lang);
       >
       </div>
 
-      <!-- Landscape thumbnail (desktop only) -->
-      <div class="absolute bottom-0 right-0 hidden h-[47%] w-[14.5%] lg:block">
-        <ImagePlaceholder label="Landscape" tone="dark" class="h-full" />
+      <!-- Small photo (desktop only, decorative). Lazy, so phones never download it. -->
+      <div
+        class="absolute bottom-0 right-0 hidden h-[47%] w-[20%] overflow-hidden bg-ink lg:block"
+      >
+        <Image
+          src={abstractPhoto}
+          alt=""
+          widths={[240, 480]}
+          sizes="15vw"
+          class="h-full w-full object-cover object-[35%_50%]"
+        />
       </div>
 
       <!-- Learn / Build / Grow (desktop only, decorative) -->

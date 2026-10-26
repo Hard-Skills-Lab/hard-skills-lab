@@ -1,0 +1,47 @@
+---
+import type { Language } from "@/content/site-config";
+import { getContent } from "@/content/site-content";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const { howItWorks } = getContent(lang);
+---
+
+<!--
+  How it works: the learner's path, step by step.
+  No id on purpose: it is not in the navigation, so the header keeps
+  "Program" active while this section is on screen.
+-->
+<section class="section-y bg-paper">
+  <div class="container-page">
+    <p class="eyebrow">{howItWorks.eyebrow}</p>
+    <h2 class="heading-section mt-4 max-w-xl">{howItWorks.title}</h2>
+
+    <ol
+      class="mt-10 grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-6"
+    >
+      {
+        howItWorks.steps.map((step, index) => (
+          <li class="border-t-2 border-orange pt-5">
+            {/* Number and title on one line on phones to save space */}
+            <div class="flex items-baseline gap-3 sm:block">
+              <span
+                class="font-heading text-3xl font-normal text-orange"
+                aria-hidden="true"
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 class="font-heading text-lg font-semibold leading-snug sm:mt-3">
+                {step.title}
+              </h3>
+            </div>
+            <p class="mt-2 max-w-xs text-sm text-muted">{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

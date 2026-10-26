@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import Icon from "@/components/Icon.astro";
-import ImagePlaceholder from "@/components/ImagePlaceholder.astro";
 import { getContent } from "@/content/site-content";
+// Stock photo for now, credits in src/assets/photos/CREDITS.md
+import classPhoto from "@/assets/photos/coding-class.jpg";
 
 interface Props {
   lang: Parameters<typeof getContent>[0];
@@ -55,19 +57,36 @@ const t = getContent(lang);
               <span class="block h-0.5 w-8 bg-orange" aria-hidden="true"></span>
             </div>
           </div>
-          <ImagePlaceholder label="Landscape" tone="dark" class="min-h-80" />
+          <div class="relative min-h-80 overflow-hidden bg-ink">
+            <Image
+              src={classPhoto}
+              alt={t.program.photoAlt}
+              widths={[320, 480, 640]}
+              sizes="20vw"
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Landscape + Learn › Build › Grow (mobile / tablet) -->
-    <div class="relative mt-10 aspect-16/10 sm:aspect-2/1 lg:hidden">
-      <ImagePlaceholder
-        label="Landscape"
-        tone="dark"
-        labelPosition="top-right"
-        class="absolute inset-0"
+    <div
+      class="relative mt-10 aspect-16/10 overflow-hidden bg-ink sm:aspect-2/1 lg:hidden"
+    >
+      <Image
+        src={classPhoto}
+        alt={t.program.photoAlt}
+        widths={[480, 800, 1000]}
+        sizes="100vw"
+        class="absolute inset-0 h-full w-full object-cover object-[50%_30%]"
       />
+      <!-- Dark fade at the bottom so the white text stays readable -->
+      <div
+        class="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/10 to-transparent"
+        aria-hidden="true"
+      >
+      </div>
       <p
         class="absolute bottom-3 left-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white"
         aria-hidden="true"

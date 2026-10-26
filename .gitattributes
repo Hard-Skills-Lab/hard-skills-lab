@@ -1,0 +1,3 @@
+# Store text files with LF line endings, whatever the OS.
+# Stops Windows checkouts from showing every file as modified (CRLF only).
+* text=auto eol=lf

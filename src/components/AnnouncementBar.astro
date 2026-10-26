@@ -1,0 +1,27 @@
+---
+import type { Language } from "../content/site-config";
+import { getMainCta } from "../content/site-content";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const cta = getMainCta(lang);
+---
+
+<!-- Thin bar above the header with the cohort status. Empty text = no bar. -->{
+  cta.status && (
+    <div class="bg-ink text-white">
+      <p class="container-page flex flex-wrap items-center justify-center gap-x-3 text-center text-xs sm:text-sm">
+        <span class="py-1">{cta.status}</span>
+        <a
+          href={cta.href}
+          class="inline-flex min-h-9 items-center font-semibold underline decoration-orange decoration-2 underline-offset-4 transition-colors hover:decoration-white"
+        >
+          {cta.label}
+        </a>
+      </p>
+    </div>
+  )
+}

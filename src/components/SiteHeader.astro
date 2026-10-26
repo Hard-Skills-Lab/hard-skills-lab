@@ -1,7 +1,6 @@
 ---
 import type { Language } from "../content/site-config";
-import { siteConfig } from "../content/site-config";
-import { getContent } from "../content/site-content";
+import { getContent, getMainCta } from "../content/site-content";
 import type { SiteContent } from "../content/site-content";
 import SiteLogo from "./SiteLogo.astro";
 import LanguageSwitch from "./LanguageSwitch.astro";
@@ -16,7 +15,7 @@ interface Props {
 
 const { lang, navigation } = Astro.props;
 const { header } = getContent(lang);
-const applyUrl = siteConfig.applicationUrls[lang];
+const cta = getMainCta(lang);
 
 // Order follows the order of the sections on the page.
 // "#top" scrolls to the top of the page (Home).
@@ -26,6 +25,7 @@ const navItems = [
   { label: navigation.curriculum, href: "#curriculum" },
   { label: navigation.projects, href: "#projects" },
   { label: navigation.about, href: "#about" },
+  { label: navigation.faq, href: "#faq" },
 ];
 ---
 
@@ -58,8 +58,8 @@ const navItems = [
       <LanguageSwitch lang={lang} switchLabel={header.switchLanguage} />
 
       <div class="hidden lg:block">
-        <PrimaryButton href={applyUrl} size="sm" arrow>
-          {header.applyCta}
+        <PrimaryButton href={cta.href} size="sm" arrow>
+          {cta.label}
         </PrimaryButton>
       </div>
 
@@ -145,8 +145,8 @@ const navItems = [
         class="-ml-1.5 mt-8"
       />
 
-      <PrimaryButton href={applyUrl} arrow class="mt-6 w-full">
-        {header.applyCta}
+      <PrimaryButton href={cta.href} arrow class="mt-6 w-full">
+        {cta.label}
       </PrimaryButton>
 
       {

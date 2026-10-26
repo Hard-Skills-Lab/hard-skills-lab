@@ -14,7 +14,7 @@
 
 Build a fast, accessible, responsive bilingual website that explains Hard Skills Lab and helps eligible learners understand the program and apply.
 
-Hard Skills Lab is a small organization that aims to train young Africans in data and AI through free, online, practical, project-first learning. The initial audience includes learners in Togo and across West Africa. The first cohort has not launched yet, so the site must not imply that a cohort has already completed or that outcomes have already been achieved.
+Hard Skills Lab is a small organization that aims to train young Africans in data and AI through free, online, practical, project-first learning. The audience is young people across Africa. Because the program runs in French and English, it is open to learners from francophone and anglophone countries. The first cohort has not launched yet, so the site must not imply that a cohort has already completed or that outcomes have already been achieved.
 
 ### Success criteria
 
@@ -142,7 +142,7 @@ Recommended order:
 
 2. **Program overview**
    - Explain the cohort format: 8 weeks plus a capstone project.
-   - Four facts: 100% online, bilingual, beginner-friendly, open to eligible learners in Togo and West Africa.
+   - Four facts: 100% online, bilingual, beginner-friendly, open to learners across Africa.
    - Explain the commitment clearly: live sessions plus work between sessions.
    - If stating “around 10–12 hours per week”, confirm that estimate with both founders before publishing.
 
@@ -158,10 +158,10 @@ Recommended order:
    - Make clear that both tracks contribute to the final project.
 
 5. **Two learning tracks**
-   - **Data Analysis with Python** — led by Hugues.
-   - **Artificial Intelligence & Machine Learning** — led by the other co-founder.
+   - **Data Analysis with Python**, led by Kokou Hugues Minasseh.
+   - **Artificial Intelligence & Machine Learning**, led by Yao Gervais Amoah.
    - Each card should contain a concise summary, what learners will practice, and a link to the curriculum section if useful.
-   - Confirm track names, founder names, and descriptions before publishing.
+   - Show the track lead's name, role and LinkedIn on each track. Confirm names, roles and descriptions before publishing.
 
 6. **Example projects / practical work**
    - Show the kind of work learners may do, not work that has already been completed.
@@ -169,10 +169,10 @@ Recommended order:
    - Label the section and each item as an example or proposed project until the actual curriculum and data are approved.
    - Do not present simulated charts or mock screenshots as real research findings.
 
-7. **About / team**
-   - Short mission and teaching philosophy.
-   - Founder portraits, names, roles, and short bios, approved by the founders.
-   - If final portraits are unavailable, use intentional placeholders rather than stock portraits that could be mistaken for the founders.
+7. **About**
+   - Short mission and why it matters (free, bilingual, project-first).
+   - No founder cards or team bios, and no "two co-founders" framing. The track leads are named on the curriculum tracks instead.
+   - If portraits are added later (for example next to the track leads), use real photos, never stock portraits that could be mistaken for the team.
 
 8. **How to apply / eligibility**
    - Explain who the program is for, whether prior experience is needed, language expectations, internet requirements, and time commitment.
@@ -184,7 +184,7 @@ Recommended order:
    - Is the program free?
    - Do I need prior experience?
    - Do I need my own computer and a stable internet connection?
-   - Can I apply from outside Togo?
+   - Can I apply from any African country?
    - How much time should I set aside?
    - What languages are used?
    - What happens after I apply?
@@ -428,7 +428,7 @@ Implement each section using shared components and localized content.
 - [ ] Curriculum section: high-level weekly progression, with content approved by track leads.
 - [ ] Track cards: Data Analysis with Python and Artificial Intelligence & Machine Learning.
 - [ ] Example project cards: clearly label as proposed/illustrative until real projects are available.
-- [ ] About/team section: founder names, roles, bios, and approved photos or explicit placeholders.
+- [ ] About section: the mission and why it matters, without founder cards or a "two co-founders" line. Track leads are named on the curriculum tracks instead (name, role, LinkedIn).
 - [ ] Eligibility/application section: eligibility, language, internet, time commitment, and application steps.
 - [ ] FAQ section: only confirmed answers.
 - [ ] Final application CTA.

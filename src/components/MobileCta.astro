@@ -1,0 +1,56 @@
+---
+import PrimaryButton from "./PrimaryButton.astro";
+import type { Language } from "../content/site-config";
+import { getMainCta } from "../content/site-content";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const cta = getMainCta(lang);
+---
+
+<!--
+  Sticky button for phones and tablets (the header has no button there).
+  It slides in once the hero buttons are off screen, and hides again over
+  the apply section and the footer, where the same button is already visible.
+  Without JavaScript it simply stays hidden.
+-->
+<div
+  id="mobile-cta"
+  class="invisible fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-rule bg-paper/95 px-4 py-3 backdrop-blur-sm transition-[translate,visibility] duration-300 lg:hidden"
+>
+  <PrimaryButton href={cta.href} arrow class="w-full">
+    {cta.label}
+  </PrimaryButton>
+</div>
+
+<script>
+  const bar = document.getElementById("mobile-cta");
+
+  // Places where the main button is already on screen
+  const targets = [
+    document.querySelector("[data-hero-actions]"),
+    document.getElementById("apply"),
+    document.querySelector("body > footer"),
+  ].filter((el): el is Element => el !== null);
+
+  if (bar && targets.length > 0) {
+    const visible = new Set<Element>();
+
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      }
+
+      // Show the bar only when none of them is visible
+      const show = visible.size === 0;
+      bar.classList.toggle("invisible", !show);
+      bar.classList.toggle("translate-y-full", !show);
+    });
+
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>
