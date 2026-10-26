@@ -50,6 +50,8 @@ export interface SiteContent {
     facts: string[];
     pillars: string[];
     scroll: string;
+    // Alt text of the hero photo
+    photoAlt: string;
   };
   program: {
     eyebrow: string;
@@ -65,6 +67,8 @@ export interface SiteContent {
       title: string;
       text: string;
     };
+    // Alt text of the classroom photo (mission card and phone landscape)
+    photoAlt: string;
   };
   howItWorks: {
     eyebrow: string;
@@ -102,6 +106,8 @@ export interface SiteContent {
       eyebrow: string;
       title: string;
       intro: string;
+      // Alt text of the coding photo under the track cards (phones)
+      photoAlt: string;
     };
   };
   projects: {
@@ -219,6 +225,7 @@ export const content: Record<Language, SiteContent> = {
       facts: ["Free", "8 weeks", "100% online", "French & English"],
       pillars: ["Learn", "Build", "Grow"],
       scroll: "Scroll",
+      photoAlt: "A young woman working on a laptop at a desk",
     },
     program: {
       eyebrow: "The program",
@@ -252,6 +259,8 @@ export const content: Record<Language, SiteContent> = {
         title: "More African talent in data and AI.",
         text: "We close the gap in practical, free training, and build a community of learners who create real solutions for Africa.",
       },
+      photoAlt:
+        "A coding class in a computer lab, with the teacher at the front",
     },
     howItWorks: {
       eyebrow: "How it works",
@@ -352,6 +361,7 @@ export const content: Record<Language, SiteContent> = {
         title: "Two skills, working together.",
         intro:
           "Data helps you understand. AI helps you build. Together, they help you solve real problems.",
+        photoAlt: "A developer with headphones writing code on a large screen",
       },
     },
     projects: {
@@ -549,6 +559,8 @@ export const content: Record<Language, SiteContent> = {
       facts: ["Gratuit", "8 semaines", "100 % en ligne", "Français et anglais"],
       pillars: ["Apprendre", "Créer", "Grandir"],
       scroll: "Défiler",
+      photoAlt:
+        "Une jeune femme travaille sur un ordinateur portable à son bureau",
     },
     program: {
       eyebrow: "Le programme",
@@ -582,6 +594,8 @@ export const content: Record<Language, SiteContent> = {
         title: "Plus de talents africains en données et en IA.",
         text: "Nous comblons le manque de formations pratiques et gratuites, et nous construisons une communauté d'apprenants qui créent de vraies solutions pour l'Afrique.",
       },
+      photoAlt:
+        "Un cours de programmation dans une salle informatique, avec le formateur devant la classe",
     },
     howItWorks: {
       eyebrow: "Comment ça marche",
@@ -682,6 +696,8 @@ export const content: Record<Language, SiteContent> = {
         title: "Deux compétences qui se complètent.",
         intro:
           "Les données vous aident à comprendre. L'IA vous aide à construire. Ensemble, elles vous permettent de résoudre de vrais problèmes.",
+        photoAlt:
+          "Un développeur avec un casque écrit du code sur un grand écran",
       },
     },
     projects: {
