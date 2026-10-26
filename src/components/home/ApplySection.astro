@@ -5,7 +5,7 @@ import ImagePlaceholder from "@/components/ImagePlaceholder.astro";
 import PrimaryButton from "@/components/PrimaryButton.astro";
 import type { Language } from "@/content/site-config";
 import { siteConfig } from "@/content/site-config";
-import { getContent } from "@/content/site-content";
+import { getContent, getMainCta } from "@/content/site-content";
 
 interface Props {
   lang: Language;
@@ -13,7 +13,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const { apply, hero } = getContent(lang);
-const applyUrl = siteConfig.applicationUrls[lang];
+const cta = getMainCta(lang);
 const contactUrl = `mailto:${siteConfig.social.email}`;
 ---
 
@@ -30,10 +30,12 @@ const contactUrl = `mailto:${siteConfig.social.email}`;
         <div class="max-w-xl">
           <p class="eyebrow">{apply.eyebrow}</p>
           <h2 class="heading-section mt-4">{apply.title}</h2>
-          <p class="mt-5 text-base text-muted sm:text-lg">{apply.intro}</p>
+          <p class="mt-5 text-base text-muted sm:text-lg">
+            {siteConfig.applicationsOpen ? apply.intro : apply.waitlistIntro}
+          </p>
         </div>
         <div class="hidden shrink-0 lg:block">
-          <PrimaryButton href={applyUrl} arrow>{apply.cta}</PrimaryButton>
+          <PrimaryButton href={cta.href} arrow>{cta.label}</PrimaryButton>
         </div>
       </div>
 
@@ -56,8 +58,8 @@ const contactUrl = `mailto:${siteConfig.social.email}`;
 
       <!-- Mobile button -->
       <div class="mt-8 lg:hidden">
-        <PrimaryButton href={applyUrl} arrow class="w-full">
-          {apply.cta}
+        <PrimaryButton href={cta.href} arrow class="w-full">
+          {cta.label}
         </PrimaryButton>
       </div>
 

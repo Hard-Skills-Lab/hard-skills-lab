@@ -24,7 +24,7 @@ const carouselAttrs = isCarousel
   : {};
 ---
 
-<section id="projects" class="section-y bg-paper lg:bg-paper-soft">
+<section id="projects" class="section-y bg-paper-soft lg:bg-paper">
   <div class="container-page">
     <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
       <!-- Intro -->
@@ -34,11 +34,18 @@ const carouselAttrs = isCarousel
         <p class="mt-5 max-w-md text-base text-muted sm:text-lg">
           {projects.intro}
         </p>
-        <div class="mt-2 lg:pt-2">
-          <ExternalLink href={projects.seeMore.href} srLabel={projects.newTab}>
-            {projects.seeMore.label}
-          </ExternalLink>
-        </div>
+        {
+          projects.seeMore.href && (
+            <div class="mt-2 lg:pt-2">
+              <ExternalLink
+                href={projects.seeMore.href}
+                srLabel={projects.newTab}
+              >
+                {projects.seeMore.label}
+              </ExternalLink>
+            </div>
+          )
+        }
       </div>
 
       <!-- Projects -->
@@ -80,14 +87,17 @@ const carouselAttrs = isCarousel
                     {item.title}
                   </h3>
                   <p class="mt-2 max-w-sm text-sm text-muted">{item.text}</p>
-                  <div class="mt-auto pt-3">
-                    <ExternalLink
-                      href={item.href}
-                      srLabel={`${item.title} ${projects.newTab}`}
-                    >
-                      {projects.viewProject}
-                    </ExternalLink>
-                  </div>
+                  {/* No link until the project is published */}
+                  {item.href && (
+                    <div class="mt-auto pt-3">
+                      <ExternalLink
+                        href={item.href}
+                        srLabel={`${item.title} ${projects.newTab}`}
+                      >
+                        {projects.viewProject}
+                      </ExternalLink>
+                    </div>
+                  )}
                 </article>
               </li>
             ))

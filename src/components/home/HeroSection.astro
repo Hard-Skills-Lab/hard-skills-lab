@@ -1,8 +1,7 @@
 ---
 import ImagePlaceholder from "@/components/ImagePlaceholder.astro";
 import PrimaryButton from "@/components/PrimaryButton.astro";
-import { siteConfig } from "@/content/site-config";
-import { getContent } from "@/content/site-content";
+import { getContent, getMainCta } from "@/content/site-content";
 
 interface Props {
   lang: Parameters<typeof getContent>[0];
@@ -10,6 +9,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getContent(lang);
+const cta = getMainCta(lang);
 ---
 
 <!--
@@ -31,9 +31,28 @@ const t = getContent(lang);
       <p class="mt-6 max-w-md text-base text-ink/80 sm:text-lg">
         {t.hero.subtitle}
       </p>
-      <div class="mt-8">
-        <PrimaryButton href={siteConfig.applicationUrls[lang]} arrow>
-          {t.hero.cta}
+
+      <!-- Key facts, so visitors get the essentials at a glance -->
+      <ul
+        class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-ink sm:text-base"
+      >
+        {
+          t.hero.facts.map((fact) => (
+            <li class="flex items-center gap-2">
+              <span class="size-1.5 shrink-0 bg-orange" aria-hidden="true" />
+              {fact}
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- data-hero-actions: the mobile sticky button stays hidden while these are on screen -->
+      <div class="mt-8 flex flex-wrap gap-3" data-hero-actions>
+        <PrimaryButton href={cta.href} arrow>
+          {cta.label}
+        </PrimaryButton>
+        <PrimaryButton href="#curriculum" variant="secondary">
+          {t.cta.curriculum}
         </PrimaryButton>
       </div>
     </div>
@@ -43,7 +62,8 @@ const t = getContent(lang);
   <div
     class="px-4 pb-8 sm:px-6 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[50%] lg:p-0 2xl:w-[45%]"
   >
-    <div class="relative aspect-4/5 sm:aspect-16/10 lg:aspect-auto lg:h-full">
+    <!-- 16:9 on phones (was 4:5) so the page gets to the program faster -->
+    <div class="relative aspect-video sm:aspect-16/10 lg:aspect-auto lg:h-full">
       <ImagePlaceholder
         label="Hero portrait"
         class="absolute inset-0 lg:right-[9%]"

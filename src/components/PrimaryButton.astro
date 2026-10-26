@@ -25,7 +25,8 @@ const sizes = {
 };
 
 const variants = {
-  primary: "bg-orange text-white hover:bg-orange/90",
+  // Darker orange so the white label passes WCAG AA (5.6:1)
+  primary: "bg-orange-deep text-white hover:brightness-90",
   secondary: "border border-ink text-ink hover:bg-ink hover:text-white",
 };
 ---

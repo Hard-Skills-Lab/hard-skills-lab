@@ -1,0 +1,45 @@
+---
+interface Props {
+  /** "Led by" in the page language */
+  label: string;
+  name: string;
+  role: string;
+  /** LinkedIn URL. Empty string shows the name without a link. */
+  linkedin: string;
+  /** Read by screen readers after the name, e.g. "(LinkedIn profile, opens in a new tab)" */
+  linkLabel: string;
+  class?: string;
+}
+
+const {
+  label,
+  name,
+  role,
+  linkedin,
+  linkLabel,
+  class: className,
+} = Astro.props;
+---
+
+<!-- Track lead: who teaches the track, linked to LinkedIn when we have the URL -->
+<div class:list={["text-sm", className]}>
+  <p class="text-muted">
+    {label}{" "}
+    {
+      linkedin ? (
+        <a
+          href={linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4 transition-colors hover:text-orange-deep"
+        >
+          {name}
+          <span class="sr-only">&nbsp;{linkLabel}</span>
+        </a>
+      ) : (
+        <span class="font-semibold text-ink">{name}</span>
+      )
+    }
+  </p>
+  <p class="mt-0.5 text-muted">{role}</p>
+</div>

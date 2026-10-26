@@ -1,5 +1,7 @@
 ---
+import Icon from "@/components/Icon.astro";
 import ImagePlaceholder from "@/components/ImagePlaceholder.astro";
+import TrackLead from "@/components/TrackLead.astro";
 import { getContent } from "@/content/site-content";
 
 interface Props {
@@ -11,7 +13,7 @@ const t = getContent(lang);
 ---
 
 <!-- Curriculum Section -->
-<section id="curriculum" class="section-y">
+<section id="curriculum" class="section-y bg-paper-soft">
   <div class="container-page">
     <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
       <!-- Intro -->
@@ -27,6 +29,18 @@ const t = getContent(lang);
         <p class="mt-5 max-w-md text-base text-muted sm:text-lg">
           {t.curriculum.intro}
         </p>
+
+        <!-- Tools -->
+        <p class="mt-8 text-sm font-semibold">{t.curriculum.toolsTitle}</p>
+        <ul class="mt-3 flex max-w-md flex-wrap gap-2">
+          {
+            t.curriculum.tools.map((tool) => (
+              <li class="border border-rule bg-paper px-2.5 py-1 font-mono text-xs text-ink">
+                {tool}
+              </li>
+            ))
+          }
+        </ul>
       </div>
 
       <!-- Mobile / tablet: one list, data + AI topic per week.
@@ -35,7 +49,7 @@ const t = getContent(lang);
         {
           t.curriculum.tracks[0].weeks.map((dataWeek, index) => (
             <li class="flex gap-4 border-b border-rule py-5">
-              <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-orange text-[11px] font-semibold text-white">
+              <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-orange-deep text-[11px] font-semibold text-white">
                 {index + 1}
               </span>
               <div>
@@ -65,16 +79,37 @@ const t = getContent(lang);
               <h3 class="flex flex-wrap items-baseline gap-x-2 font-heading text-lg font-semibold leading-snug">
                 {track.shortTitle}
               </h3>
+              <TrackLead
+                label={t.curriculum.leadLabel}
+                name={track.lead.name}
+                role={track.lead.role}
+                linkedin={track.lead.linkedin}
+                linkLabel={t.curriculum.leadLink}
+                class="mt-2"
+              />
               <ol class="relative mt-4 before:absolute before:bottom-6 before:left-[11.5px] before:top-6 before:w-px before:bg-orange/40">
                 {track.weeks.map((week, index) => (
                   <li class="relative flex items-center gap-3 border-b border-rule py-3 text-sm">
-                    <span class="relative z-10 flex size-6 shrink-0 items-center justify-center rounded-full bg-orange text-[11px] font-semibold text-white">
+                    <span class="relative z-10 flex size-6 shrink-0 items-center justify-center rounded-full bg-orange-deep text-[11px] font-semibold text-white">
                       {index + 1}
                     </span>
                     <span>{week}</span>
                   </li>
                 ))}
               </ol>
+
+              {/* What learners can do at the end of the track */}
+              <p class="mt-6 text-sm font-semibold">
+                {t.curriculum.outcomesTitle}
+              </p>
+              <ul class="mt-3 space-y-2">
+                {track.outcomes.map((outcome) => (
+                  <li class="flex gap-2 text-sm text-muted">
+                    <Icon name="check" class="mt-0.5 size-4 text-orange" />
+                    {outcome}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))
         }
@@ -88,7 +123,7 @@ const t = getContent(lang);
   above). No id on purpose: it is display:none on desktop and would
   confuse the header's scroll-spy.
 -->
-<section class="section-y bg-paper-soft lg:hidden">
+<section class="section-y bg-paper lg:hidden">
   <div class="container-page">
     <p class="eyebrow">{t.curriculum.tracksSection.eyebrow}</p>
     <h2 class="heading-section mt-4">{t.curriculum.tracksSection.title}</h2>
@@ -109,7 +144,27 @@ const t = getContent(lang);
             <h3 class="mt-3 font-heading text-xl font-semibold leading-tight">
               {track.title}
             </h3>
-            <p class="mt-3 text-sm text-muted">{track.summary}</p>
+            <TrackLead
+              label={t.curriculum.leadLabel}
+              name={track.lead.name}
+              role={track.lead.role}
+              linkedin={track.lead.linkedin}
+              linkLabel={t.curriculum.leadLink}
+              class="mt-3"
+            />
+            <p class="mt-4 text-sm text-muted">{track.summary}</p>
+
+            <p class="mt-5 text-sm font-semibold">
+              {t.curriculum.outcomesTitle}
+            </p>
+            <ul class="mt-2 space-y-2">
+              {track.outcomes.map((outcome) => (
+                <li class="flex gap-2 text-sm text-muted">
+                  <Icon name="check" class="mt-0.5 size-4 text-orange" />
+                  {outcome}
+                </li>
+              ))}
+            </ul>
           </li>
         ))
       }

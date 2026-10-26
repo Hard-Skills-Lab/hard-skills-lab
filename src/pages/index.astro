@@ -1,4 +1,63 @@
 ---
-// Redirect root to English as default language
-return Astro.redirect("/en/");
+// Root page. Sends visitors straight to /fr/ or /en/ based on the browser
+// language, with English as the default (SPEC.md). Astro.redirect() made a
+// page that waited 2 seconds and always picked English.
+// Link previews (LinkedIn, WhatsApp) do not run JavaScript, so the English
+// sharing tags are repeated here.
+import { siteConfig } from "../content/site-config";
+import { getContent } from "../content/site-content";
+
+const { meta } = getContent("en");
+const enUrl = new URL("/en/", siteConfig.siteUrl);
+const frUrl = new URL("/fr/", siteConfig.siteUrl);
+const ogImage = new URL("/og/og-en.png", siteConfig.siteUrl);
 ---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={enUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="fr" href={frUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hard Skills Lab" />
+    <meta property="og:url" content={enUrl} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={meta.ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- is:inline so it runs at once, before the page renders -->
+    <script is:inline>
+      // First language in the browser's list that we offer, English otherwise.
+      // Plain ES2015 on purpose, so older phone browsers (KaiOS) can run it.
+      const preferred = navigator.languages || [navigator.language || "en"];
+      const match = preferred
+        .map((code) => String(code).toLowerCase().slice(0, 2))
+        .find((code) => code === "fr" || code === "en");
+
+      location.replace(match === "fr" ? "/fr/" : "/en/");
+    </script>
+
+    <!-- Without JavaScript, go to English straight away -->
+    <noscript><meta http-equiv="refresh" content="0; url=/en/" /></noscript>
+  </head>
+  <body>
+    <!-- Only seen if both redirects fail -->
+    <p>
+      <a href="/en/" hreflang="en">English</a> ·
+      <a href="/fr/" hreflang="fr" lang="fr">Français</a>
+    </p>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+---
+import Icon from "@/components/Icon.astro";
+import type { Language } from "@/content/site-config";
+import { siteConfig } from "@/content/site-config";
+import { getContent } from "@/content/site-content";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const { faq } = getContent(lang);
+const email = siteConfig.social.email;
+---
+
+<!-- FAQ. Native <details>, so it works without JavaScript. -->
+<section id="faq" class="section-y bg-paper-soft lg:bg-paper">
+  <div class="container-page">
+    <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
+      <!-- Intro -->
+      <div class="lg:col-span-4">
+        <p class="eyebrow">{faq.eyebrow}</p>
+        <h2 class="heading-section mt-4">{faq.title}</h2>
+        <p class="mt-5 max-w-sm text-base text-muted">
+          {faq.more}{" "}
+          <a
+            href={`mailto:${email}`}
+            class="whitespace-nowrap font-semibold text-ink underline decoration-orange decoration-2 underline-offset-4 transition-colors hover:text-orange-deep"
+          >
+            {email}
+          </a>
+        </p>
+      </div>
+
+      <!-- Questions -->
+      <ul class="border-t border-rule lg:col-span-8">
+        {
+          faq.questions.map((item) => (
+            <li class="border-b border-rule">
+              <details class="group">
+                <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-6 py-4 font-heading text-base font-semibold leading-snug transition-colors hover:text-orange-deep sm:text-lg [&::-webkit-details-marker]:hidden">
+                  {item.question}
+                  <Icon
+                    name="plus"
+                    class="size-5 text-orange transition-transform group-open:rotate-45"
+                  />
+                </summary>
+                <p class="max-w-2xl pb-6 pr-10 text-muted">{item.answer}</p>
+              </details>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,10 +1,12 @@
 ---
 import type { Language } from "../content/site-config";
 import { siteConfig } from "../content/site-config";
+import { getContent } from "../content/site-content";
 import type { SiteContent } from "../content/site-content";
 import { socialLinks } from "../content/social-links";
 import SiteLogo from "./SiteLogo.astro";
 import Icon from "./Icon.astro";
+import LanguageSwitch from "./LanguageSwitch.astro";
 
 interface Props {
   lang: Language;
@@ -13,6 +15,7 @@ interface Props {
 }
 
 const { lang, footer, navigation } = Astro.props;
+const { header } = getContent(lang);
 const year = new Date().getFullYear();
 
 // Same links and order as the header
@@ -22,6 +25,7 @@ const navItems = [
   { label: navigation.curriculum, href: "#curriculum" },
   { label: navigation.projects, href: "#projects" },
   { label: navigation.about, href: "#about" },
+  { label: navigation.faq, href: "#faq" },
 ];
 ---
 
@@ -84,7 +88,21 @@ const navItems = [
             </ul>
           )
         }
+
+        <LanguageSwitch
+          lang={lang}
+          switchLabel={header.switchLanguage}
+          tone="dark"
+          class="-mx-1.5"
+        />
       </div>
     </div>
+
+    <!-- Row 3: privacy note (the forms collect personal data) -->
+    {
+      footer.privacy && (
+        <p class="mt-6 max-w-3xl text-xs text-white/60">{footer.privacy}</p>
+      )
+    }
   </div>
 </footer>

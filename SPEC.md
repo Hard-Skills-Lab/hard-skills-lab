@@ -12,7 +12,7 @@
 
 Build a fast, accessible, responsive bilingual website that explains Hard Skills Lab and helps eligible learners understand the program and apply.
 
-Hard Skills Lab is a small organization that aims to train young Africans in data and AI through free, online, practical, project-first learning. The initial audience includes learners in Togo and across West Africa. The first cohort has not launched yet, so the site must not imply that a cohort has already completed or that outcomes have already been achieved.
+Hard Skills Lab is a small organization that aims to train young Africans in data and AI through free, online, practical, project-first learning. The audience is young people across Africa. Because the program runs in French and English, it is open to learners from francophone and anglophone countries. The first cohort has not launched yet, so the site must not imply that a cohort has already completed or that outcomes have already been achieved.
 
 ### Success criteria
 
@@ -227,7 +227,7 @@ None.
 - [ ] Curriculum section: high-level weekly progression, with content approved by track leads.
 - [ ] Track cards: Data Analysis with Python and Artificial Intelligence & Machine Learning.
 - [ ] Example project cards: clearly label as proposed/illustrative until real projects are available.
-- [ ] About/team section: founder names, roles, bios, and approved photos or explicit placeholders.
+- [ ] About section: the mission and why it matters, without founder cards or a "two co-founders" line. Track leads are named on the curriculum tracks instead (name, role, LinkedIn).
 - [ ] Eligibility/application section: eligibility, language, internet, time commitment, and application steps.
 - [ ] FAQ section: only confirmed answers.
 - [ ] Final application CTA.
