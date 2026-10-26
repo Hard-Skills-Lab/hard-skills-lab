@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import PrimaryButton from "@/components/PrimaryButton.astro";
 import { getContent, getMainCta } from "@/content/site-content";
 // Stock photos for now, credits in src/assets/photos/CREDITS.md
-import developerPhoto from "@/assets/photos/developer-code.jpg";
+import abstractPhoto from "@/assets/photos/abstractPhoto.jpg";
 import heroPhoto from "@/assets/photos/hero-laptop.jpg";
 
 interface Props {
@@ -93,10 +93,10 @@ const cta = getMainCta(lang);
 
       <!-- Small photo (desktop only, decorative). Lazy, so phones never download it. -->
       <div
-        class="absolute bottom-0 right-0 hidden h-[47%] w-[14.5%] overflow-hidden bg-ink lg:block"
+        class="absolute bottom-0 right-0 hidden h-[47%] w-[20%] overflow-hidden bg-ink lg:block"
       >
         <Image
-          src={developerPhoto}
+          src={abstractPhoto}
           alt=""
           widths={[240, 480]}
           sizes="15vw"

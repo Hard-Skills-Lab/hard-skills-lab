@@ -3,8 +3,6 @@ import { Image } from "astro:assets";
 import Icon from "@/components/Icon.astro";
 import TrackLead from "@/components/TrackLead.astro";
 import { getContent } from "@/content/site-content";
-// Stock photo for now, credits in src/assets/photos/CREDITS.md
-import developerPhoto from "@/assets/photos/developer-code.jpg";
 
 interface Props {
   lang: Parameters<typeof getContent>[0];
@@ -171,15 +169,5 @@ const t = getContent(lang);
         ))
       }
     </ol>
-
-    <div class="mt-6 aspect-video overflow-hidden bg-ink sm:aspect-2/1">
-      <Image
-        src={developerPhoto}
-        alt={t.curriculum.tracksSection.photoAlt}
-        widths={[480, 800, 1000]}
-        sizes="100vw"
-        class="h-full w-full object-cover"
-      />
-    </div>
   </div>
 </section>
