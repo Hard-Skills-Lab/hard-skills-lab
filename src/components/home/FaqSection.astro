@@ -1,5 +1,6 @@
 ---
 import Icon from "@/components/Icon.astro";
+import SocialLinks from "@/components/SocialLinks.astro";
 import type { Language } from "@/content/site-config";
 import { siteConfig } from "@/content/site-config";
 import { getContent } from "@/content/site-content";
@@ -9,7 +10,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const { faq } = getContent(lang);
+const { faq, cta } = getContent(lang);
 const email = siteConfig.social.email;
 ---
 
@@ -30,6 +31,7 @@ const email = siteConfig.social.email;
             {email}
           </a>
         </p>
+        <SocialLinks newTabLabel={cta.newTab} class="mt-5" />
       </div>
 
       <!-- Questions -->

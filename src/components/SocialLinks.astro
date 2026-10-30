@@ -1,0 +1,46 @@
+---
+import Icon from "./Icon.astro";
+import { socialLinks } from "../content/social-links";
+
+interface Props {
+  /** Read by screen readers after each name, e.g. "(opens in a new tab)" */
+  newTabLabel: string;
+  /** "dark" for the footer, "light" for sections on the paper background */
+  tone?: "dark" | "light";
+  class?: string;
+}
+
+const { newTabLabel, tone = "light", class: className } = Astro.props;
+
+const tones = {
+  dark: "border-white/20 text-white/80 hover:border-white hover:text-white",
+  light: "border-rule text-ink hover:border-ink hover:text-orange-deep",
+};
+---
+
+<!--
+  Social accounts as square icon buttons (footer and FAQ).
+  They open in a new tab, like the application form, so the site stays open.
+-->
+{
+  socialLinks.length > 0 && (
+    <ul class:list={["flex gap-2", className]}>
+      {socialLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${link.name} ${newTabLabel}`}
+            class:list={[
+              "inline-flex size-11 items-center justify-center border transition-colors",
+              tones[tone],
+            ]}
+          >
+            <Icon name={link.icon} class="size-5" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

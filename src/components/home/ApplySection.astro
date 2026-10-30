@@ -45,7 +45,7 @@ const contactUrl = `mailto:${siteConfig.social.email}`;
           </p>
         </div>
         <div class="hidden shrink-0 lg:block">
-          <PrimaryButton href={cta.href} arrow>{cta.label}</PrimaryButton>
+          <PrimaryButton href={cta.href} srLabel={cta.newTab} arrow>{cta.label}</PrimaryButton>
         </div>
       </div>
 
@@ -68,7 +68,7 @@ const contactUrl = `mailto:${siteConfig.social.email}`;
 
       <!-- Mobile button -->
       <div class="mt-8 lg:hidden">
-        <PrimaryButton href={cta.href} arrow class="w-full">
+        <PrimaryButton href={cta.href} srLabel={cta.newTab} arrow class="w-full">
           {cta.label}
         </PrimaryButton>
       </div>

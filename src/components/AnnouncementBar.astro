@@ -17,9 +17,12 @@ const cta = getMainCta(lang);
         <span class="py-1">{cta.status}</span>
         <a
           href={cta.href}
+          target="_blank"
+          rel="noopener noreferrer"
           class="inline-flex min-h-9 items-center font-semibold underline decoration-orange decoration-2 underline-offset-4 transition-colors hover:decoration-white"
         >
           {cta.label}
+          <span class="sr-only">&nbsp;{cta.newTab}</span>
         </a>
       </p>
     </div>

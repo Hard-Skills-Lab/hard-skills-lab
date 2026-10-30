@@ -4,6 +4,10 @@
 import "@fontsource-variable/space-grotesk/wght.css";
 import "@fontsource-variable/source-sans-3/wght.css";
 import "@fontsource/ibm-plex-mono/400.css";
+// The heading and body fonts are preloaded, so they arrive with the page and
+// the text does not jump when they replace the fallback font (layout shift).
+import spaceGroteskFont from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
+import sourceSansFont from "@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2?url";
 import "../styles/global.css";
 import { siteConfig } from "../content/site-config";
 import { getContent } from "../content/site-content";
@@ -29,6 +33,8 @@ const ogImage = new URL(`/og/og-${lang}.png`, siteConfig.siteUrl);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href={spaceGroteskFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sourceSansFont} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

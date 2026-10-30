@@ -3,9 +3,8 @@ import type { Language } from "../content/site-config";
 import { siteConfig } from "../content/site-config";
 import { getContent } from "../content/site-content";
 import type { SiteContent } from "../content/site-content";
-import { socialLinks } from "../content/social-links";
 import SiteLogo from "./SiteLogo.astro";
-import Icon from "./Icon.astro";
+import SocialLinks from "./SocialLinks.astro";
 import LanguageSwitch from "./LanguageSwitch.astro";
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 }
 
 const { lang, footer, navigation } = Astro.props;
-const { header } = getContent(lang);
+const { header, cta } = getContent(lang);
 const year = new Date().getFullYear();
 
 // Same links and order as the header
@@ -71,23 +70,7 @@ const navItems = [
           {siteConfig.social.email}
         </a>
 
-        {
-          socialLinks.length > 0 && (
-            <ul class="flex gap-2">
-              {socialLinks.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    aria-label={link.name}
-                    class="inline-flex size-11 items-center justify-center border border-white/20 text-white/80 transition-colors hover:border-white hover:text-white"
-                  >
-                    <Icon name={link.icon} class="size-5" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )
-        }
+        <SocialLinks newTabLabel={cta.newTab} tone="dark" />
 
         <LanguageSwitch
           lang={lang}

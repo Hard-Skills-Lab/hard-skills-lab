@@ -51,7 +51,7 @@ const cta = getMainCta(lang);
 
       <!-- data-hero-actions: the mobile sticky button stays hidden while these are on screen -->
       <div class="mt-8 flex flex-wrap gap-3" data-hero-actions>
-        <PrimaryButton href={cta.href} arrow>
+        <PrimaryButton href={cta.href} srLabel={cta.newTab} arrow>
           {cta.label}
         </PrimaryButton>
         <PrimaryButton href="#curriculum" variant="secondary">

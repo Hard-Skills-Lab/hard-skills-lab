@@ -21,7 +21,7 @@ const cta = getMainCta(lang);
   id="mobile-cta"
   class="invisible fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-rule bg-paper/95 px-4 py-3 backdrop-blur-sm transition-[translate,visibility] duration-300 lg:hidden"
 >
-  <PrimaryButton href={cta.href} arrow class="w-full">
+  <PrimaryButton href={cta.href} srLabel={cta.newTab} arrow class="w-full">
     {cta.label}
   </PrimaryButton>
 </div>

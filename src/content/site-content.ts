@@ -1,6 +1,10 @@
 import { siteConfig } from './site-config';
 import type { Language } from './site-config';
+import type { ImageMetadata } from 'astro';
 import type { IconName } from '../components/icons';
+// Charts of the two sample projects (see src/assets/projects/CREDITS.md)
+import roadAccidentsChart from '../assets/projects/road-accidents-heatmap.png';
+import churnChart from '../assets/projects/churn-confusion-matrices.png';
 
 export interface NavigationItem {
   label: string;
@@ -37,6 +41,8 @@ export interface SiteContent {
     apply: string;
     waitlist: string;
     curriculum: string;
+    // Read by screen readers after the Apply button (the form opens in a new tab)
+    newTab: string;
   };
   // Thin bar above the header. Leave the texts empty to hide it.
   announcement: {
@@ -102,6 +108,11 @@ export interface SiteContent {
       weeks: string[];
       outcomes: string[];
     }>;
+    // The final project that joins both tracks (weeks 7 and 8)
+    capstone: {
+      title: string;
+      text: string;
+    };
     tracksSection: {
       eyebrow: string;
       title: string;
@@ -118,17 +129,26 @@ export interface SiteContent {
     seeMore: { label: string; href: string };
     viewProject: string;
     newTab: string;
-    illustrativeLabel: string;
+    // Small tag saying the project was made by the team, not by learners
+    exampleLabel: string;
     previous: string;
     next: string;
     items: Array<{
       category: string;
       title: string;
       text: string;
+      // Source of the data, shown in small print under the text
+      credit?: string;
       // Leave empty to hide the "View project" link
       href: string;
-      illustrative?: boolean;
-      image: { label: string; tone: 'light' | 'dark' };
+      example?: boolean;
+      // Without src, a placeholder with the label is shown instead
+      image: {
+        label: string;
+        tone: 'light' | 'dark';
+        src?: ImageMetadata;
+        alt?: string;
+      };
     }>;
   };
   about: {
@@ -207,9 +227,10 @@ export const content: Record<Language, SiteContent> = {
       tagline: 'Free. Practical. Bilingual. Beginner friendly.',
     },
     cta: {
-      apply: 'Apply for cohort 1',
+      apply: 'Apply to the cohort',
       waitlist: 'Get notified',
       curriculum: 'See the curriculum',
+      newTab: '(opens in a new tab)',
     },
     announcement: {
       open: 'Cohort 1 applications are open.',
@@ -284,7 +305,7 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           title: 'Present your project',
-          text: 'In week 8, bring both tracks together in one capstone project and present it.',
+          text: 'In weeks 7 and 8, bring both tracks together in one capstone project and present it.',
         },
       ],
     },
@@ -292,14 +313,22 @@ export const content: Record<Language, SiteContent> = {
       eyebrow: 'The curriculum',
       title: ['8 weeks.', '2 tracks.', '1 project.'],
       intro:
-        'Everyone follows both tracks. Each week you have one data session and one AI session. The two tracks support each other, and everything builds towards a final project you present.',
+        'Everyone follows both tracks. Each week you have one data session and one AI session. The AI sessions only use Python you have already learned in the data track, so you can start from zero. In weeks 7 and 8, both tracks come together in one final project.',
       weekLabel: 'Week',
       leadLabel: 'Led by',
       leadLink: '(LinkedIn profile, opens in a new tab)',
       outcomesTitle: 'By the end, you can',
       toolsTitle: 'Tools you will use',
-      // DEV: list to confirm with the track leads
-      tools: ['Python', 'Jupyter', 'pandas', 'Matplotlib', 'scikit-learn'],
+      tools: [
+        'Python',
+        'Jupyter',
+        'Google Colab',
+        'NumPy',
+        'pandas',
+        'Matplotlib',
+        'seaborn',
+        'scikit-learn',
+      ],
       tracks: [
         {
           title: 'Data Analysis with Python',
@@ -312,21 +341,22 @@ export const content: Record<Language, SiteContent> = {
           },
           summary:
             'Clean, explore and visualise data to find insights about your market, your users or your community.',
+          // Same outline as the Python for Data Analysis course notes
           weeks: [
-            'Python basics & environment setup',
-            'Data structures, functions, files',
-            'Pandas: load, filter, group, summarise',
-            'Cleaning messy data',
-            'Visualisation',
-            'Basic statistics that matter',
-            'End-to-end data analysis',
-            'Capstone data work & presentation',
+            'Introduction and Python basics',
+            'NumPy and data structures',
+            'pandas fundamentals',
+            'Data cleaning and preparation',
+            'Exploratory data analysis',
+            'Data visualisation',
+            'Capstone: question, data and workflow',
+            'Project presentation and discussion',
           ],
           outcomes: [
-            'Write Python to load, clean and reshape data',
-            'Explore and summarise a dataset with pandas',
-            'Build clear charts and use basic statistics',
-            'Run a full analysis and present what you found',
+            'Write clear Python to load, clean and prepare messy data',
+            'Select, filter, group and reshape data with NumPy and pandas',
+            'Explore a dataset and back each finding with numbers',
+            'Build clear charts and present your findings in a notebook',
           ],
         },
         {
@@ -339,25 +369,30 @@ export const content: Record<Language, SiteContent> = {
             linkedin: 'https://www.linkedin.com/in/gervais-amoah/',
           },
           summary:
-            'Build and evaluate simple models to predict, classify or generate useful results from data.',
+            'Teach a computer to predict, classify and find groups in data, then check honestly how well it works.',
+          // Each week only uses Python already taught in the data track
           weeks: [
-            'What is AI and ML, setup',
-            'How machines learn from data',
-            'First model: classifier or regressor',
-            'Training, testing, evaluation',
-            'Improving models, second algorithm',
-            'LLMs and responsible AI',
-            'Applied AI mini-project',
-            'Capstone model work & presentation',
+            'What AI and ML are, no code yet',
+            'How machines learn: features, labels, error',
+            'First model: predicting a number',
+            'Classification: predicting a category',
+            'Better models: features, overfitting, comparison',
+            'Finding groups and explaining results',
+            'Generative AI, responsible AI, capstone plan',
+            'Capstone: test, explain and present your model',
           ],
           outcomes: [
-            'Explain how machines learn from data',
-            'Train, test and evaluate a first model',
-            'Improve a model and compare two algorithms',
-            'Use LLMs responsibly and build a small AI project',
+            'Explain in plain words how machines learn from data',
+            'Train and test regression and classification models',
+            'Compare models fairly and pick the right metric',
+            "Use generative AI responsibly and know a model's limits",
           ],
         },
       ],
+      capstone: {
+        title: 'The capstone: one project, both tracks',
+        text: "In weeks 7 and 8 you pick a real dataset on an issue you care about. You clean, explore and chart it with what the data track taught you, add one model from the AI track that predicts or groups something useful, then present your findings, the model's limits and one recommendation.",
+      },
       tracksSection: {
         eyebrow: 'The tracks',
         title: 'Two skills, working together.',
@@ -370,33 +405,45 @@ export const content: Record<Language, SiteContent> = {
       eyebrow: 'Real work',
       title: 'Sample projects',
       intro:
-        'Here is the kind of work you will do. Both examples follow the curriculum: a data analysis and a simple machine learning project.',
+        'Two real projects from our team, one for each track, with the code open on GitHub. They show where the skills you learn here can take you.',
       // TODO: add the real links (a projects page or GitHub) when they exist
       seeMore: {
         label: 'See more projects',
         href: '',
       },
-      viewProject: 'View project',
+      viewProject: 'View on GitHub',
       newTab: '(opens in a new tab)',
-      illustrativeLabel: 'Illustrative example',
+      exampleLabel: 'Example by our team',
       previous: 'Previous projects',
       next: 'Next projects',
       items: [
         {
           category: 'Data analysis project',
-          title: 'Youth employment in Africa',
-          text: 'Clean, explore and visualise public data to find insights about youth employment across African countries.',
-          href: '',
-          illustrative: true,
-          image: { label: 'Data visualisation', tone: 'light' },
+          title: 'When and where road accidents happen',
+          text: "Cleaning and exploring the UK's 2018 road accident records to find the riskiest hours, roads and hotspots, then turning the results into road-safety advice. The worst hour is 17:00 and the worst day is Friday.",
+          credit:
+            'Data: UK Department for Transport (STATS19), Open Government Licence v3.0.',
+          href: 'https://github.com/Hugues-hash/msc-traffic-accident-data-mining',
+          example: true,
+          image: {
+            label: 'Data visualisation',
+            tone: 'light',
+            src: roadAccidentsChart,
+            alt: 'Heatmap of road accidents in 2018 by day of the week and hour. The darkest cells are weekday mornings around 8:00 and late afternoons around 17:00.',
+          },
         },
         {
           category: 'AI / ML project',
-          title: 'Student dropout prediction',
-          text: 'Build and evaluate a simple model to predict which students are at risk of dropping out (uses real-world style data).',
-          href: '',
-          illustrative: true,
-          image: { label: 'Code screenshot', tone: 'dark' },
+          title: 'Predicting which customers will leave',
+          text: "Models that predict a streaming customer's monthly spend and whether they will cancel, compared with clear metrics, plus customer groups a retention team could act on. The best churn model was right for 98% of test customers.",
+          href: 'https://github.com/Hugues-hash/msc-customer-behaviour-analysis',
+          example: true,
+          image: {
+            label: 'Model results',
+            tone: 'dark',
+            src: churnChart,
+            alt: 'Confusion matrices of two churn models on 1,000 test customers. The random forest classifies 977 correctly and the neural network 982.',
+          },
         },
       ],
     },
@@ -436,7 +483,7 @@ export const content: Record<Language, SiteContent> = {
         {
           question: 'Do I need to know how to code?',
           answer:
-            'No. The program is beginner friendly. Week 1 starts with Python basics and setting up your tools.',
+            'No. The program is beginner friendly. Week 1 starts with Python basics and setting up your tools, and the AI track begins without any code.',
         },
         {
           question: 'Who can join?',
@@ -455,9 +502,9 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           question: 'When does the next cohort start?',
-          // DEV: update this answer when applications open
+          // DEV: add the dates here once they are fixed
           answer:
-            'The dates are not set yet. Click “Get notified” and we will email you as soon as applications open.',
+            'The dates are not set yet. You can already apply, and we will email you the dates as soon as they are fixed.',
         },
         {
           question: 'What do I get at the end?',
@@ -543,9 +590,10 @@ export const content: Record<Language, SiteContent> = {
       tagline: 'Gratuit. Pratique. Bilingue. Accessible aux débutants.',
     },
     cta: {
-      apply: 'Postuler à la cohorte 1',
+      apply: 'Postuler à la cohorte',
       waitlist: 'Me prévenir',
       curriculum: 'Voir le curriculum',
+      newTab: "(s'ouvre dans un nouvel onglet)",
     },
     announcement: {
       open: 'Cohorte 1 : les candidatures sont ouvertes.',
@@ -621,7 +669,7 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           title: 'Présentez votre projet',
-          text: 'En semaine 8, réunissez les deux parcours dans un projet final et présentez-le.',
+          text: 'En semaines 7 et 8, réunissez les deux parcours dans un projet final et présentez-le.',
         },
       ],
     },
@@ -629,14 +677,22 @@ export const content: Record<Language, SiteContent> = {
       eyebrow: 'Le curriculum',
       title: ['8 semaines.', '2 parcours.', '1 projet.'],
       intro:
-        'Tout le monde suit les deux parcours. Chaque semaine, vous avez une session données et une session IA. Les deux parcours se renforcent, et tout converge vers un projet final que vous présentez.',
+        "Tout le monde suit les deux parcours. Chaque semaine, vous avez une session données et une session IA. Les sessions IA n'utilisent que le Python déjà vu dans le parcours données : vous pouvez partir de zéro. En semaines 7 et 8, les deux parcours se rejoignent dans un projet final.",
       weekLabel: 'Semaine',
       leadLabel: 'Animé par',
       leadLink: "(profil LinkedIn, s'ouvre dans un nouvel onglet)",
       outcomesTitle: 'À la fin, vous saurez',
       toolsTitle: 'Les outils utilisés',
-      // DEV : liste à confirmer avec les responsables des parcours
-      tools: ['Python', 'Jupyter', 'pandas', 'Matplotlib', 'scikit-learn'],
+      tools: [
+        'Python',
+        'Jupyter',
+        'Google Colab',
+        'NumPy',
+        'pandas',
+        'Matplotlib',
+        'seaborn',
+        'scikit-learn',
+      ],
       tracks: [
         {
           title: 'Analyse de données avec Python',
@@ -649,21 +705,22 @@ export const content: Record<Language, SiteContent> = {
           },
           summary:
             'Nettoyez, explorez et visualisez des données pour dégager des enseignements sur votre marché, vos utilisateurs ou votre communauté.',
+          // Même plan que le support de cours Python for Data Analysis
           weeks: [
-            "Bases de Python et installation de l'environnement",
-            'Structures de données, fonctions, fichiers',
-            'Pandas : charger, filtrer, regrouper, résumer',
-            'Nettoyage de données désordonnées',
-            'Visualisation',
-            'Les statistiques de base qui comptent',
-            'Analyse de données de bout en bout',
-            'Projet final en données et présentation',
+            'Introduction et bases de Python',
+            'NumPy et structures de données',
+            'Les bases de pandas',
+            'Nettoyage et préparation des données',
+            'Analyse exploratoire des données',
+            'Visualisation des données',
+            'Projet final : question, données et démarche',
+            'Présentation des projets et discussion',
           ],
           outcomes: [
-            'Écrire du Python pour charger, nettoyer et transformer des données',
-            'Explorer et résumer un jeu de données avec pandas',
-            'Créer des graphiques clairs et utiliser les statistiques de base',
-            'Mener une analyse complète et présenter vos résultats',
+            'Écrire du Python clair pour charger, nettoyer et préparer des données désordonnées',
+            'Sélectionner, filtrer, regrouper et transformer des données avec NumPy et pandas',
+            'Explorer un jeu de données et appuyer chaque constat sur des chiffres',
+            'Créer des graphiques clairs et présenter vos résultats dans un notebook',
           ],
         },
         {
@@ -673,28 +730,33 @@ export const content: Record<Language, SiteContent> = {
           lead: {
             name: 'Yao Gervais Amoah',
             role: 'Ingénieur en machine learning et formateur',
-            linkedin: '',
+            linkedin: 'https://www.linkedin.com/in/gervais-amoah/',
           },
           summary:
-            'Construisez et évaluez des modèles simples pour prédire, classer ou générer des résultats utiles à partir de données.',
+            "Apprenez à un ordinateur à prédire, classer et trouver des groupes dans des données, puis vérifiez honnêtement ce qu'il vaut.",
+          // Chaque semaine n'utilise que le Python déjà vu dans le parcours données
           weeks: [
-            "Qu'est-ce que l'IA et le ML ? Installation",
-            'Comment les machines apprennent des données',
-            'Premier modèle : classification ou régression',
-            'Entraînement, test et évaluation',
-            'Améliorer les modèles, second algorithme',
-            'LLM et IA responsable',
-            "Mini-projet d'IA appliquée",
-            'Projet final en modèle et présentation',
+            "L'IA et le ML, sans code pour commencer",
+            'Comment une machine apprend : variables, étiquettes, erreur',
+            'Premier modèle : prédire un nombre',
+            'Classification : prédire une catégorie',
+            'De meilleurs modèles : variables, surapprentissage, comparaison',
+            'Trouver des groupes et expliquer les résultats',
+            'IA générative, IA responsable, plan du projet final',
+            'Projet final : tester, expliquer et présenter votre modèle',
           ],
           outcomes: [
-            'Expliquer comment les machines apprennent des données',
-            'Entraîner, tester et évaluer un premier modèle',
-            'Améliorer un modèle et comparer deux algorithmes',
-            "Utiliser les LLM de façon responsable et créer un petit projet d'IA",
+            'Expliquer simplement comment une machine apprend des données',
+            'Entraîner et tester des modèles de régression et de classification',
+            'Comparer des modèles avec rigueur et choisir la bonne métrique',
+            "Utiliser l'IA générative de façon responsable et connaître les limites d'un modèle",
           ],
         },
       ],
+      capstone: {
+        title: 'Le projet final : un projet, deux parcours',
+        text: "En semaines 7 et 8, vous choisissez un vrai jeu de données sur un sujet qui vous tient à cœur. Vous le nettoyez, l'explorez et le mettez en graphiques avec ce que le parcours données vous a appris, vous ajoutez un modèle du parcours IA qui prédit ou regroupe quelque chose d'utile, puis vous présentez vos résultats, les limites du modèle et une recommandation.",
+      },
       tracksSection: {
         eyebrow: 'Les parcours',
         title: 'Deux compétences qui se complètent.',
@@ -708,33 +770,45 @@ export const content: Record<Language, SiteContent> = {
       eyebrow: 'Travaux concrets',
       title: 'Exemples de projets',
       intro:
-        'Voici le type de travail que vous réaliserez. Les deux exemples suivent le curriculum : une analyse de données et un projet simple de machine learning.',
+        "Deux vrais projets de notre équipe, un par parcours, avec le code ouvert sur GitHub. Ils montrent jusqu'où les compétences apprises ici peuvent vous mener.",
       // TODO : ajouter les vrais liens (page projets ou GitHub) quand ils existeront
       seeMore: {
         label: 'Voir plus de projets',
         href: '',
       },
-      viewProject: 'Voir le projet',
+      viewProject: 'Voir sur GitHub',
       newTab: "(s'ouvre dans un nouvel onglet)",
-      illustrativeLabel: 'Exemple illustratif',
+      exampleLabel: "Exemple de l'équipe",
       previous: 'Projets précédents',
       next: 'Projets suivants',
       items: [
         {
           category: "Projet d'analyse de données",
-          title: "L'emploi des jeunes en Afrique",
-          text: "Nettoyez, explorez et visualisez des données publiques pour mieux comprendre l'emploi des jeunes dans les pays africains.",
-          href: '',
-          illustrative: true,
-          image: { label: 'Data visualisation', tone: 'light' },
+          title: 'Quand et où se produisent les accidents de la route',
+          text: "Nettoyer et explorer les accidents de la route de 2018 au Royaume-Uni pour repérer les heures, les routes et les zones les plus à risque, puis en tirer des conseils de sécurité routière. L'heure la plus touchée est 17 h et le jour le plus touché, le vendredi.",
+          credit:
+            'Données : ministère britannique des Transports (STATS19), Open Government Licence v3.0.',
+          href: 'https://github.com/Hugues-hash/msc-traffic-accident-data-mining',
+          example: true,
+          image: {
+            label: 'Data visualisation',
+            tone: 'light',
+            src: roadAccidentsChart,
+            alt: "Carte de chaleur des accidents de la route de 2018 par jour de la semaine et par heure. Les cases les plus foncées sont les matins de semaine vers 8 h et les fins d'après-midi vers 17 h.",
+          },
         },
         {
           category: 'Projet IA / ML',
-          title: 'Prédiction du décrochage scolaire',
-          text: "Construisez et évaluez un modèle simple pour prédire quels élèves risquent d'abandonner leurs études (avec des données proches du réel).",
-          href: '',
-          illustrative: true,
-          image: { label: 'Code screenshot', tone: 'dark' },
+          title: 'Prédire quels clients vont partir',
+          text: "Des modèles qui prédisent les dépenses mensuelles des abonnés d'un service de streaming et s'ils vont résilier, comparés avec des métriques claires, plus des groupes de clients utiles pour la fidélisation. Le meilleur modèle a vu juste pour 98 % des clients de test.",
+          href: 'https://github.com/Hugues-hash/msc-customer-behaviour-analysis',
+          example: true,
+          image: {
+            label: 'Model results',
+            tone: 'dark',
+            src: churnChart,
+            alt: 'Matrices de confusion de deux modèles de résiliation sur 1 000 clients de test. La forêt aléatoire en classe correctement 977 et le réseau de neurones 982.',
+          },
         },
       ],
     },
@@ -775,7 +849,7 @@ export const content: Record<Language, SiteContent> = {
         {
           question: 'Faut-il savoir coder ?',
           answer:
-            "Non. Le programme est accessible aux débutants. La semaine 1 commence par les bases de Python et l'installation des outils.",
+            "Non. Le programme est accessible aux débutants. La semaine 1 commence par les bases de Python et l'installation des outils, et le parcours IA démarre sans code.",
         },
         {
           question: 'Qui peut participer ?',
@@ -794,9 +868,9 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           question: 'Quand commence la prochaine cohorte ?',
-          // DEV : mettre à jour cette réponse à l'ouverture des candidatures
+          // DEV : ajouter les dates ici dès qu'elles sont fixées
           answer:
-            "Les dates ne sont pas encore fixées. Cliquez sur « Me prévenir » et nous vous écrirons dès l'ouverture des candidatures.",
+            "Les dates ne sont pas encore fixées. Vous pouvez déjà postuler, et nous vous enverrons les dates par e-mail dès qu'elles seront fixées.",
         },
         {
           question: "Qu'est-ce que j'obtiens à la fin ?",
@@ -871,6 +945,7 @@ export function getMainCta(lang: Language) {
       href: siteConfig.applicationUrls[lang],
       label: cta.apply,
       status: announcement.open,
+      newTab: cta.newTab,
     };
   }
 
@@ -878,5 +953,6 @@ export function getMainCta(lang: Language) {
     href: siteConfig.waitlistUrls[lang],
     label: cta.waitlist,
     status: announcement.waitlist,
+    newTab: cta.newTab,
   };
 }

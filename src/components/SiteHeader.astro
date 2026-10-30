@@ -58,7 +58,7 @@ const navItems = [
       <LanguageSwitch lang={lang} switchLabel={header.switchLanguage} />
 
       <div class="hidden lg:block">
-        <PrimaryButton href={cta.href} size="sm" arrow>
+        <PrimaryButton href={cta.href} srLabel={cta.newTab} size="sm" arrow>
           {cta.label}
         </PrimaryButton>
       </div>
@@ -145,7 +145,7 @@ const navItems = [
         class="-ml-1.5 mt-8"
       />
 
-      <PrimaryButton href={cta.href} arrow class="mt-6 w-full">
+      <PrimaryButton href={cta.href} srLabel={cta.newTab} arrow class="mt-6 w-full">
         {cta.label}
       </PrimaryButton>
 
@@ -156,10 +156,13 @@ const navItems = [
               <li>
                 <a
                   href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="inline-flex min-h-11 items-center gap-3 text-sm font-medium text-white/80 transition-colors hover:text-white"
                 >
                   <Icon name={link.icon} class="size-5" />
                   {link.name}
+                  <span class="sr-only">&nbsp;{cta.newTab}</span>
                 </a>
               </li>
             ))}

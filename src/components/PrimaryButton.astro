@@ -5,6 +5,8 @@ interface Props {
   size?: "sm" | "md";
   /** Adds a trailing arrow that nudges right on hover/focus */
   arrow?: boolean;
+  /** Read by screen readers after the label when the link opens in a new tab */
+  srLabel?: string;
   class?: string;
 }
 
@@ -13,8 +15,13 @@ const {
   variant = "primary",
   size = "md",
   arrow = false,
+  srLabel,
   class: className,
 } = Astro.props;
+
+// Links to other sites (like the application form) open in a new tab,
+// so the visitor keeps the website open behind it
+const external = /^https?:\/\//.test(href);
 
 const base =
   "group inline-flex items-center justify-center gap-2 font-semibold transition-colors";
@@ -31,8 +38,14 @@ const variants = {
 };
 ---
 
-<a href={href} class:list={[base, sizes[size], variants[variant], className]}>
+<a
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  class:list={[base, sizes[size], variants[variant], className]}
+>
   <slot />
+  {external && srLabel && <span class="sr-only">&nbsp;{srLabel}</span>}
   {
     arrow && (
       <svg

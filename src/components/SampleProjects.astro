@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { Language } from "../content/site-config";
 import { getContent } from "../content/site-content";
 import ImagePlaceholder from "./ImagePlaceholder.astro";
@@ -67,19 +68,30 @@ const carouselAttrs = isCarousel
                 ]}
               >
                 <article class="flex h-full flex-col">
-                  <div class="relative aspect-16/10">
-                    <ImagePlaceholder
-                      label={item.image.label}
-                      tone={item.image.tone}
-                      class="absolute inset-0"
-                    />
+                  {/* Real chart from the project, shown whole on a white card */}
+                  <div class="relative aspect-2/1 overflow-hidden border border-rule bg-white">
+                    {item.image.src ? (
+                      <Image
+                        src={item.image.src}
+                        alt={item.image.alt ?? ""}
+                        widths={[480, 900]}
+                        sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw"
+                        class="absolute inset-0 h-full w-full object-contain p-2"
+                      />
+                    ) : (
+                      <ImagePlaceholder
+                        label={item.image.label}
+                        tone={item.image.tone}
+                        class="absolute inset-0"
+                      />
+                    )}
                   </div>
 
                   <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1">
                     <p class="eyebrow">{item.category}</p>
-                    {item.illustrative && (
+                    {item.example && (
                       <span class="border border-rule px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted">
-                        {projects.illustrativeLabel}
+                        {projects.exampleLabel}
                       </span>
                     )}
                   </div>
@@ -87,6 +99,9 @@ const carouselAttrs = isCarousel
                     {item.title}
                   </h3>
                   <p class="mt-2 max-w-sm text-sm text-muted">{item.text}</p>
+                  {item.credit && (
+                    <p class="mt-2 max-w-sm text-xs text-muted">{item.credit}</p>
+                  )}
                   {/* No link until the project is published */}
                   {item.href && (
                     <div class="mt-auto pt-3">

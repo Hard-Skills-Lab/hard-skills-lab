@@ -29,6 +29,8 @@ export const iconPaths = {
     '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v5M8 8v.01M12 16v-5M12 13c0-1.7 1.3-2 2.5-2s2.5.8 2.5 2.5V16"/>',
   instagram:
     '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/>',
+  facebook:
+    '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15.5 7.5H14a2.5 2.5 0 0 0-2.5 2.5v11"/><path d="M9 13h6"/>',
 } as const;
 
 export type IconName = keyof typeof iconPaths;
