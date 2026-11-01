@@ -233,7 +233,8 @@ export const content: Record<Language, SiteContent> = {
       newTab: '(opens in a new tab)',
     },
     announcement: {
-      open: 'Cohort 1 applications are open.',
+      // The deadline is also in apply.details and the FAQ
+      open: 'Cohort 1 applications are open until 1 December.',
       waitlist: 'Cohort 1 applications open soon.',
     },
     hero: {
@@ -502,9 +503,9 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           question: 'When does the next cohort start?',
-          // DEV: add the dates here once they are fixed
+          // DEV: add the start date here once it is fixed
           answer:
-            'The dates are not set yet. You can already apply, and we will email you the dates as soon as they are fixed.',
+            'Applications close on 1 December 2026. The start date is not set yet, and we will email you as soon as it is.',
         },
         {
           question: 'What do I get at the end?',
@@ -541,8 +542,7 @@ export const content: Record<Language, SiteContent> = {
         {
           icon: 'calendar',
           title: 'Application deadline',
-          // DEV: the mockup says "May 31, 2025 (example)". Set the real date.
-          text: 'Date to be confirmed.',
+          text: '1 December 2026',
         },
       ],
       questions: {
@@ -596,7 +596,8 @@ export const content: Record<Language, SiteContent> = {
       newTab: "(s'ouvre dans un nouvel onglet)",
     },
     announcement: {
-      open: 'Cohorte 1 : les candidatures sont ouvertes.',
+      // La date limite est aussi dans apply.details et la FAQ
+      open: "Cohorte 1 : candidatures ouvertes jusqu'au 1er décembre.",
       waitlist: 'Cohorte 1 : candidatures bientôt ouvertes.',
     },
     hero: {
@@ -868,9 +869,9 @@ export const content: Record<Language, SiteContent> = {
         },
         {
           question: 'Quand commence la prochaine cohorte ?',
-          // DEV : ajouter les dates ici dès qu'elles sont fixées
+          // DEV : ajouter la date de début ici dès qu'elle est fixée
           answer:
-            "Les dates ne sont pas encore fixées. Vous pouvez déjà postuler, et nous vous enverrons les dates par e-mail dès qu'elles seront fixées.",
+            "Les candidatures ferment le 1er décembre 2026. La date de début n'est pas encore fixée, et nous vous écrirons dès qu'elle le sera.",
         },
         {
           question: "Qu'est-ce que j'obtiens à la fin ?",
@@ -907,8 +908,7 @@ export const content: Record<Language, SiteContent> = {
         {
           icon: 'calendar',
           title: 'Date limite de candidature',
-          // DEV : la maquette indique « 31 mai 2025 (exemple) ». Mettre la vraie date.
-          text: 'Date à confirmer.',
+          text: '1er décembre 2026',
         },
       ],
       questions: {
