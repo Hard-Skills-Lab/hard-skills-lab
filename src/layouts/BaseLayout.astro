@@ -11,6 +11,7 @@ import sourceSansFont from "@fontsource-variable/source-sans-3/files/source-sans
 import "../styles/global.css";
 import { siteConfig } from "../content/site-config";
 import { getContent } from "../content/site-content";
+import StructuredData from "../components/StructuredData.astro";
 
 interface Props {
   title: string;
@@ -66,6 +67,9 @@ const ogImage = new URL(`/og/og-${lang}.png`, siteConfig.siteUrl);
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured data for search engines and AI tools -->
+    <StructuredData lang={lang} pageUrl={canonicalUrl} title={title} description={description} />
 
     <title>{title}</title>
   </head>
