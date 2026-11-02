@@ -1,0 +1,110 @@
+---
+// Structured data (JSON-LD). It tells search engines and AI tools, in a form
+// machines can read, who runs the site, what the two tracks are and what the
+// FAQ answers. Everything comes from the same content as the visible page,
+// so the two always match.
+import { siteConfig } from "../content/site-config";
+import type { Language } from "../content/site-config";
+import { getContent } from "../content/site-content";
+import { socialLinks } from "../content/social-links";
+
+interface Props {
+  lang: Language;
+  // Canonical address of the page, e.g. https://hardskills-lab.org/en/
+  pageUrl: URL;
+  title: string;
+  description: string;
+}
+
+const { lang, pageUrl, title, description } = Astro.props;
+const { curriculum, faq } = getContent(lang);
+
+const homeUrl = new URL("/", siteConfig.siteUrl).href;
+
+// Fixed ids, so the blocks below can point to each other
+const orgId = `${homeUrl}#organization`;
+const websiteId = `${homeUrl}#website`;
+
+const organization = {
+  "@type": "EducationalOrganization",
+  "@id": orgId,
+  name: "Hard Skills Lab",
+  url: homeUrl,
+  // 400 x 400 PNG (Google asks for at least 112 x 112)
+  logo: new URL("/logo.png", siteConfig.siteUrl).href,
+  email: siteConfig.social.email,
+  description,
+  areaServed: "Africa",
+  knowsLanguage: ["en", "fr"],
+  // The organisation's own pages on LinkedIn, Instagram and Facebook
+  sameAs: socialLinks.map((link) => link.href),
+};
+
+const website = {
+  "@type": "WebSite",
+  "@id": websiteId,
+  name: "Hard Skills Lab",
+  url: homeUrl,
+  inLanguage: ["en", "fr"],
+  publisher: { "@id": orgId },
+};
+
+const webPage = {
+  "@type": "WebPage",
+  "@id": `${pageUrl.href}#webpage`,
+  url: pageUrl.href,
+  name: title,
+  description,
+  inLanguage: lang,
+  isPartOf: { "@id": websiteId },
+  about: { "@id": orgId },
+};
+
+// One course per track. Both are free, online, for beginners, and run in
+// French and English.
+const courses = curriculum.tracks.map((track) => ({
+  "@type": "Course",
+  name: track.title,
+  description: track.summary,
+  url: new URL("#curriculum", pageUrl).href,
+  provider: { "@id": orgId },
+  inLanguage: ["en", "fr"],
+  isAccessibleForFree: true,
+  educationalLevel: lang === "fr" ? "Débutant" : "Beginner",
+  teaches: track.outcomes,
+  hasCourseInstance: {
+    "@type": "CourseInstance",
+    courseMode: "Online",
+    // sameAs is left out of the JSON when the lead has no LinkedIn link
+    instructor: {
+      "@type": "Person",
+      name: track.lead.name,
+      sameAs: track.lead.linkedin || undefined,
+    },
+  },
+}));
+
+// The FAQ section, question by question
+const faqPage = {
+  "@type": "FAQPage",
+  "@id": `${pageUrl.href}#faq`,
+  url: new URL("#faq", pageUrl).href,
+  inLanguage: lang,
+  isPartOf: { "@id": `${pageUrl.href}#webpage` },
+  mainEntity: faq.questions.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": [organization, website, webPage, ...courses, faqPage],
+};
+
+// "<" is escaped so no text can close the <script> tag early
+const json = JSON.stringify(graph).replace(/</g, "\\u003c");
+---
+
+<script is:inline type="application/ld+json" set:html={json} />
