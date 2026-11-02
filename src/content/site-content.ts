@@ -34,6 +34,8 @@ export interface SiteContent {
     menuLabel: string;
     mainNavLabel: string;
     switchLanguage: string;
+    // Name of the light / dark switch, read by screen readers
+    darkTheme: string;
     tagline: string;
   };
   // Button labels. Apply or waitlist depends on siteConfig.applicationsOpen.
@@ -219,6 +221,7 @@ export const content: Record<Language, SiteContent> = {
       menuLabel: 'Menu',
       mainNavLabel: 'Main navigation',
       switchLanguage: 'Switch to French',
+      darkTheme: 'Dark theme',
       tagline: 'Free. Practical. Bilingual. Beginner friendly.',
     },
     cta: {
@@ -574,6 +577,7 @@ export const content: Record<Language, SiteContent> = {
       menuLabel: 'Menu',
       mainNavLabel: 'Navigation principale',
       switchLanguage: "Passer à l'anglais",
+      darkTheme: 'Thème sombre',
       tagline: 'Gratuit. Pratique. Bilingue. Accessible aux débutants.',
     },
     cta: {

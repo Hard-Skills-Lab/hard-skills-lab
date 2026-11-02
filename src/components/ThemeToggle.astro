@@ -1,0 +1,99 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  /** Name of the button, read by screen readers, e.g. "Dark theme" */
+  label: string;
+  /** "dark" for the phone menu, "light" for the header */
+  tone?: "light" | "dark";
+  class?: string;
+}
+
+const { label, tone = "light", class: className } = Astro.props;
+
+const tones = {
+  light: "text-ink hover:text-orange-deep",
+  dark: "text-white/80 hover:text-white",
+};
+---
+
+<!--
+  Light / dark switch. The site follows the system setting until the visitor
+  presses it. aria-pressed="true" means the dark theme is on.
+  The moon shows in the light theme, the sun in the dark theme.
+-->
+<button
+  type="button"
+  data-theme-toggle
+  aria-pressed="false"
+  aria-label={label}
+  class:list={[
+    "inline-flex size-11 items-center justify-center transition-colors",
+    tones[tone],
+    className,
+  ]}
+>
+  <Icon name="moon" class="size-5 dark:hidden" />
+  <Icon name="sun" class="hidden size-5 dark:block" />
+</button>
+
+<script>
+  type Theme = "light" | "dark";
+
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll<HTMLButtonElement>(
+    "[data-theme-toggle]",
+  );
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+  const systemTheme = (): Theme => (systemDark.matches ? "dark" : "light");
+
+  // The theme chosen with the button, or null if the visitor never chose
+  const savedTheme = (): Theme | null => {
+    try {
+      const value = localStorage.getItem("theme");
+      return value === "light" || value === "dark" ? value : null;
+    } catch {
+      return null;
+    }
+  };
+
+  // The theme to show: the visitor's choice, otherwise the system's
+  const currentTheme = (): Theme => savedTheme() ?? systemTheme();
+
+  const setTheme = (theme: Theme) => {
+    root.dataset.theme = theme;
+    buttons.forEach((button) =>
+      button.setAttribute("aria-pressed", String(theme === "dark")),
+    );
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const next: Theme = root.dataset.theme === "dark" ? "light" : "dark";
+      setTheme(next);
+
+      try {
+        // Back to the same theme as the system: forget the choice, so the
+        // site follows the system again. Otherwise keep it for next visits.
+        if (next === systemTheme()) localStorage.removeItem("theme");
+        else localStorage.setItem("theme", next);
+      } catch {
+        // Storage blocked: the choice only lasts while this page is open
+      }
+    });
+  });
+
+  // The system can switch by itself (automatic dark mode in the evening).
+  // The site follows it, unless the visitor chose a theme with the button.
+  systemDark.addEventListener("change", () => setTheme(currentTheme()));
+
+  // The Back button can show the page exactly as it was left. Check again,
+  // in case the theme was changed on the other language page in between.
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) setTheme(currentTheme());
+  });
+
+  // The script in BaseLayout.astro already set the theme. Sync the buttons.
+  setTheme(root.dataset.theme === "dark" ? "dark" : "light");
+</script>

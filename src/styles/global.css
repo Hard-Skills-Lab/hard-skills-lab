@@ -24,6 +24,13 @@
    */
   --color-orange-deep: #d94f2b;
 
+  /*
+   * Background of the dark bands (announcement bar, footer, phone menu) and
+   * colour of the text that sits on a photo. Same as ink in the light theme,
+   * but it stays dark in the dark theme, where ink turns light.
+   */
+  --color-night: #20211f;
+
   /* Typography */
   /* Self-hosted variable fonts (imported in BaseLayout.astro) */
   --font-heading:
@@ -54,6 +61,41 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
 }
+
+/* ------------------------------------------------------------------ */
+/* Dark theme                                                          */
+/* ------------------------------------------------------------------ */
+
+/*
+ * The small script in BaseLayout.astro sets data-theme on <html> before the
+ * page is drawn: the visitor's choice if they used the button in the header
+ * (ThemeToggle.astro), otherwise their system setting.
+ * Only these colours change. Orange and white are the same in both themes.
+ *
+ * It sits inside @supports because, for browsers without color-mix(),
+ * Tailwind writes the light colour directly in classes like text-ink/80.
+ * Those old browsers keep the light theme and do not get the button.
+ */
+@supports (color: color-mix(in lab, red, red)) {
+  :root[data-theme='dark'] {
+    --color-paper: #191a18;
+    --color-paper-soft: #1f201e;
+    --color-ink: #ecebe5;
+    --color-muted: #a6a49c;
+    --color-rule: #383935;
+    --color-night: #111210;
+    color-scheme: dark;
+  }
+}
+
+@supports not (color: color-mix(in lab, red, red)) {
+  [data-theme-toggle] {
+    display: none;
+  }
+}
+
+/* dark:... classes follow the same switch */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 /* ------------------------------------------------------------------ */
 /* Layout & typography utilities (shared by header and all sections)   */

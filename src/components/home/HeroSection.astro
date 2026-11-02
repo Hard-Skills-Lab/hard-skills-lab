@@ -98,7 +98,7 @@ const cta = getMainCta(lang);
 
       <!-- Small photo (desktop only, decorative). Lazy, so phones never download it. -->
       <div
-        class="absolute bottom-0 right-0 hidden h-[47%] w-[20%] overflow-hidden bg-ink lg:block"
+        class="absolute bottom-0 right-0 hidden h-[47%] w-[20%] overflow-hidden bg-night lg:block"
       >
         <Image
           src={abstractPhoto}
@@ -109,9 +109,9 @@ const cta = getMainCta(lang);
         />
       </div>
 
-      <!-- Learn / Build / Grow (desktop only, decorative) -->
+      <!-- Learn / Build / Grow (desktop only, decorative). On the light wall of the photo, so text-night keeps it dark in both themes. -->
       <ul
-        class="absolute right-[calc(9%+2rem)] top-[17%] hidden border-l-2 border-orange pl-3 text-xs font-medium uppercase leading-5 tracking-[0.18em] text-ink lg:block"
+        class="absolute right-[calc(9%+2rem)] top-[17%] hidden border-l-2 border-orange pl-3 text-xs font-medium uppercase leading-5 tracking-[0.18em] text-night lg:block"
         aria-hidden="true"
       >
         {t.hero.pillars.map((pillar) => <li>{pillar}</li>)}
