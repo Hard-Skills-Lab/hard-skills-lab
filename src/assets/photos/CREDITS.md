@@ -8,4 +8,6 @@ Stock photos used on the homepage until we have our own. Both licences allow fre
 | `coding-class.jpg`   | Kenneth Chiamaka Ejiofor | https://www.pexels.com/photo/diverse-group-learning-programming-in-computer-lab-30879378/ | Pexels License   | Program (mission card on desktop, landscape on phones)   |
 | `study-notebook.jpg` | FOTOGRAFÍA EDITORIAL     | https://unsplash.com/photos/woman-typing-on-laptop-at-workspace-RMK8Lt3Ac2s               | Unsplash License | Apply section (left column on desktop, banner on phones) |
 
+`hero-laptop.jpg` is retouched: the Apple logo on the laptop lid was removed (2 November 2026). On phones the photo is shown almost whole, so the logo was visible there. The Unsplash License allows changes.
+
 The files are web-sized copies (2000 px wide for the hero, 1000 or 1280 px for the others). Astro resizes them and serves WebP at build time.

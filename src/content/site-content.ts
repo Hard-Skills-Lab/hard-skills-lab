@@ -91,7 +91,6 @@ export interface SiteContent {
     eyebrow: string;
     title: string[];
     intro: string;
-    weekLabel: string;
     leadLabel: string;
     // Read by screen readers after the lead's name when it links to LinkedIn
     leadLink: string;
@@ -115,13 +114,6 @@ export interface SiteContent {
     capstone: {
       title: string;
       text: string;
-    };
-    tracksSection: {
-      eyebrow: string;
-      title: string;
-      intro: string;
-      // Alt text of the coding photo under the track cards (phones)
-      photoAlt: string;
     };
   };
   projects: {
@@ -318,7 +310,6 @@ export const content: Record<Language, SiteContent> = {
       title: ['8 weeks.', '2 tracks.', '1 project.'],
       intro:
         'Everyone follows both tracks. Each week you have one data session and one AI session. The AI sessions only use Python you have already learned in the data track, so you can start from zero. In weeks 7 and 8, both tracks come together in one final project.',
-      weekLabel: 'Week',
       leadLabel: 'Led by',
       leadLink: '(LinkedIn profile, opens in a new tab)',
       outcomesTitle: 'By the end, you can',
@@ -396,13 +387,6 @@ export const content: Record<Language, SiteContent> = {
       capstone: {
         title: 'The capstone: one project, both tracks',
         text: "In weeks 7 and 8 you pick a real dataset on an issue you care about. You clean, explore and chart it with what the data track taught you, add one model from the AI track that predicts or groups something useful, then present your findings, the model's limits and one recommendation.",
-      },
-      tracksSection: {
-        eyebrow: 'The tracks',
-        title: 'Two skills, working together.',
-        intro:
-          'Data helps you understand. AI helps you build. Together, they help you solve real problems.',
-        photoAlt: 'A developer with headphones writing code on a large screen',
       },
     },
     projects: {
@@ -682,7 +666,6 @@ export const content: Record<Language, SiteContent> = {
       title: ['8 semaines.', '2 parcours.', '1 projet.'],
       intro:
         "Tout le monde suit les deux parcours. Chaque semaine, vous avez une session données et une session IA. Les sessions IA n'utilisent que le Python déjà vu dans le parcours données : vous pouvez partir de zéro. En semaines 7 et 8, les deux parcours se rejoignent dans un projet final.",
-      weekLabel: 'Semaine',
       leadLabel: 'Animé par',
       leadLink: "(profil LinkedIn, s'ouvre dans un nouvel onglet)",
       outcomesTitle: 'À la fin, vous saurez',
@@ -760,14 +743,6 @@ export const content: Record<Language, SiteContent> = {
       capstone: {
         title: 'Le projet final : un projet, deux parcours',
         text: "En semaines 7 et 8, vous choisissez un vrai jeu de données sur un sujet qui vous tient à cœur. Vous le nettoyez, l'explorez et le mettez en graphiques avec ce que le parcours données vous a appris, vous ajoutez un modèle du parcours IA qui prédit ou regroupe quelque chose d'utile, puis vous présentez vos résultats, les limites du modèle et une recommandation.",
-      },
-      tracksSection: {
-        eyebrow: 'Les parcours',
-        title: 'Deux compétences qui se complètent.',
-        intro:
-          "Les données vous aident à comprendre. L'IA vous aide à construire. Ensemble, elles vous permettent de résoudre de vrais problèmes.",
-        photoAlt:
-          'Un développeur avec un casque écrit du code sur un grand écran',
       },
     },
     projects: {
