@@ -363,7 +363,7 @@ export const content: Record<Language, SiteContent> = {
           // DEV: confirm the name format, role line and LinkedIn URL
           lead: {
             name: 'Yao Gervais Amoah',
-            role: 'Machine learning engineer and educator',
+            role: 'Software engineer and educator',
             linkedin: 'https://www.linkedin.com/in/gervais-amoah/',
           },
           summary:
@@ -720,7 +720,7 @@ export const content: Record<Language, SiteContent> = {
           // DEV : confirmer le format du nom, le rôle et l'URL LinkedIn
           lead: {
             name: 'Yao Gervais Amoah',
-            role: 'Ingénieur en machine learning et formateur',
+            role: 'Ingénieur logiciel et formateur',
             linkedin: 'https://www.linkedin.com/in/gervais-amoah/',
           },
           summary:
