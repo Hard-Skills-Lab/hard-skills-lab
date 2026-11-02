@@ -25,12 +25,17 @@ const cta = getMainCta(lang);
     <div
       class="relative z-10 flex flex-col justify-center pb-10 pt-10 sm:pt-14 lg:min-h-136 lg:w-[55%] lg:py-20"
     >
-      <p class="eyebrow">{t.hero.eyebrow}</p>
-      <h1
-        class="mt-5 font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl"
+      <!--
+        The H1 is the plain description, styled as the small orange label. The
+        block span keeps the label's own size and line height inside the h1.
+      -->
+      <h1><span class="eyebrow block">{t.hero.heading}</span></h1>
+      <!-- The slogan. leading-[1.2] and text-balance keep the look it had as an h1. -->
+      <p
+        class="mt-5 font-heading text-4xl font-bold leading-[1.2] tracking-tight text-balance sm:text-5xl xl:text-6xl"
       >
-        {t.hero.titleLines.map((line) => <span class="block">{line}</span>)}
-      </h1>
+        {t.hero.sloganLines.map((line) => <span class="block">{line}</span>)}
+      </p>
       <p class="mt-6 max-w-md text-base text-ink/80 sm:text-lg">
         {t.hero.subtitle}
       </p>

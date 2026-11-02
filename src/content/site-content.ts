@@ -50,8 +50,11 @@ export interface SiteContent {
     waitlist: string;
   };
   hero: {
-    eyebrow: string;
-    titleLines: string[];
+    // The page's H1. Says plainly what we offer, because search engines and
+    // AI tools read it first. Shown as the small orange line above the slogan.
+    heading: string;
+    // The big slogan under the H1 (a paragraph, not a heading)
+    sloganLines: string[];
     subtitle: string;
     facts: string[];
     pillars: string[];
@@ -238,8 +241,8 @@ export const content: Record<Language, SiteContent> = {
       waitlist: 'Cohort 1 applications open soon.',
     },
     hero: {
-      eyebrow: 'Data & AI training for Africa',
-      titleLines: [
+      heading: 'Free data and AI training for young Africans',
+      sloganLines: [
         'Real skills.',
         'Practical projects.',
         'A stronger tomorrow.',
@@ -564,8 +567,8 @@ export const content: Record<Language, SiteContent> = {
   },
   fr: {
     meta: {
-      title:
-        'Hard Skills Lab | Formation gratuite en données et IA pour les jeunes Africains',
+      // Kept short: Bing flagged the longer title (79 characters) as too long
+      title: 'Hard Skills Lab | Formation gratuite en données et IA',
       description:
         "Formation gratuite, en ligne et axée sur les projets, en données et en IA, pour les jeunes de toute l'Afrique, en français et en anglais.",
       ogImageAlt:
@@ -601,8 +604,8 @@ export const content: Record<Language, SiteContent> = {
       waitlist: 'Cohorte 1 : candidatures bientôt ouvertes.',
     },
     hero: {
-      eyebrow: "Formation en données et IA pour l'Afrique",
-      titleLines: [
+      heading: 'Formation gratuite en données et IA pour les jeunes Africains',
+      sloganLines: [
         'De vraies compétences.',
         'Des projets concrets.',
         'Un avenir plus solide.',
