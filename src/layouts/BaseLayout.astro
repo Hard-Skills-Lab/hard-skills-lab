@@ -57,7 +57,13 @@ const ogImage = new URL(`/og/og-${lang}.png`, siteConfig.siteUrl);
     <link rel="preload" href={sourceSansFont} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <!-- Site icon. The ICO and PNG are for search engines and browsers that
+         do not use the SVG (DuckDuckGo reads favicon.ico). Phones use the
+         Apple touch icon when the site is saved to the home screen. -->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Canonical and hreflang -->
     <link rel="canonical" href={canonicalUrl} />

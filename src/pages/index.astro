@@ -21,7 +21,13 @@ const ogImage = new URL("/og/og-en.png", siteConfig.siteUrl);
     <title>{meta.title}</title>
     <meta name="description" content={meta.description} />
     <meta name="robots" content="noindex" />
+    <!-- Site icon. The ICO and PNG are for search engines and browsers that
+         do not use the SVG (DuckDuckGo reads favicon.ico). Phones use the
+         Apple touch icon when the site is saved to the home screen. -->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={enUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="fr" href={frUrl} />
