@@ -53,7 +53,10 @@ const ogImage = new URL("/og/og-en.png", siteConfig.siteUrl);
         .map((code) => String(code).toLowerCase().slice(0, 2))
         .find((code) => code === "fr" || code === "en");
 
-      location.replace(match === "fr" ? "/fr/" : "/en/");
+      // Add the site the visitor came from (empty if none) to the address,
+      // so the visit counter on the next page can see it (see BaseLayout.astro)
+      const target = match === "fr" ? "/fr/" : "/en/";
+      location.replace(target + "#from=" + encodeURIComponent(document.referrer));
     </script>
 
     <!-- Without JavaScript, go to English straight away -->

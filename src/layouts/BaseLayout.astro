@@ -53,6 +53,25 @@ const ogImage = new URL(`/og/og-${lang}.png`, siteConfig.siteUrl);
         document.documentElement.dataset.theme = theme;
       })();
     </script>
+    <!--
+      The root page (/) sends visitors here and adds the site they came from
+      to the address (#from=...). Put it back as the referrer, so the visit
+      counter at the end of the page sees LinkedIn or Facebook rather than
+      our own root page, then tidy the address.
+    -->
+    <script is:inline>
+      (() => {
+        if (location.hash.indexOf("#from=") !== 0) return;
+        let from = "";
+        try {
+          from = decodeURIComponent(location.hash.slice(6));
+        } catch (error) {
+          // Badly encoded value: count the visit as a direct one
+        }
+        history.replaceState(null, "", location.pathname + location.search);
+        Object.defineProperty(document, "referrer", { get: () => from });
+      })();
+    </script>
     <link rel="preload" href={spaceGroteskFont} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={sourceSansFont} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
@@ -107,5 +126,12 @@ const ogImage = new URL(`/og/og-${lang}.png`, siteConfig.siteUrl);
       {header.skipLink}
     </a>
     <slot />
+
+    <!--
+      Cloudflare Web Analytics: counts page views and visits by page, country,
+      referring site and device. No cookies and nothing stored in the browser.
+      The token comes from the Cloudflare dashboard (Web analytics).
+    -->
+    <script is:inline type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "5e7fccc1a0634109a730035d62887cdc"}'></script>
   </body>
 </html>

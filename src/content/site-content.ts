@@ -549,7 +549,7 @@ export const content: Record<Language, SiteContent> = {
       rights: 'All rights reserved.',
       // DEV: draft, to approve before going live
       privacy:
-        'Privacy: we use the details you give in our forms only to run the program and keep you informed. Email us if you want them deleted.',
+        'Privacy: we use the details you give in our forms only to run the program and keep you informed. Email us if you want them deleted. We count visits with Cloudflare Web Analytics, which uses no cookies and collects no personal data.',
     },
   },
   fr: {
@@ -907,7 +907,7 @@ export const content: Record<Language, SiteContent> = {
       rights: 'Tous droits réservés.',
       // DEV : brouillon, à valider avant la mise en ligne
       privacy:
-        'Confidentialité : nous utilisons les informations de nos formulaires uniquement pour organiser le programme et vous tenir informé. Écrivez-nous pour les faire supprimer.',
+        'Confidentialité : nous utilisons les informations de nos formulaires uniquement pour organiser le programme et vous tenir informé. Écrivez-nous pour les faire supprimer. Nous comptons les visites avec Cloudflare Web Analytics, sans cookies ni données personnelles.',
     },
   },
 };
